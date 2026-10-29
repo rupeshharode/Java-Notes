@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Autowiring · Night Java</title>
+<meta name="description" content="@Autowired, @Qualifier, @Primary and resolving ambiguous beans.">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body class="topic-body">
+<aside class="sidebar">
+  <a class="brand" href="../index.html"><span class="brand-mark">J</span> Night Java</a>
+  <input class="side-filter" type="search" placeholder="Filter topics…" aria-label="Filter topics">
+  <div class="side-phase-wrap"><label class="side-phase-label" for="side-phase">Jump to phase</label>
+  <select id="side-phase" class="side-phase"><option value="1">Phase 1 · Programming Basics</option>
+<option value="2">Phase 2 · OOP</option>
+<option value="3">Phase 3 · Core Java Advanced</option>
+<option value="4">Phase 4 · Advanced Java</option>
+<option value="5">Phase 5 · DSA</option>
+<option value="6">Phase 6 · Database</option>
+<option value="7">Phase 7 · Backend Development</option>
+<option value="8">Phase 8 · Frontend</option>
+<option value="9">Phase 9 · DevOps + Deployment</option>
+<option value="10">Phase 10 · LLD</option>
+<option value="11">Phase 11 · HLD</option>
+<option value="12">Phase 12 · Interview Topics</option></select></div>
+  <nav class="side-nav" aria-label="Topics in roadmap order"><a class="side-link" href="../topics/java-fundamentals.html" data-slug="java-fundamentals"><span class="check" data-check="java-fundamentals" aria-hidden="true"></span>Java Fundamentals Q&amp;A</a>
+<a class="side-link" href="../topics/oops-encapsulation.html" data-slug="oops-encapsulation"><span class="check" data-check="oops-encapsulation" aria-hidden="true"></span>OOPs &amp; Encapsulation</a>
+<a class="side-link" href="../topics/inheritance.html" data-slug="inheritance"><span class="check" data-check="inheritance" aria-hidden="true"></span>Inheritance</a>
+<a class="side-link" href="../topics/has-a-is-a.html" data-slug="has-a-is-a"><span class="check" data-check="has-a-is-a" aria-hidden="true"></span>Has-a vs Is-a Relationships</a>
+<a class="side-link" href="../topics/polymorphism.html" data-slug="polymorphism"><span class="check" data-check="polymorphism" aria-hidden="true"></span>Polymorphism</a>
+<a class="side-link" href="../topics/abstraction.html" data-slug="abstraction"><span class="check" data-check="abstraction" aria-hidden="true"></span>Abstraction</a>
+<a class="side-link" href="../topics/interface.html" data-slug="interface"><span class="check" data-check="interface" aria-hidden="true"></span>Interfaces</a>
+<a class="side-link" href="../topics/anonymous-inner-class.html" data-slug="anonymous-inner-class"><span class="check" data-check="anonymous-inner-class" aria-hidden="true"></span>Anonymous Inner Class</a>
+<a class="side-link" href="../topics/collections-framework.html" data-slug="collections-framework"><span class="check" data-check="collections-framework" aria-hidden="true"></span>Collections Framework</a>
+<a class="side-link" href="../topics/exception-handling.html" data-slug="exception-handling"><span class="check" data-check="exception-handling" aria-hidden="true"></span>Exception Handling</a>
+<a class="side-link" href="../topics/file-handling.html" data-slug="file-handling"><span class="check" data-check="file-handling" aria-hidden="true"></span>File Handling</a>
+<a class="side-link" href="../topics/generics.html" data-slug="generics"><span class="check" data-check="generics" aria-hidden="true"></span>Generics</a>
+<a class="side-link" href="../topics/stream-api.html" data-slug="stream-api"><span class="check" data-check="stream-api" aria-hidden="true"></span>Stream API</a>
+<a class="side-link" href="../topics/multithreading.html" data-slug="multithreading"><span class="check" data-check="multithreading" aria-hidden="true"></span>Multithreading</a>
+<a class="side-link" href="../topics/executorservice.html" data-slug="executorservice"><span class="check" data-check="executorservice" aria-hidden="true"></span>ExecutorService</a>
+<a class="side-link" href="../topics/completablefuture.html" data-slug="completablefuture"><span class="check" data-check="completablefuture" aria-hidden="true"></span>CompletableFuture</a>
+<a class="side-link" href="../topics/atomic-classes.html" data-slug="atomic-classes"><span class="check" data-check="atomic-classes" aria-hidden="true"></span>Atomic Classes</a>
+<a class="side-link" href="../topics/concurrent-collections.html" data-slug="concurrent-collections"><span class="check" data-check="concurrent-collections" aria-hidden="true"></span>Concurrent Collections</a>
+<a class="side-link" href="../topics/jdbc.html" data-slug="jdbc"><span class="check" data-check="jdbc" aria-hidden="true"></span>JDBC</a>
+<a class="side-link" href="../topics/servlet.html" data-slug="servlet"><span class="check" data-check="servlet" aria-hidden="true"></span>Servlets</a>
+<a class="side-link" href="../topics/jsp.html" data-slug="jsp"><span class="check" data-check="jsp" aria-hidden="true"></span>JSP</a>
+<a class="side-link" href="../topics/hibernate.html" data-slug="hibernate"><span class="check" data-check="hibernate" aria-hidden="true"></span>Hibernate</a>
+<a class="side-link" href="../topics/spring-mvc.html" data-slug="spring-mvc"><span class="check" data-check="spring-mvc" aria-hidden="true"></span>Spring MVC</a>
+<a class="side-link" href="../topics/session-management.html" data-slug="session-management"><span class="check" data-check="session-management" aria-hidden="true"></span>Session Management</a>
+<a class="side-link" href="../topics/maven.html" data-slug="maven"><span class="check" data-check="maven" aria-hidden="true"></span>Maven</a>
+<a class="side-link" href="../topics/servlet-vs-spring-core.html" data-slug="servlet-vs-spring-core"><span class="check" data-check="servlet-vs-spring-core" aria-hidden="true"></span>Servlet vs Spring Core</a>
+<a class="side-link" href="../topics/ioc-and-di.html" data-slug="ioc-and-di"><span class="check" data-check="ioc-and-di" aria-hidden="true"></span>IoC &amp; Dependency Injection</a>
+<a class="side-link" href="../topics/autowiring.html" aria-current="page" data-slug="autowiring"><span class="check" data-check="autowiring" aria-hidden="true"></span>Autowiring</a>
+<a class="side-link" href="../topics/bean-configuration.html" data-slug="bean-configuration"><span class="check" data-check="bean-configuration" aria-hidden="true"></span>Bean Configuration &amp; Annotations</a>
+<a class="side-link" href="../topics/bean-lifecycle.html" data-slug="bean-lifecycle"><span class="check" data-check="bean-lifecycle" aria-hidden="true"></span>Bean Lifecycle</a>
+<a class="side-link" href="../topics/bean-lifecycle-aop.html" data-slug="bean-lifecycle-aop"><span class="check" data-check="bean-lifecycle-aop" aria-hidden="true"></span>Bean Lifecycle &amp; Where AOP Fits</a>
+<a class="side-link" href="../topics/spring-aop.html" data-slug="spring-aop"><span class="check" data-check="spring-aop" aria-hidden="true"></span>Spring AOP</a>
+<a class="side-link" href="../topics/spring-transactions.html" data-slug="spring-transactions"><span class="check" data-check="spring-transactions" aria-hidden="true"></span>Spring Transactions</a>
+<a class="side-link" href="../topics/spring-data.html" data-slug="spring-data"><span class="check" data-check="spring-data" aria-hidden="true"></span>Spring Data (JPA)</a>
+<a class="side-link" href="../topics/spring-profiles.html" data-slug="spring-profiles"><span class="check" data-check="spring-profiles" aria-hidden="true"></span>Spring Profiles &amp; Config</a>
+<a class="side-link" href="../topics/spring-security.html" data-slug="spring-security"><span class="check" data-check="spring-security" aria-hidden="true"></span>Spring Security Flow</a>
+<a class="side-link" href="../topics/filters-and-interceptors.html" data-slug="filters-and-interceptors"><span class="check" data-check="filters-and-interceptors" aria-hidden="true"></span>Filters &amp; Interceptors</a>
+<a class="side-link" href="../topics/core-java-deep-dive.html" data-slug="core-java-deep-dive"><span class="check" data-check="core-java-deep-dive" aria-hidden="true"></span>Core Java Deep-Dive</a></nav>
+  <p class="side-progress"><span data-progress-text></span></p>
+</aside>
+<main class="content">
+  <header class="topic-head">
+    <p class="crumb"><a href="../index.html">Roadmap</a> / Phase 7 · Backend Development</p>
+    <h1>Autowiring</h1>
+    <p class="summary">@Autowired, @Qualifier, @Primary and resolving ambiguous beans.</p>
+    <div class="head-row">
+      <div class="tags"><span class="tag">spring</span><span class="tag">autowired</span><span class="tag">di</span></div>
+      <button class="read-btn" data-read-btn data-slug="autowiring"><span class="read-icon">○</span> Mark as read</button>
+    </div>
+  </header>
+  <div class="tabs" role="tablist">
+    <button class="tab active" role="tab" data-tab="notes" aria-selected="true">Notes</button>
+    <button class="tab" role="tab" data-tab="examples" aria-selected="false">Code examples</button>
+  </div>
+  <section class="panel active" data-panel="notes" role="tabpanel">
+    <article class="prose"><h3>Auto wiring</h3>
+<p>Autowiring in Spring means automatically resolving and injecting the dependencies required by a Spring-managed bean.</p>
+<p>In XML-based configuration, Spring provides autowiring modes such as <code>byName</code>, <code>byType</code>, and <code>constructor</code>.</p>
+<p>In <code>byName</code>, Spring matches the dependency with a bean whose name matches the property name.</p>
+<p>In <code>byType</code>, Spring looks for a bean whose type matches the required dependency.</p>
+<p>In <code>constructor</code> autowiring, Spring resolves the dependencies required by the constructor, primarily based on their types.</p>
+<p>When using annotation-based configuration, <code>@Autowired</code> is commonly used for dependency injection. It primarily resolves dependencies by type. If multiple beans of the same type are available, Spring can use <code>@Primary</code> or <code>@Qualifier</code> to determine which bean should be injected.</p>
+<p>If multiple beans match and there is no way to resolve the ambiguity, Spring throws a <code>NoUniqueBeanDefinitionException</code>.</p>
+<p>Therefore, XML autowiring modes such as <code>byName</code>, <code>byType</code>, and <code>constructor</code> should be distinguished from annotation-based dependency injection using <code>@Autowired</code>.</p>
+<p>Q.2 @Value &amp; Spring Expression Language &amp; @ConfigurationProperties</p>
+<p><code>@Value</code> is a Spring annotation used to inject values from property sources into fields, constructor parameters, or method parameters.</p>
+<p>For example, if we have:</p>
+<div class="codehilite"><div class="highlight"><pre><span></span><span class="na">app.name</span><span class="o">=</span><span class="s">MyApplication</span>
+<span class="na">app.timeout</span><span class="o">=</span><span class="s">60</span>
+</pre></div>
+</div>
+<p>we can inject these values using:</p>
+<div class="codehilite"><div class="highlight"><pre><span></span><span class="nd">@Value</span><span class="p">(</span><span class="s">"${app.name}"</span><span class="p">)</span>
+<span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">appName</span><span class="p">;</span>
+
+<span class="nd">@Value</span><span class="p">(</span><span class="s">"${app.timeout}"</span><span class="p">)</span>
+<span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">timeout</span><span class="p">;</span>
+</pre></div>
+</div>
+<h2>SpEl</h2>
+<p>The <code>${...}</code> syntax is called a property placeholder. It tells Spring to resolve the specified property from the available property sources.</p>
+<p>We can also provide a default value using the <code>:</code> syntax:</p>
+<div class="codehilite"><div class="highlight"><pre><span></span><span class="nd">@Value</span><span class="p">(</span><span class="s">"${app.timeout:30}"</span><span class="p">)</span>
+<span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">timeout</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>If <code>app.timeout</code> is available, Spring uses its value; otherwise, it uses <code>30</code>.</p>
+<p><code>@Value</code> can also use Spring Expression Language (SpEL) with the <code>#{...}</code> syntax. For example:</p>
+<div class="codehilite"><div class="highlight"><pre><span></span><span class="nd">@Value</span><span class="p">(</span><span class="s">"#{2 + 3}"</span><span class="p">)</span>
+<span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">result</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Here <code>#{...}</code> is a SpEL expression, while <code>${...}</code> is a property placeholder.</p>
+<p>Therefore, <code>${...}</code> and <code>#{...}</code> should not be confused: <code>${...}</code> is used for property resolution, whereas <code>#{...}</code> is used for Spring Expression Language.</p>
+<h2>why we use SpEL</h2>
+<p>We use Spring Expression Language, or SpEL, when we need to evaluate dynamic expressions in a Spring application.</p>
+<p>Unlike <code>${...}</code>, which is mainly used to resolve property values, SpEL uses <code>#{...}</code> and supports operations such as calculations, conditional expressions, method invocation, accessing objects and Spring beans, and working with collections.</p>
+<p>For example:</p>
+<div class="codehilite"><div class="highlight"><pre><span></span><span class="nd">@Value</span><span class="p">(</span><span class="s">"#{10 &gt; 5 ? 'Yes' : 'No'}"</span><span class="p">)</span>
+<span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">result</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Here, SpEL evaluates the expression and assigns <code>Yes</code> to the field.</p>
+<p>Therefore, <code>${...}</code> is mainly used for property resolution, while <code>#{...}</code> is used when we need Spring Expression Language and dynamic expression evaluation.</p>
+<p>Q.3 @componentProperties </p>
+<p>@ConfigurationProperties is used to bind a group of related configuration properties from application.properties or application.yml to a Java object.</p>
+<p>Means it reduce the need to use @values multiple time in same class in this we define a prefix and rest of it it matchs through a field name</p>
+<p>for example-&gt;</p>
+<p>Properties-&gt;</p>
+<p>app.name=MyApplication
+app.version=1.0
+app.timeout=30
+app.max-users=100</p>
+<p>java-&gt;</p>
+<p>@Component
+@ConfigurationProperties(prefix = "app")
+public class AppProperties {</p>
+<div class="codehilite"><div class="highlight"><pre><span></span>private String name;
+private String version;
+private int timeout;
+private int maxUsers;
+
+// getters and setters
+</pre></div>
+</div>
+<p>}</p>
+<p>app.name       → name
+app.version    → version
+app.timeout    → timeout
+app.max-users  → maxUsers</p>
+<p>Q.4 runner interfaces</p>
+<p>there are two interfaces-&gt;
+1.CommandLineRunner interface
+2. ApplicationRunner interface</p>
+<p>Both have abstract method run()</p>
+<p>They let you run custom code immediately after the Spring context is initialized but before the application starts serving requests—commonly used for tasks like seeding data, validating configs, or parsing startup arguments.</p>
+<p>@Component
+public class DataSeedRunner implements CommandLineRunner {
+    private final SeedService seedService;</p>
+<div class="codehilite"><div class="highlight"><pre><span></span>public DataSeedRunner(SeedService seedService) {
+    this.seedService = seedService;
+}
+
+@Override
+public void run(String... args) {
+    seedService.seedIfEmpty();
+}
+</pre></div>
+</div>
+<p>}</p>
+<p>@Component
+public class EnvironmentAwareRunner implements ApplicationRunner {
+    @Override
+    public void run(ApplicationArguments args) {
+        if (args.containsOption("profile")) {
+            System.out.println("Profile: " + args.getOptionValues("profile"));
+        }
+    }
+}</p></article>
+  </section>
+  <section class="panel" data-panel="examples" role="tabpanel" hidden>
+    <article class="prose"><h3>@Autowired by type — and ambiguity</h3>
+<div class="codehilite"><div class="highlight"><pre><span></span><span class="kd">interface</span> <span class="nc">Notifier</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">send</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">msg</span><span class="p">);</span><span class="w"> </span><span class="p">}</span>
+
+<span class="nd">@Component</span><span class="w"> </span><span class="kd">class</span> <span class="nc">EmailNotifier</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Notifier</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+<span class="nd">@Component</span><span class="w"> </span><span class="kd">class</span> <span class="nc">SmsNotifier</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Notifier</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+
+<span class="c1">// Two beans of type Notifier -&gt; constructor injection by type is now ambiguous</span>
+<span class="nd">@Service</span>
+<span class="kd">class</span> <span class="nc">AlertService</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Notifier</span><span class="w"> </span><span class="n">notifier</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// org.springframework.beans.factory.NoUniqueBeanDefinitionException:</span>
+<span class="w">    </span><span class="c1">// expected single matching bean but found 2</span>
+<span class="w">    </span><span class="n">AlertService</span><span class="p">(</span><span class="n">Notifier</span><span class="w"> </span><span class="n">notifier</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">notifier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">notifier</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<h3>Fix 1: @Primary — the default choice</h3>
+<div class="codehilite"><div class="highlight"><pre><span></span><span class="nd">@Component</span>
+<span class="nd">@Primary</span><span class="w">                       </span><span class="c1">// wins when the type alone can't decide</span>
+<span class="kd">class</span> <span class="nc">EmailNotifier</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Notifier</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+</pre></div>
+</div>
+<h3>Fix 2: @Qualifier — explicit pick</h3>
+<div class="codehilite"><div class="highlight"><pre><span></span><span class="nd">@Component</span><span class="p">(</span><span class="s">"sms"</span><span class="p">)</span><span class="w">              </span><span class="c1">// bean name</span>
+<span class="kd">class</span> <span class="nc">SmsNotifier</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Notifier</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+
+<span class="nd">@Service</span>
+<span class="kd">class</span> <span class="nc">AlertService</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">AlertService</span><span class="p">(</span><span class="nd">@Qualifier</span><span class="p">(</span><span class="s">"sms"</span><span class="p">)</span><span class="w"> </span><span class="n">Notifier</span><span class="w"> </span><span class="n">notifier</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">notifier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">notifier</span><span class="p">;</span><span class="w">   </span><span class="c1">// exactly the SMS one</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Notifier</span><span class="w"> </span><span class="n">notifier</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<h3>Fix 3: inject them all</h3>
+<div class="codehilite"><div class="highlight"><pre><span></span><span class="nd">@Service</span>
+<span class="kd">class</span> <span class="nc">BroadcastService</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Notifier</span><span class="o">&gt;</span><span class="w"> </span><span class="n">all</span><span class="p">;</span><span class="w">          </span><span class="c1">// every Notifier bean, ordered</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">Notifier</span><span class="o">&gt;</span><span class="w"> </span><span class="n">byName</span><span class="p">;</span><span class="c1">// key = bean name</span>
+
+<span class="w">    </span><span class="n">BroadcastService</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Notifier</span><span class="o">&gt;</span><span class="w"> </span><span class="n">all</span><span class="p">,</span><span class="w"> </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">Notifier</span><span class="o">&gt;</span><span class="w"> </span><span class="n">byName</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">all</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">all</span><span class="p">;</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">byName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">byName</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">broadcast</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">msg</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">all</span><span class="p">.</span><span class="na">forEach</span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">n</span><span class="p">.</span><span class="na">send</span><span class="p">(</span><span class="n">msg</span><span class="p">));</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<h3>Autowiring modes (know the terms)</h3>
+<div class="codehilite"><div class="highlight"><pre><span></span><span class="c1">// no        — default in plain Spring (no injection unless annotated)</span>
+<span class="c1">// byType    — what @Autowired does first</span>
+<span class="c1">// byName    — fallback: field/param name must match a bean name</span>
+<span class="c1">// constructor — via @Component constructor args (best practice)</span>
+
+<span class="c1">// Optional dependency with a default:</span>
+<span class="nd">@Service</span>
+<span class="kd">class</span> <span class="nc">CacheWarmer</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">CacheWarmer</span><span class="p">(</span><span class="nd">@Autowired</span><span class="p">(</span><span class="n">required</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">)</span><span class="w"> </span><span class="nd">@Qualifier</span><span class="p">(</span><span class="s">"redis"</span><span class="p">)</span><span class="w"> </span><span class="n">Cache</span><span class="w"> </span><span class="n">cache</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">cache</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cache</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Cache</span><span class="w"> </span><span class="n">cache</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div></article>
+  </section>
+  <nav class="prev-next"><a class="pn previous" href="ioc-and-di.html"><span class="pn-label">Previous</span><span class="pn-title">IoC &amp; Dependency Injection</span></a><a class="pn next" href="bean-configuration.html"><span class="pn-label">Next</span><span class="pn-title">Bean Configuration &amp; Annotations</span></a></nav>
+</main>
+<script src="../assets/app.js"></script>
+</body>
+</html>

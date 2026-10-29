@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Polymorphism · Night Java</title>
+<meta name="description" content="Compile-time vs runtime polymorphism, overloading and overriding.">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body class="topic-body">
+<aside class="sidebar">
+  <a class="brand" href="../index.html"><span class="brand-mark">J</span> Night Java</a>
+  <input class="side-filter" type="search" placeholder="Filter topics…" aria-label="Filter topics">
+  <div class="side-phase-wrap"><label class="side-phase-label" for="side-phase">Jump to phase</label>
+  <select id="side-phase" class="side-phase"><option value="1">Phase 1 · Programming Basics</option>
+<option value="2">Phase 2 · OOP</option>
+<option value="3">Phase 3 · Core Java Advanced</option>
+<option value="4">Phase 4 · Advanced Java</option>
+<option value="5">Phase 5 · DSA</option>
+<option value="6">Phase 6 · Database</option>
+<option value="7">Phase 7 · Backend Development</option>
+<option value="8">Phase 8 · Frontend</option>
+<option value="9">Phase 9 · DevOps + Deployment</option>
+<option value="10">Phase 10 · LLD</option>
+<option value="11">Phase 11 · HLD</option>
+<option value="12">Phase 12 · Interview Topics</option></select></div>
+  <nav class="side-nav" aria-label="Topics in roadmap order"><a class="side-link" href="../topics/java-fundamentals.html" data-slug="java-fundamentals"><span class="check" data-check="java-fundamentals" aria-hidden="true"></span>Java Fundamentals Q&amp;A</a>
+<a class="side-link" href="../topics/oops-encapsulation.html" data-slug="oops-encapsulation"><span class="check" data-check="oops-encapsulation" aria-hidden="true"></span>OOPs &amp; Encapsulation</a>
+<a class="side-link" href="../topics/inheritance.html" data-slug="inheritance"><span class="check" data-check="inheritance" aria-hidden="true"></span>Inheritance</a>
+<a class="side-link" href="../topics/has-a-is-a.html" data-slug="has-a-is-a"><span class="check" data-check="has-a-is-a" aria-hidden="true"></span>Has-a vs Is-a Relationships</a>
+<a class="side-link" href="../topics/polymorphism.html" aria-current="page" data-slug="polymorphism"><span class="check" data-check="polymorphism" aria-hidden="true"></span>Polymorphism</a>
+<a class="side-link" href="../topics/abstraction.html" data-slug="abstraction"><span class="check" data-check="abstraction" aria-hidden="true"></span>Abstraction</a>
+<a class="side-link" href="../topics/interface.html" data-slug="interface"><span class="check" data-check="interface" aria-hidden="true"></span>Interfaces</a>
+<a class="side-link" href="../topics/anonymous-inner-class.html" data-slug="anonymous-inner-class"><span class="check" data-check="anonymous-inner-class" aria-hidden="true"></span>Anonymous Inner Class</a>
+<a class="side-link" href="../topics/collections-framework.html" data-slug="collections-framework"><span class="check" data-check="collections-framework" aria-hidden="true"></span>Collections Framework</a>
+<a class="side-link" href="../topics/exception-handling.html" data-slug="exception-handling"><span class="check" data-check="exception-handling" aria-hidden="true"></span>Exception Handling</a>
+<a class="side-link" href="../topics/file-handling.html" data-slug="file-handling"><span class="check" data-check="file-handling" aria-hidden="true"></span>File Handling</a>
+<a class="side-link" href="../topics/generics.html" data-slug="generics"><span class="check" data-check="generics" aria-hidden="true"></span>Generics</a>
+<a class="side-link" href="../topics/stream-api.html" data-slug="stream-api"><span class="check" data-check="stream-api" aria-hidden="true"></span>Stream API</a>
+<a class="side-link" href="../topics/multithreading.html" data-slug="multithreading"><span class="check" data-check="multithreading" aria-hidden="true"></span>Multithreading</a>
+<a class="side-link" href="../topics/executorservice.html" data-slug="executorservice"><span class="check" data-check="executorservice" aria-hidden="true"></span>ExecutorService</a>
+<a class="side-link" href="../topics/completablefuture.html" data-slug="completablefuture"><span class="check" data-check="completablefuture" aria-hidden="true"></span>CompletableFuture</a>
+<a class="side-link" href="../topics/atomic-classes.html" data-slug="atomic-classes"><span class="check" data-check="atomic-classes" aria-hidden="true"></span>Atomic Classes</a>
+<a class="side-link" href="../topics/concurrent-collections.html" data-slug="concurrent-collections"><span class="check" data-check="concurrent-collections" aria-hidden="true"></span>Concurrent Collections</a>
+<a class="side-link" href="../topics/jdbc.html" data-slug="jdbc"><span class="check" data-check="jdbc" aria-hidden="true"></span>JDBC</a>
+<a class="side-link" href="../topics/servlet.html" data-slug="servlet"><span class="check" data-check="servlet" aria-hidden="true"></span>Servlets</a>
+<a class="side-link" href="../topics/jsp.html" data-slug="jsp"><span class="check" data-check="jsp" aria-hidden="true"></span>JSP</a>
+<a class="side-link" href="../topics/hibernate.html" data-slug="hibernate"><span class="check" data-check="hibernate" aria-hidden="true"></span>Hibernate</a>
+<a class="side-link" href="../topics/spring-mvc.html" data-slug="spring-mvc"><span class="check" data-check="spring-mvc" aria-hidden="true"></span>Spring MVC</a>
+<a class="side-link" href="../topics/session-management.html" data-slug="session-management"><span class="check" data-check="session-management" aria-hidden="true"></span>Session Management</a>
+<a class="side-link" href="../topics/maven.html" data-slug="maven"><span class="check" data-check="maven" aria-hidden="true"></span>Maven</a>
+<a class="side-link" href="../topics/servlet-vs-spring-core.html" data-slug="servlet-vs-spring-core"><span class="check" data-check="servlet-vs-spring-core" aria-hidden="true"></span>Servlet vs Spring Core</a>
+<a class="side-link" href="../topics/ioc-and-di.html" data-slug="ioc-and-di"><span class="check" data-check="ioc-and-di" aria-hidden="true"></span>IoC &amp; Dependency Injection</a>
+<a class="side-link" href="../topics/autowiring.html" data-slug="autowiring"><span class="check" data-check="autowiring" aria-hidden="true"></span>Autowiring</a>
+<a class="side-link" href="../topics/bean-configuration.html" data-slug="bean-configuration"><span class="check" data-check="bean-configuration" aria-hidden="true"></span>Bean Configuration &amp; Annotations</a>
+<a class="side-link" href="../topics/bean-lifecycle.html" data-slug="bean-lifecycle"><span class="check" data-check="bean-lifecycle" aria-hidden="true"></span>Bean Lifecycle</a>
+<a class="side-link" href="../topics/bean-lifecycle-aop.html" data-slug="bean-lifecycle-aop"><span class="check" data-check="bean-lifecycle-aop" aria-hidden="true"></span>Bean Lifecycle &amp; Where AOP Fits</a>
+<a class="side-link" href="../topics/spring-aop.html" data-slug="spring-aop"><span class="check" data-check="spring-aop" aria-hidden="true"></span>Spring AOP</a>
+<a class="side-link" href="../topics/spring-transactions.html" data-slug="spring-transactions"><span class="check" data-check="spring-transactions" aria-hidden="true"></span>Spring Transactions</a>
+<a class="side-link" href="../topics/spring-data.html" data-slug="spring-data"><span class="check" data-check="spring-data" aria-hidden="true"></span>Spring Data (JPA)</a>
+<a class="side-link" href="../topics/spring-profiles.html" data-slug="spring-profiles"><span class="check" data-check="spring-profiles" aria-hidden="true"></span>Spring Profiles &amp; Config</a>
+<a class="side-link" href="../topics/spring-security.html" data-slug="spring-security"><span class="check" data-check="spring-security" aria-hidden="true"></span>Spring Security Flow</a>
+<a class="side-link" href="../topics/filters-and-interceptors.html" data-slug="filters-and-interceptors"><span class="check" data-check="filters-and-interceptors" aria-hidden="true"></span>Filters &amp; Interceptors</a>
+<a class="side-link" href="../topics/core-java-deep-dive.html" data-slug="core-java-deep-dive"><span class="check" data-check="core-java-deep-dive" aria-hidden="true"></span>Core Java Deep-Dive</a></nav>
+  <p class="side-progress"><span data-progress-text></span></p>
+</aside>
+<main class="content">
+  <header class="topic-head">
+    <p class="crumb"><a href="../index.html">Roadmap</a> / Phase 2 · OOP</p>
+    <h1>Polymorphism</h1>
+    <p class="summary">Compile-time vs runtime polymorphism, overloading and overriding.</p>
+    <div class="head-row">
+      <div class="tags"><span class="tag">oop</span><span class="tag">overloading</span><span class="tag">overriding</span></div>
+      <button class="read-btn" data-read-btn data-slug="polymorphism"><span class="read-icon">○</span> Mark as read</button>
+    </div>
+  </header>
+  <div class="tabs" role="tablist">
+    <button class="tab active" role="tab" data-tab="notes" aria-selected="true">Notes</button>
+    <button class="tab" role="tab" data-tab="examples" aria-selected="false">Code examples</button>
+  </div>
+  <section class="panel active" data-panel="notes" role="tabpanel">
+    <article class="prose"><p>**Polymorphism **</p>
+<p>Polymorphism means "many forms." In polymorphism, the same method name or interface can behave differently in different situations.</p>
+<p>There are two main types of polymorphism:</p>
+<p>Compile-Time Polymorphism (Method Overloading)</p>
+<p>Method overloading occurs when a class has two or more methods with the same name but different parameter lists.</p>
+<p>The parameters can differ in:</p>
+<p>Number of arguments</p>
+<p>Type of arguments</p>
+<p>Order of argument types</p>
+<p>The compiler determines which overloaded method to call at compile time.</p>
+<p>Runtime Polymorphism (Method Overriding)</p>
+<p>Method overriding occurs when a child class provides its own implementation of a method that it inherits from the parent class.</p>
+<p>The method that will actually execute is determined at runtime based on the object, which is why it is called runtime polymorphism.</p>
+<p>In short:</p>
+<p>Overloading → Same class → Same method name → Different parameters → Compile time</p>
+<p>Overriding → Parent-child relationship → Same method signature → Different implementation → Runtime</p>
+<p>Example Overloading --&gt;</p>
+<p>class Calculator {</p>
+<div class="codehilite"><div class="highlight"><pre><span></span>int sum(int a, int b) {
+    return a + b;
+}
+
+float sum(float a, float b) {
+    return a + b;
+}
+</pre></div>
+</div>
+<p>}</p>
+<p>Example Overriding --&gt;</p>
+<p>class Animal {
+    void sound() {
+        System.out.println("Animal makes a sound");
+    }
+}</p>
+<p>class Dog extends Animal {
+    @Override
+    void sound() {
+        System.out.println("Dog barks");
+    }
+}</p>
+<p>Animal a = new Dog();
+a.sound(); // Dog barks</p></article>
+  </section>
+  <section class="panel" data-panel="examples" role="tabpanel" hidden>
+    <article class="prose"><h3>Runtime polymorphism: overriding</h3>
+<div class="codehilite"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="nc">Shape</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="nf">area</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nc">Circle</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Shape</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">r</span><span class="p">;</span>
+<span class="w">    </span><span class="n">Circle</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">r</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">r</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="nd">@Override</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="nf">area</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">Math</span><span class="p">.</span><span class="na">PI</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">r</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nc">Rectangle</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Shape</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">w</span><span class="p">,</span><span class="w"> </span><span class="n">h</span><span class="p">;</span>
+<span class="w">    </span><span class="n">Rectangle</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">w</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">h</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">w</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">w</span><span class="p">;</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">h</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">h</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="nd">@Override</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="nf">area</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">w</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">h</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nc">Demo</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Shape</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Circle</span><span class="p">(</span><span class="mi">7</span><span class="p">);</span><span class="w">       </span><span class="c1">// parent reference, child object</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="na">area</span><span class="p">());</span><span class="w">  </span><span class="c1">// Circle.area() chosen at RUNTIME</span>
+<span class="w">        </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Rectangle</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">);</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="na">area</span><span class="p">());</span><span class="w">  </span><span class="c1">// Rectangle.area()</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<h3>Compile-time polymorphism: overloading</h3>
+<div class="codehilite"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="nc">Printer</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">print</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">msg</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">"String: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">msg</span><span class="p">);</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">print</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">"int: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">n</span><span class="p">);</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">print</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">msg</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">copies</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* different parameter list */</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="c1">// int print(String msg) {}  // NOT overloading — return type alone differs</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<h3>Overriding rules interviewers test</h3>
+<div class="codehilite"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="nc">Parent</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="n">Object</span><span class="w"> </span><span class="nf">process</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nc">Child</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Parent</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 1. Same signature</span>
+<span class="w">    </span><span class="c1">// 2. Access can only widen (protected -&gt; public), never narrow</span>
+<span class="w">    </span><span class="c1">// 3. Return type can be the same or a subtype (covariant)</span>
+<span class="w">    </span><span class="c1">// 4. Can throw only the same, fewer, or narrower checked exceptions</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">process</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="s">"ok"</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// final / private / static methods cannot be overridden</span>
+<span class="kd">class</span> <span class="nc">FinalParent</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">final</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">lock</span><span class="p">()</span><span class="w"> </span><span class="p">{}</span><span class="w">       </span><span class="c1">// cannot override</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">hide</span><span class="p">()</span><span class="w"> </span><span class="p">{}</span><span class="w">     </span><span class="c1">// not inherited, so nothing to override</span>
+<span class="p">}</span>
+</pre></div>
+</div></article>
+  </section>
+  <nav class="prev-next"><a class="pn previous" href="has-a-is-a.html"><span class="pn-label">Previous</span><span class="pn-title">Has-a vs Is-a Relationships</span></a><a class="pn next" href="abstraction.html"><span class="pn-label">Next</span><span class="pn-title">Abstraction</span></a></nav>
+</main>
+<script src="../assets/app.js"></script>
+</body>
+</html>

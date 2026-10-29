@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hibernate · Night Java</title>
+<meta name="description" content="ORM fundamentals: entities, mappings, sessions, caching and HQL.">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body class="topic-body">
+<aside class="sidebar">
+  <a class="brand" href="../index.html"><span class="brand-mark">J</span> Night Java</a>
+  <input class="side-filter" type="search" placeholder="Filter topics…" aria-label="Filter topics">
+  <div class="side-phase-wrap"><label class="side-phase-label" for="side-phase">Jump to phase</label>
+  <select id="side-phase" class="side-phase"><option value="1">Phase 1 · Programming Basics</option>
+<option value="2">Phase 2 · OOP</option>
+<option value="3">Phase 3 · Core Java Advanced</option>
+<option value="4">Phase 4 · Advanced Java</option>
+<option value="5">Phase 5 · DSA</option>
+<option value="6">Phase 6 · Database</option>
+<option value="7">Phase 7 · Backend Development</option>
+<option value="8">Phase 8 · Frontend</option>
+<option value="9">Phase 9 · DevOps + Deployment</option>
+<option value="10">Phase 10 · LLD</option>
+<option value="11">Phase 11 · HLD</option>
+<option value="12">Phase 12 · Interview Topics</option></select></div>
+  <nav class="side-nav" aria-label="Topics in roadmap order"><a class="side-link" href="../topics/java-fundamentals.html" data-slug="java-fundamentals"><span class="check" data-check="java-fundamentals" aria-hidden="true"></span>Java Fundamentals Q&amp;A</a>
+<a class="side-link" href="../topics/oops-encapsulation.html" data-slug="oops-encapsulation"><span class="check" data-check="oops-encapsulation" aria-hidden="true"></span>OOPs &amp; Encapsulation</a>
+<a class="side-link" href="../topics/inheritance.html" data-slug="inheritance"><span class="check" data-check="inheritance" aria-hidden="true"></span>Inheritance</a>
+<a class="side-link" href="../topics/has-a-is-a.html" data-slug="has-a-is-a"><span class="check" data-check="has-a-is-a" aria-hidden="true"></span>Has-a vs Is-a Relationships</a>
+<a class="side-link" href="../topics/polymorphism.html" data-slug="polymorphism"><span class="check" data-check="polymorphism" aria-hidden="true"></span>Polymorphism</a>
+<a class="side-link" href="../topics/abstraction.html" data-slug="abstraction"><span class="check" data-check="abstraction" aria-hidden="true"></span>Abstraction</a>
+<a class="side-link" href="../topics/interface.html" data-slug="interface"><span class="check" data-check="interface" aria-hidden="true"></span>Interfaces</a>
+<a class="side-link" href="../topics/anonymous-inner-class.html" data-slug="anonymous-inner-class"><span class="check" data-check="anonymous-inner-class" aria-hidden="true"></span>Anonymous Inner Class</a>
+<a class="side-link" href="../topics/collections-framework.html" data-slug="collections-framework"><span class="check" data-check="collections-framework" aria-hidden="true"></span>Collections Framework</a>
+<a class="side-link" href="../topics/exception-handling.html" data-slug="exception-handling"><span class="check" data-check="exception-handling" aria-hidden="true"></span>Exception Handling</a>
+<a class="side-link" href="../topics/file-handling.html" data-slug="file-handling"><span class="check" data-check="file-handling" aria-hidden="true"></span>File Handling</a>
+<a class="side-link" href="../topics/generics.html" data-slug="generics"><span class="check" data-check="generics" aria-hidden="true"></span>Generics</a>
+<a class="side-link" href="../topics/stream-api.html" data-slug="stream-api"><span class="check" data-check="stream-api" aria-hidden="true"></span>Stream API</a>
+<a class="side-link" href="../topics/multithreading.html" data-slug="multithreading"><span class="check" data-check="multithreading" aria-hidden="true"></span>Multithreading</a>
+<a class="side-link" href="../topics/executorservice.html" data-slug="executorservice"><span class="check" data-check="executorservice" aria-hidden="true"></span>ExecutorService</a>
+<a class="side-link" href="../topics/completablefuture.html" data-slug="completablefuture"><span class="check" data-check="completablefuture" aria-hidden="true"></span>CompletableFuture</a>
+<a class="side-link" href="../topics/atomic-classes.html" data-slug="atomic-classes"><span class="check" data-check="atomic-classes" aria-hidden="true"></span>Atomic Classes</a>
+<a class="side-link" href="../topics/concurrent-collections.html" data-slug="concurrent-collections"><span class="check" data-check="concurrent-collections" aria-hidden="true"></span>Concurrent Collections</a>
+<a class="side-link" href="../topics/jdbc.html" data-slug="jdbc"><span class="check" data-check="jdbc" aria-hidden="true"></span>JDBC</a>
+<a class="side-link" href="../topics/servlet.html" data-slug="servlet"><span class="check" data-check="servlet" aria-hidden="true"></span>Servlets</a>
+<a class="side-link" href="../topics/jsp.html" data-slug="jsp"><span class="check" data-check="jsp" aria-hidden="true"></span>JSP</a>
+<a class="side-link" href="../topics/hibernate.html" aria-current="page" data-slug="hibernate"><span class="check" data-check="hibernate" aria-hidden="true"></span>Hibernate</a>
+<a class="side-link" href="../topics/spring-mvc.html" data-slug="spring-mvc"><span class="check" data-check="spring-mvc" aria-hidden="true"></span>Spring MVC</a>
+<a class="side-link" href="../topics/session-management.html" data-slug="session-management"><span class="check" data-check="session-management" aria-hidden="true"></span>Session Management</a>
+<a class="side-link" href="../topics/maven.html" data-slug="maven"><span class="check" data-check="maven" aria-hidden="true"></span>Maven</a>
+<a class="side-link" href="../topics/servlet-vs-spring-core.html" data-slug="servlet-vs-spring-core"><span class="check" data-check="servlet-vs-spring-core" aria-hidden="true"></span>Servlet vs Spring Core</a>
+<a class="side-link" href="../topics/ioc-and-di.html" data-slug="ioc-and-di"><span class="check" data-check="ioc-and-di" aria-hidden="true"></span>IoC &amp; Dependency Injection</a>
+<a class="side-link" href="../topics/autowiring.html" data-slug="autowiring"><span class="check" data-check="autowiring" aria-hidden="true"></span>Autowiring</a>
+<a class="side-link" href="../topics/bean-configuration.html" data-slug="bean-configuration"><span class="check" data-check="bean-configuration" aria-hidden="true"></span>Bean Configuration &amp; Annotations</a>
+<a class="side-link" href="../topics/bean-lifecycle.html" data-slug="bean-lifecycle"><span class="check" data-check="bean-lifecycle" aria-hidden="true"></span>Bean Lifecycle</a>
+<a class="side-link" href="../topics/bean-lifecycle-aop.html" data-slug="bean-lifecycle-aop"><span class="check" data-check="bean-lifecycle-aop" aria-hidden="true"></span>Bean Lifecycle &amp; Where AOP Fits</a>
+<a class="side-link" href="../topics/spring-aop.html" data-slug="spring-aop"><span class="check" data-check="spring-aop" aria-hidden="true"></span>Spring AOP</a>
+<a class="side-link" href="../topics/spring-transactions.html" data-slug="spring-transactions"><span class="check" data-check="spring-transactions" aria-hidden="true"></span>Spring Transactions</a>
+<a class="side-link" href="../topics/spring-data.html" data-slug="spring-data"><span class="check" data-check="spring-data" aria-hidden="true"></span>Spring Data (JPA)</a>
+<a class="side-link" href="../topics/spring-profiles.html" data-slug="spring-profiles"><span class="check" data-check="spring-profiles" aria-hidden="true"></span>Spring Profiles &amp; Config</a>
+<a class="side-link" href="../topics/spring-security.html" data-slug="spring-security"><span class="check" data-check="spring-security" aria-hidden="true"></span>Spring Security Flow</a>
+<a class="side-link" href="../topics/filters-and-interceptors.html" data-slug="filters-and-interceptors"><span class="check" data-check="filters-and-interceptors" aria-hidden="true"></span>Filters &amp; Interceptors</a>
+<a class="side-link" href="../topics/core-java-deep-dive.html" data-slug="core-java-deep-dive"><span class="check" data-check="core-java-deep-dive" aria-hidden="true"></span>Core Java Deep-Dive</a></nav>
+  <p class="side-progress"><span data-progress-text></span></p>
+</aside>
+<main class="content">
+  <header class="topic-head">
+    <p class="crumb"><a href="../index.html">Roadmap</a> / Phase 4 · Advanced Java</p>
+    <h1>Hibernate</h1>
+    <p class="summary">ORM fundamentals: entities, mappings, sessions, caching and HQL.</p>
+    <div class="head-row">
+      <div class="tags"><span class="tag">orm</span><span class="tag">jpa</span><span class="tag">database</span></div>
+      <button class="read-btn" data-read-btn data-slug="hibernate"><span class="read-icon">○</span> Mark as read</button>
+    </div>
+  </header>
+  <div class="tabs" role="tablist">
+    <button class="tab active" role="tab" data-tab="notes" aria-selected="true">Notes</button>
+    <button class="tab" role="tab" data-tab="examples" aria-selected="false">Code examples</button>
+  </div>
+  <section class="panel active" data-panel="notes" role="tabpanel">
+    <article class="prose"><p>Q.1What is Hibernate, and why do we use it in Java?</p>
+<p>Hibernate is an ORM (Object-Relational Mapping) framework for Java that is used to map Java objects to relational database tables.</p>
+<p>In a Java application, data is represented as objects, whereas a relational database stores data in tables. Hibernate provides a mapping between these objects and database tables, so developers can work with Java objects instead of handling database operations directly.</p>
+<p>Hibernate also reduces the need to write SQL queries and manually manage database connections. It provides APIs and methods to perform operations such as saving, retrieving, updating, and deleting data.</p>
+<p>Compared to JDBC, Hibernate provides a higher-level abstraction. In JDBC, we generally need to manage database connections and write SQL queries manually, whereas Hibernate handles much of this work for us.</p>
+<p>Q.2 What is ORM, and how does Hibernate implement ORM?</p>
+<p>ORM stands for Object-Relational Mapping. Java is an object-oriented programming language, so we represent data using classes and objects. However, relational databases store data in tables and rows. ORM acts as a bridge between Java objects and relational database tables. It maps Java classes to database tables and objects to rows, so we don't need to manually convert object data into database records. Hibernate is an ORM framework that provides this functionality.</p>
+<p>Q.3 How does Hibernate implement ORM?", you can say:</p>
+<p>"Hibernate implements ORM by mapping Java classes to database tables and Java objects to table rows. We use annotations like @Entity, @Table, and @Id to define the mapping. When we create a Java object and save it using Hibernate, Hibernate generates the required SQL query and stores the data in the database. In this way, Hibernate reduces the need for manually writing SQL queries and converting Java objects into database records."</p>
+<p>Q.4 What is the difference between JDBC and Hibernate?</p>
+<p>JDBC is a Java API used to connect a Java application to a database. In JDBC, we generally establish the database connection, write SQL queries, and process the results manually. Whereas, Hibernate is an ORM framework that maps Java classes to database tables and objects to rows automatically. It manages database connections through its configuration and can generate SQL queries automatically, so we don't need to write SQL for every operation. However, if we need to write queries manually, Hibernate supports HQL, JPQL, and native SQL. The main difference is that JDBC works directly with SQL, whereas Hibernate works with Java objects and handles object-relational mapping.</p>
+<p>JPQL stands for Java Persistence Query Language. HQL stands for Hibernate Query Language. Both are object-oriented query languages, but they are not the same.</p>
+<p>Q.5 What is the difference between Session and SessionFactory in Hibernate?</p>
+<p>SessionFactory is an interface in Hibernate, and SessionFactoryImpl is one of its implementations. A SessionFactory is generally created once for an application and is used to create Session objects.</p>
+<p>A Session represents a unit of work with the database and is typically created for a particular transaction or unit of work. After the work is completed, the Session is closed.</p>
+<p>The main difference in caching is that Session provides first-level cache, which is associated with a particular Session. SessionFactory is associated with the second-level cache, which can be shared across multiple Sessions.</p>
+<p>Also, SessionFactory is thread-safe and can be shared across multiple threads, whereas a Session is not thread-safe and should generally be used by one thread at a time.</p>
+<p>Q.6 What is the difference between get() and load() methods in Hibernate?</p>
+<p>The get() and load() methods in Hibernate are used to retrieve an object from the database using its primary key.The main difference between <code>get()</code> and <code>load()</code> is how they handle an entity that does not exist.</p>
+<p><code>get()</code> immediately checks the database and returns the entity if it exists. If the entity does not exist, it returns <code>null</code>.</p>
+<p><code>load()</code> can return a proxy object without immediately accessing the database. If the entity does not exist, an exception can be thrown when the proxy is accessed.</p>
+<p>Therefore, we can remember it as: <code>get()</code> returns <code>null</code> when the object is not found, whereas <code>load()</code> can throw an exception when the object is accessed and does not exist.</p>
+<p>Q.7 What is the difference between save(), persist(), and saveOrUpdate() in Hibernate?</p>
+<p><code>save()</code> is a Hibernate-specific method used to save a new entity. It traditionally returns the generated identifier/serializable  of the entity.</p>
+<p><code>persist()</code> is a JPA-defined method that is also supported by Hibernate. It is used to make a new entity persistent. Unlike <code>save()</code>, <code>persist()</code> returns void.</p>
+<p><code>saveOrUpdate()</code> is a Hibernate-specific method. It can be used to either save a new entity or update an existing entity depending on the entity's state.</p>
+<p>So, <code>save()</code> and <code>saveOrUpdate()</code> are Hibernate-specific APIs, whereas <code>persist()</code> is part of the JPA specification.</p>
+<p>Q.8 What are the three states of an entity in Hibernate?</p>
+<p>There are four main entity states in JPA and Hibernate: Transient, Managed, Detached, and Removed.</p>
+<p><strong>Transient:</strong> When we create an entity object using the <code>new</code> keyword, it is initially in the transient state. It is not associated with the persistence context and is not stored in the database.</p>
+<p><strong>Managed:</strong> When an entity becomes associated with the persistence context, it enters the managed state. Hibernate tracks changes made to the entity and synchronizes those changes with the database during flush or commit.</p>
+<p><strong>Detached:</strong> When a managed entity is no longer associated with the persistence context, it becomes detached. This can happen when the persistence context is closed or when we explicitly call <code>detach()</code>.</p>
+<p><strong>Removed:</strong> When we call <code>remove()</code> on a managed entity, it enters the removed state and is marked for deletion from the database. The actual deletion is generally synchronized with the database during flush or commit.</p>
+<p>Q.9 First Level Caching And Second Level Caching</p>
+<p>First-level cache is associated with a Hibernate <code>Session</code>. It exists for the lifetime of that Session, and each Session has its own first-level cache. It is enabled by default.</p>
+<p>Second-level cache is associated with the <code>SessionFactory</code>. It can be shared across multiple Sessions and can improve performance by reducing repeated database queries. Unlike first-level cache, second-level cache generally needs to be explicitly configured with a cache provider.</p>
+<p>So, the main difference is that first-level cache is Session-specific, whereas second-level cache is shared across multiple Sessions through the SessionFactory.</p>
+<p>Q&gt;10 Lazy loading in hibernate</p>
+<p>Lazy loading is a technique in Hibernate where related data is not loaded from the database immediately. Instead, Hibernate loads the data only when it is actually accessed or needed.</p>
+<p>For example, when we retrieve an Employee, Hibernate may load the Employee information first and load the associated Department information only when we access the Department.</p>
+<p>Lazy loading helps avoid unnecessary database queries and can improve application performance.</p>
+<p>Q.11 eager loading</p>
+<p>Lazy loading is a technique in Hibernate where related data is not loaded from the database immediately. Instead, Hibernate loads the data only when it is actually accessed or needed.</p>
+<p>For example, when we retrieve an Employee, Hibernate may load the Employee information first and load the associated Department information only when we access the Department.</p>
+<p>Lazy loading helps avoid unnecessary database queries and can improve application performance.</p>
+<p>Q.12 merge()</p>
+<p><code>merge()</code> is a JPA-defined method that is also supported by Hibernate. It is used to merge the state of a detached entity back into the persistence context.</p>
+<p>The important point is that <code>merge()</code> does not make the original detached object managed. Instead, Hibernate copies its state to a managed entity and returns the managed instance.</p>
+<p>For example, if an Employee object is detached and we call <code>merge()</code>, Hibernate returns a managed Employee object containing the state of the detached object.</p>
+<p>Q.13 Update()</p>
+<p><code>update()</code> is a Hibernate-specific method that is traditionally used to re-associate a detached entity with the current Session. The given object becomes associated with the Session, and its changes can be synchronized with the database.</p>
+<p><code>merge()</code> is a JPA-defined method. It copies the state of a detached entity to a managed entity and returns the managed instance. The original detached object remains detached.</p>
+<p>Therefore, the main difference is that <code>update()</code> re-associates the given object with the Session, whereas <code>merge()</code> copies its state to a managed object.</p>
+<p>Q.14 HQL or SQL</p>
+<p>HQL stands for Hibernate Query Language. It is an object-oriented query language provided by Hibernate and is used to query Java entities and their properties.</p>
+<p>Unlike SQL, which works with database tables and columns, HQL works with entity classes and their properties.</p>
+<p>For example, in HQL we write <code>FROM Employee WHERE name = 'John'</code>, where <code>Employee</code> is the Java entity class.</p>
+<p>Hibernate translates the HQL query into SQL and executes it against the database.</p>
+<p>Rest Questions </p>
+<p>Hibernate mapping relationships:
+@OneToOne
+@OneToMany
+@ManyToOne
+@ManyToMany
+mappedBy
+cascade
+orphanRemoval
+Fetch types: LAZY vs EAGER in annotations
+Session methods: persist, save, get, load, update, merge, delete
+flush() vs commit()
+Session vs EntityManager
+Hibernate configuration
+hibernate.cfg.xml
+Annotations vs XML mapping
+Dialect
+Transactions
+Dirty checking
+First-level cache in detail
+Second-level cache
+N+1 query problem
+JOIN FETCH 
+HQL vs Criteria API
+Hibernate inheritance mapping
+Optimistic vs pessimistic locking
+@Version
+Common Hibernate exceptions
+Hibernate architecture / lifecycle</p>
+<p>Q.4 Cascade</p>
+<p>Cascade in Hibernate/JPA is used to propagate operations performed on one entity to its related entities.</p>
+<p>For example, if a Customer has multiple Orders and we use <code>CascadeType.REMOVE</code>, removing the Customer can also remove its related Orders.</p>
+<p>Cascade is not limited to delete operations. It can also be used with operations such as persist and merge. <code>CascadeType.ALL</code> enables all applicable cascade operations.</p>
+<p>Q.3  Mappedby</p>
+<p><code>mappedBy</code> is used in a bidirectional relationship to specify the field in the other entity that owns the relationship.</p>
+<p>It tells Hibernate that the current side is the inverse side and that the relationship is already mapped by the specified field on the other entity.</p>
+<p>For example, if <code>Department</code> has <code>@OneToMany(mappedBy = "department")</code>, then the <code>department</code> field in the <code>Employee</code> entity owns the relationship.</p>
+<p>Q.5 orphenRemovel vs cascade</p>
+<p>CascadeType.REMOVE:</p>
+<p>Delete the parent → deletion is propagated to the children.</p>
+<p>orphanRemoval = true:</p>
+<p>Remove a child from the parent's relationship → the child can be deleted from the database.</p>
+<p>Q.2 N+1 Problem</p>
+<p>"N+1 is a Hibernate performance problem where Hibernate executes one query to fetch parent entities and then N additional queries to fetch their associated entities. For example, fetching 10 departments and then accessing employees can result in 11 queries. We can reduce this problem using JOIN FETCH, Entity Graphs, or batch fetching."</p>
+<p>Q3. Join Fetch vs Join</p>
+<p>JOIN                                           JOIN FETCH
+Used mainly to join/filter related entities Used to join and fetch the related entity
+Does not necessarily initialize the association Fetches the association immediately
+Can still result in additional queries when the association is accessed Helps avoid additional queries and can prevent the N+1 problem
+Useful when you only need the joined entity for conditions  Useful when you need the related objects in the result</p></article>
+  </section>
+  <section class="panel" data-panel="examples" role="tabpanel" hidden>
+    <article class="prose"><h3>Entity + configuration</h3>
+<div class="codehilite"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.persistence.*</span><span class="p">;</span>
+
+<span class="nd">@Entity</span>
+<span class="nd">@Table</span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"employees"</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Employee</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Id</span>
+<span class="w">    </span><span class="nd">@GeneratedValue</span><span class="p">(</span><span class="n">strategy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GenerationType</span><span class="p">.</span><span class="na">IDENTITY</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Long</span><span class="w"> </span><span class="n">id</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nd">@Column</span><span class="p">(</span><span class="n">nullable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w"> </span><span class="n">length</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">60</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nd">@ManyToOne</span><span class="p">(</span><span class="n">fetch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">FetchType</span><span class="p">.</span><span class="na">LAZY</span><span class="p">)</span><span class="w">          </span><span class="c1">// LAZY avoids loading dept eagerly</span>
+<span class="w">    </span><span class="nd">@JoinColumn</span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"dept_id"</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Department</span><span class="w"> </span><span class="n">dept</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Hibernate needs a no-arg constructor</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">Employee</span><span class="p">()</span><span class="w"> </span><span class="p">{}</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">Employee</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">name</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="c1">// getters and setters...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<h3>Session: persist, get, update, delete</h3>
+<div class="codehilite"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">org.hibernate.*</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.hibernate.cfg.Configuration</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nc">Demo</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">SessionFactory</span><span class="w"> </span><span class="n">factory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Configuration</span><span class="p">().</span><span class="na">configure</span><span class="p">(</span><span class="s">"hibernate.cfg.xml"</span><span class="p">)</span>
+<span class="w">                </span><span class="p">.</span><span class="na">addAnnotatedClass</span><span class="p">(</span><span class="n">Employee</span><span class="p">.</span><span class="na">class</span><span class="p">)</span>
+<span class="w">                </span><span class="p">.</span><span class="na">buildSessionFactory</span><span class="p">();</span>
+
+<span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">(</span><span class="n">Session</span><span class="w"> </span><span class="n">session</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">factory</span><span class="p">.</span><span class="na">openSession</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">Transaction</span><span class="w"> </span><span class="n">tx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">session</span><span class="p">.</span><span class="na">beginTransaction</span><span class="p">();</span>
+
+<span class="w">            </span><span class="n">Employee</span><span class="w"> </span><span class="n">e</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Employee</span><span class="p">(</span><span class="s">"Jack"</span><span class="p">);</span>
+<span class="w">            </span><span class="n">session</span><span class="p">.</span><span class="na">persist</span><span class="p">(</span><span class="n">e</span><span class="p">);</span><span class="w">              </span><span class="c1">// INSERT</span>
+
+<span class="w">            </span><span class="n">tx</span><span class="p">.</span><span class="na">commit</span><span class="p">();</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">(</span><span class="n">Session</span><span class="w"> </span><span class="n">session</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">factory</span><span class="p">.</span><span class="na">openSession</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">Employee</span><span class="w"> </span><span class="n">loaded</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">session</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">Employee</span><span class="p">.</span><span class="na">class</span><span class="p">,</span><span class="w"> </span><span class="mi">1L</span><span class="p">);</span><span class="w">   </span><span class="c1">// SELECT by PK</span>
+<span class="w">            </span><span class="n">session</span><span class="p">.</span><span class="na">getTransaction</span><span class="p">().</span><span class="na">begin</span><span class="p">();</span>
+<span class="w">            </span><span class="n">loaded</span><span class="p">.</span><span class="na">setName</span><span class="p">(</span><span class="s">"Jack Updated"</span><span class="p">);</span><span class="w">  </span><span class="c1">// dirty checking: auto UPDATE</span>
+<span class="w">            </span><span class="n">session</span><span class="p">.</span><span class="na">getTransaction</span><span class="p">().</span><span class="na">commit</span><span class="p">();</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="n">factory</span><span class="p">.</span><span class="na">close</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<h3>First-level vs second-level cache</h3>
+<div class="codehilite"><div class="highlight"><pre><span></span><span class="c1">// First-level cache: per-Session, always on.</span>
+<span class="n">Session</span><span class="w"> </span><span class="n">s1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">factory</span><span class="p">.</span><span class="na">openSession</span><span class="p">();</span>
+<span class="n">Employee</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">s1</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">Employee</span><span class="p">.</span><span class="na">class</span><span class="p">,</span><span class="w"> </span><span class="mi">1L</span><span class="p">);</span>
+<span class="n">Employee</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">s1</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">Employee</span><span class="p">.</span><span class="na">class</span><span class="p">,</span><span class="w"> </span><span class="mi">1L</span><span class="p">);</span><span class="w">   </span><span class="c1">// same object — one SQL query</span>
+
+<span class="c1">// Second-level cache: per-SessionFactory, opt-in (Ehcache, Infinispan).</span>
+<span class="nd">@Entity</span>
+<span class="nd">@org.hibernate.annotations.Cache</span><span class="p">(</span><span class="n">usage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">org</span><span class="p">.</span><span class="na">hibernate</span><span class="p">.</span><span class="na">annotations</span><span class="p">.</span><span class="na">CacheConcurrencyStrategy</span><span class="p">.</span><span class="na">READ_WRITE</span><span class="p">)</span>
+<span class="kd">class</span> <span class="nc">Lookup</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+</pre></div>
+</div>
+<h3>HQL: query objects, not tables</h3>
+<div class="codehilite"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">org.hibernate.query.Query</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.List</span><span class="p">;</span>
+
+<span class="n">List</span><span class="o">&lt;</span><span class="n">Employee</span><span class="o">&gt;</span><span class="w"> </span><span class="n">highPaid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">session</span><span class="p">.</span><span class="na">createQuery</span><span class="p">(</span>
+<span class="w">        </span><span class="s">"FROM Employee e WHERE e.salary &gt; :min ORDER BY e.salary DESC"</span><span class="p">,</span><span class="w"> </span><span class="n">Employee</span><span class="p">.</span><span class="na">class</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="na">setParameter</span><span class="p">(</span><span class="s">"min"</span><span class="p">,</span><span class="w"> </span><span class="mi">80000</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="na">setMaxResults</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="w">                      </span><span class="c1">// pagination at the query level</span>
+<span class="w">        </span><span class="p">.</span><span class="na">list</span><span class="p">();</span>
+
+<span class="c1">// Criteria API for dynamic queries</span>
+<span class="kd">var</span><span class="w"> </span><span class="n">cb</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">session</span><span class="p">.</span><span class="na">getCriteriaBuilder</span><span class="p">();</span>
+<span class="kd">var</span><span class="w"> </span><span class="n">cq</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cb</span><span class="p">.</span><span class="na">createQuery</span><span class="p">(</span><span class="n">Employee</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
+<span class="kd">var</span><span class="w"> </span><span class="n">root</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cq</span><span class="p">.</span><span class="na">from</span><span class="p">(</span><span class="n">Employee</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
+<span class="n">cq</span><span class="p">.</span><span class="na">select</span><span class="p">(</span><span class="n">root</span><span class="p">).</span><span class="na">where</span><span class="p">(</span><span class="n">cb</span><span class="p">.</span><span class="na">equal</span><span class="p">(</span><span class="n">root</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="s">"dept"</span><span class="p">).</span><span class="na">get</span><span class="p">(</span><span class="s">"name"</span><span class="p">),</span><span class="w"> </span><span class="s">"IT"</span><span class="p">));</span>
+</pre></div>
+</div></article>
+  </section>
+  <nav class="prev-next"><a class="pn previous" href="jsp.html"><span class="pn-label">Previous</span><span class="pn-title">JSP</span></a><a class="pn next" href="spring-mvc.html"><span class="pn-label">Next</span><span class="pn-title">Spring MVC</span></a></nav>
+</main>
+<script src="../assets/app.js"></script>
+</body>
+</html>

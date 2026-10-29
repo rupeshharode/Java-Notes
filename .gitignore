@@ -1,0 +1,17 @@
+# Operating system files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Editor settings
+.idea/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+
+# Local tooling output
+*.log
+coverage/
+dist/
+build/
+node_modules/

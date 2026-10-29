@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Collections Framework · Night Java</title>
+<meta name="description" content="List, Set, Queue, Map — the hierarchy, implementations and when to use each.">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body class="topic-body">
+<aside class="sidebar">
+  <a class="brand" href="../index.html"><span class="brand-mark">J</span> Night Java</a>
+  <input class="side-filter" type="search" placeholder="Filter topics…" aria-label="Filter topics">
+  <div class="side-phase-wrap"><label class="side-phase-label" for="side-phase">Jump to phase</label>
+  <select id="side-phase" class="side-phase"><option value="1">Phase 1 · Programming Basics</option>
+<option value="2">Phase 2 · OOP</option>
+<option value="3">Phase 3 · Core Java Advanced</option>
+<option value="4">Phase 4 · Advanced Java</option>
+<option value="5">Phase 5 · DSA</option>
+<option value="6">Phase 6 · Database</option>
+<option value="7">Phase 7 · Backend Development</option>
+<option value="8">Phase 8 · Frontend</option>
+<option value="9">Phase 9 · DevOps + Deployment</option>
+<option value="10">Phase 10 · LLD</option>
+<option value="11">Phase 11 · HLD</option>
+<option value="12">Phase 12 · Interview Topics</option></select></div>
+  <nav class="side-nav" aria-label="Topics in roadmap order"><a class="side-link" href="../topics/java-fundamentals.html" data-slug="java-fundamentals"><span class="check" data-check="java-fundamentals" aria-hidden="true"></span>Java Fundamentals Q&amp;A</a>
+<a class="side-link" href="../topics/oops-encapsulation.html" data-slug="oops-encapsulation"><span class="check" data-check="oops-encapsulation" aria-hidden="true"></span>OOPs &amp; Encapsulation</a>
+<a class="side-link" href="../topics/inheritance.html" data-slug="inheritance"><span class="check" data-check="inheritance" aria-hidden="true"></span>Inheritance</a>
+<a class="side-link" href="../topics/has-a-is-a.html" data-slug="has-a-is-a"><span class="check" data-check="has-a-is-a" aria-hidden="true"></span>Has-a vs Is-a Relationships</a>
+<a class="side-link" href="../topics/polymorphism.html" data-slug="polymorphism"><span class="check" data-check="polymorphism" aria-hidden="true"></span>Polymorphism</a>
+<a class="side-link" href="../topics/abstraction.html" data-slug="abstraction"><span class="check" data-check="abstraction" aria-hidden="true"></span>Abstraction</a>
+<a class="side-link" href="../topics/interface.html" data-slug="interface"><span class="check" data-check="interface" aria-hidden="true"></span>Interfaces</a>
+<a class="side-link" href="../topics/anonymous-inner-class.html" data-slug="anonymous-inner-class"><span class="check" data-check="anonymous-inner-class" aria-hidden="true"></span>Anonymous Inner Class</a>
+<a class="side-link" href="../topics/collections-framework.html" aria-current="page" data-slug="collections-framework"><span class="check" data-check="collections-framework" aria-hidden="true"></span>Collections Framework</a>
+<a class="side-link" href="../topics/exception-handling.html" data-slug="exception-handling"><span class="check" data-check="exception-handling" aria-hidden="true"></span>Exception Handling</a>
+<a class="side-link" href="../topics/file-handling.html" data-slug="file-handling"><span class="check" data-check="file-handling" aria-hidden="true"></span>File Handling</a>
+<a class="side-link" href="../topics/generics.html" data-slug="generics"><span class="check" data-check="generics" aria-hidden="true"></span>Generics</a>
+<a class="side-link" href="../topics/stream-api.html" data-slug="stream-api"><span class="check" data-check="stream-api" aria-hidden="true"></span>Stream API</a>
+<a class="side-link" href="../topics/multithreading.html" data-slug="multithreading"><span class="check" data-check="multithreading" aria-hidden="true"></span>Multithreading</a>
+<a class="side-link" href="../topics/executorservice.html" data-slug="executorservice"><span class="check" data-check="executorservice" aria-hidden="true"></span>ExecutorService</a>
+<a class="side-link" href="../topics/completablefuture.html" data-slug="completablefuture"><span class="check" data-check="completablefuture" aria-hidden="true"></span>CompletableFuture</a>
+<a class="side-link" href="../topics/atomic-classes.html" data-slug="atomic-classes"><span class="check" data-check="atomic-classes" aria-hidden="true"></span>Atomic Classes</a>
+<a class="side-link" href="../topics/concurrent-collections.html" data-slug="concurrent-collections"><span class="check" data-check="concurrent-collections" aria-hidden="true"></span>Concurrent Collections</a>
+<a class="side-link" href="../topics/jdbc.html" data-slug="jdbc"><span class="check" data-check="jdbc" aria-hidden="true"></span>JDBC</a>
+<a class="side-link" href="../topics/servlet.html" data-slug="servlet"><span class="check" data-check="servlet" aria-hidden="true"></span>Servlets</a>
+<a class="side-link" href="../topics/jsp.html" data-slug="jsp"><span class="check" data-check="jsp" aria-hidden="true"></span>JSP</a>
+<a class="side-link" href="../topics/hibernate.html" data-slug="hibernate"><span class="check" data-check="hibernate" aria-hidden="true"></span>Hibernate</a>
+<a class="side-link" href="../topics/spring-mvc.html" data-slug="spring-mvc"><span class="check" data-check="spring-mvc" aria-hidden="true"></span>Spring MVC</a>
+<a class="side-link" href="../topics/session-management.html" data-slug="session-management"><span class="check" data-check="session-management" aria-hidden="true"></span>Session Management</a>
+<a class="side-link" href="../topics/maven.html" data-slug="maven"><span class="check" data-check="maven" aria-hidden="true"></span>Maven</a>
+<a class="side-link" href="../topics/servlet-vs-spring-core.html" data-slug="servlet-vs-spring-core"><span class="check" data-check="servlet-vs-spring-core" aria-hidden="true"></span>Servlet vs Spring Core</a>
+<a class="side-link" href="../topics/ioc-and-di.html" data-slug="ioc-and-di"><span class="check" data-check="ioc-and-di" aria-hidden="true"></span>IoC &amp; Dependency Injection</a>
+<a class="side-link" href="../topics/autowiring.html" data-slug="autowiring"><span class="check" data-check="autowiring" aria-hidden="true"></span>Autowiring</a>
+<a class="side-link" href="../topics/bean-configuration.html" data-slug="bean-configuration"><span class="check" data-check="bean-configuration" aria-hidden="true"></span>Bean Configuration &amp; Annotations</a>
+<a class="side-link" href="../topics/bean-lifecycle.html" data-slug="bean-lifecycle"><span class="check" data-check="bean-lifecycle" aria-hidden="true"></span>Bean Lifecycle</a>
+<a class="side-link" href="../topics/bean-lifecycle-aop.html" data-slug="bean-lifecycle-aop"><span class="check" data-check="bean-lifecycle-aop" aria-hidden="true"></span>Bean Lifecycle &amp; Where AOP Fits</a>
+<a class="side-link" href="../topics/spring-aop.html" data-slug="spring-aop"><span class="check" data-check="spring-aop" aria-hidden="true"></span>Spring AOP</a>
+<a class="side-link" href="../topics/spring-transactions.html" data-slug="spring-transactions"><span class="check" data-check="spring-transactions" aria-hidden="true"></span>Spring Transactions</a>
+<a class="side-link" href="../topics/spring-data.html" data-slug="spring-data"><span class="check" data-check="spring-data" aria-hidden="true"></span>Spring Data (JPA)</a>
+<a class="side-link" href="../topics/spring-profiles.html" data-slug="spring-profiles"><span class="check" data-check="spring-profiles" aria-hidden="true"></span>Spring Profiles &amp; Config</a>
+<a class="side-link" href="../topics/spring-security.html" data-slug="spring-security"><span class="check" data-check="spring-security" aria-hidden="true"></span>Spring Security Flow</a>
+<a class="side-link" href="../topics/filters-and-interceptors.html" data-slug="filters-and-interceptors"><span class="check" data-check="filters-and-interceptors" aria-hidden="true"></span>Filters &amp; Interceptors</a>
+<a class="side-link" href="../topics/core-java-deep-dive.html" data-slug="core-java-deep-dive"><span class="check" data-check="core-java-deep-dive" aria-hidden="true"></span>Core Java Deep-Dive</a></nav>
+  <p class="side-progress"><span data-progress-text></span></p>
+</aside>
+<main class="content">
+  <header class="topic-head">
+    <p class="crumb"><a href="../index.html">Roadmap</a> / Phase 3 · Core Java Advanced</p>
+    <h1>Collections Framework</h1>
+    <p class="summary">List, Set, Queue, Map — the hierarchy, implementations and when to use each.</p>
+    <div class="head-row">
+      <div class="tags"><span class="tag">collections</span><span class="tag">list</span><span class="tag">map</span><span class="tag">set</span></div>
+      <button class="read-btn" data-read-btn data-slug="collections-framework"><span class="read-icon">○</span> Mark as read</button>
+    </div>
+  </header>
+  <div class="tabs" role="tablist">
+    <button class="tab active" role="tab" data-tab="notes" aria-selected="true">Notes</button>
+    <button class="tab" role="tab" data-tab="examples" aria-selected="false">Code examples</button>
+  </div>
+  <section class="panel active" data-panel="notes" role="tabpanel">
+    <article class="prose"><p>Note :- Map is not a child of collection</p>
+<p>“Java Collection Framework is a set of interfaces, classes, and utility methods provided by Java to store and manipulate a group of objects efficiently.</p>
+<p>It provides interfaces like List, Set, Queue, and Map, along with their implementations such as ArrayList, LinkedList, HashSet, HashMap, and PriorityQueue.</p>
+<p>It also provides utility methods through the Collections class, such as sort(), reverse(), and shuffle().</p>
+<p>(or)</p>
+<p>The Java Collection Framework provides ready‑made data structures (like lists, sets, maps, and queues) and algorithms (like sorting and searching) to efficiently store, retrieve, and manipulate groups of objects. It saves developers from writing custom data structures</p>
+<p>So, basically, the Collection Framework provides ready-made data structures and algorithms that make it easier to store, access, and manipulate collections of objects.”</p>
+<p>It provides commonly used interfaces such as:</p>
+<p>List – stores ordered elements and allows duplicates.</p>
+<p>Set – stores unique elements.</p>
+<p>Queue – generally follows FIFO (First In, First Out) order.</p>
+<p>Some common implementations are:</p>
+<p>ArrayList and LinkedList → implementations of List</p>
+<p>HashSet → implementation of Set</p>
+<p>PriorityQueue → implementation of Queue</p>
+<p>The Collection Framework also provides useful algorithms, such as:</p>
+<p>Collections.sort() – sorts elements.</p>
+<p>Collections.reverse() – reverses the order of elements.</p>
+<p>Collections.shuffle() – randomly rearranges elements.</p>
+<p>Iterable
+   │
+   └── Collection
+        ├── List
+        │    ├── ArrayList
+        │    ├── LinkedList
+        │    └── Vector
+        │         └── Stack
+        │
+        ├── Set
+        │    ├── HashSet
+        │    │    └── LinkedHashSet
+        │    └── SortedSet
+        │         └── NavigableSet
+        │              └── TreeSet
+        │
+        └── Queue
+             ├── PriorityQueue
+             └── Deque
+                  ├── ArrayDeque
+                  └── LinkedList</p>
+<p>Map   ← separate from Collection
+ │
+ ├── HashMap
+ │    └── LinkedHashMap
+ │
+ ├── SortedMap
+ │    └── NavigableMap
+ │         └── TreeMap
+ │
+ ├── Hashtable
+ │
+ └── ConcurrentHashMap</p>
+<p>Map is part of the Collections Framework, but not part of Collection
+The Java Collections Framework (JCF) is the overall framework that provides data structures</p></article>
+  </section>
+  <section class="panel" data-panel="examples" role="tabpanel" hidden>
+    <article class="prose"><h3>The hierarchy you should be able to draw</h3>
+<div class="codehilite"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">java.util.*</span><span class="p">;</span>
+
+<span class="c1">// Iterable -&gt; Collection -&gt; { List, Set, Queue }</span>
+<span class="c1">// Map is separate — NOT a child of Collection</span>
+
+<span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span><span class="w">      </span><span class="c1">// fast random access, O(1) get</span>
+<span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">linked</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">LinkedList</span><span class="o">&lt;&gt;</span><span class="p">();</span><span class="w">   </span><span class="c1">// fast inserts/removes at ends</span>
+<span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">set</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HashSet</span><span class="o">&lt;&gt;</span><span class="p">();</span><span class="w">          </span><span class="c1">// no order, O(1) contains</span>
+<span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">sorted</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">TreeSet</span><span class="o">&lt;&gt;</span><span class="p">();</span><span class="w">       </span><span class="c1">// sorted order, O(log n)</span>
+<span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">ordered</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">LinkedHashSet</span><span class="o">&lt;&gt;</span><span class="p">();</span><span class="c1">// insertion order kept</span>
+<span class="n">Queue</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">pq</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">PriorityQueue</span><span class="o">&lt;&gt;</span><span class="p">();</span><span class="w">   </span><span class="c1">// natural ordering, heap-backed</span>
+<span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">map</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HashMap</span><span class="o">&lt;&gt;</span><span class="p">();</span><span class="w"> </span><span class="c1">// O(1) put/get, no order</span>
+<span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">treeMap</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">TreeMap</span><span class="o">&lt;&gt;</span><span class="p">();</span><span class="w"> </span><span class="c1">// sorted by key</span>
+</pre></div>
+</div>
+<h3>ArrayList vs LinkedList in action</h3>
+<div class="codehilite"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">java.util.*</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nc">Demo</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">names</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="w">        </span><span class="n">names</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">"Jack"</span><span class="p">);</span><span class="w">            </span><span class="c1">// append: O(1) amortized</span>
+<span class="w">        </span><span class="n">names</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">"Riya"</span><span class="p">);</span>
+<span class="w">        </span><span class="n">names</span><span class="p">.</span><span class="na">set</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">"John"</span><span class="p">);</span><span class="w">         </span><span class="c1">// replace by index: O(1)</span>
+<span class="w">        </span><span class="n">names</span><span class="p">.</span><span class="na">remove</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span><span class="w">              </span><span class="c1">// shift elements: O(n)</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">names</span><span class="p">);</span><span class="w">    </span><span class="c1">// [John]</span>
+
+<span class="w">        </span><span class="c1">// Fail-fast iteration: modifying while iterating throws</span>
+<span class="w">        </span><span class="c1">// ConcurrentModificationException</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">List</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">"a"</span><span class="p">,</span><span class="w"> </span><span class="s">"b"</span><span class="p">,</span><span class="w"> </span><span class="s">"c"</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">// names.add(n);  // would blow up on the next next() call</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<h3>HashMap: put, get, and the entrySet loop</h3>
+<div class="codehilite"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">java.util.*</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nc">Frequency</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HashMap</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">word</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s">"java is fun and java is vast"</span><span class="p">.</span><span class="na">split</span><span class="p">(</span><span class="s">" "</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">count</span><span class="p">.</span><span class="na">merge</span><span class="p">(</span><span class="n">word</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">Integer</span><span class="p">::</span><span class="n">sum</span><span class="p">);</span><span class="w">   </span><span class="c1">// classic counting idiom</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">Map</span><span class="p">.</span><span class="na">Entry</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">e</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">count</span><span class="p">.</span><span class="na">entrySet</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="na">getKey</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">" -&gt; "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="na">getValue</span><span class="p">());</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">count</span><span class="p">.</span><span class="na">getOrDefault</span><span class="p">(</span><span class="s">"rust"</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">));</span><span class="w"> </span><span class="c1">// 0, no NPE</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<h3>Choosing between them</h3>
+<div class="codehilite"><div class="highlight"><pre><span></span><span class="c1">// | Need                          | Use                    |</span>
+<span class="c1">// |-------------------------------|------------------------|</span>
+<span class="c1">// | Index-based access            | ArrayList              |</span>
+<span class="c1">// | Many insert/delete at ends    | LinkedList / ArrayDeque|</span>
+<span class="c1">// | Unique items, fast lookup     | HashSet                |</span>
+<span class="c1">// | Unique + sorted               | TreeSet                |</span>
+<span class="c1">// | Key -&gt; value, fast            | HashMap                |</span>
+<span class="c1">// | Sorted keys                   | TreeMap                |</span>
+<span class="c1">// | Priority order processing     | PriorityQueue          |</span>
+<span class="c1">// | Thread-safe                   | ConcurrentHashMap, CopyOnWriteArrayList |</span>
+</pre></div>
+</div></article>
+  </section>
+  <nav class="prev-next"><a class="pn previous" href="anonymous-inner-class.html"><span class="pn-label">Previous</span><span class="pn-title">Anonymous Inner Class</span></a><a class="pn next" href="exception-handling.html"><span class="pn-label">Next</span><span class="pn-title">Exception Handling</span></a></nav>
+</main>
+<script src="../assets/app.js"></script>
+</body>
+</html>

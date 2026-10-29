@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IoC &amp; Dependency Injection · Night Java</title>
+<meta name="description" content="The IoC container, BeanFactory vs ApplicationContext and injection styles.">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body class="topic-body">
+<aside class="sidebar">
+  <a class="brand" href="../index.html"><span class="brand-mark">J</span> Night Java</a>
+  <input class="side-filter" type="search" placeholder="Filter topics…" aria-label="Filter topics">
+  <div class="side-phase-wrap"><label class="side-phase-label" for="side-phase">Jump to phase</label>
+  <select id="side-phase" class="side-phase"><option value="1">Phase 1 · Programming Basics</option>
+<option value="2">Phase 2 · OOP</option>
+<option value="3">Phase 3 · Core Java Advanced</option>
+<option value="4">Phase 4 · Advanced Java</option>
+<option value="5">Phase 5 · DSA</option>
+<option value="6">Phase 6 · Database</option>
+<option value="7">Phase 7 · Backend Development</option>
+<option value="8">Phase 8 · Frontend</option>
+<option value="9">Phase 9 · DevOps + Deployment</option>
+<option value="10">Phase 10 · LLD</option>
+<option value="11">Phase 11 · HLD</option>
+<option value="12">Phase 12 · Interview Topics</option></select></div>
+  <nav class="side-nav" aria-label="Topics in roadmap order"><a class="side-link" href="../topics/java-fundamentals.html" data-slug="java-fundamentals"><span class="check" data-check="java-fundamentals" aria-hidden="true"></span>Java Fundamentals Q&amp;A</a>
+<a class="side-link" href="../topics/oops-encapsulation.html" data-slug="oops-encapsulation"><span class="check" data-check="oops-encapsulation" aria-hidden="true"></span>OOPs &amp; Encapsulation</a>
+<a class="side-link" href="../topics/inheritance.html" data-slug="inheritance"><span class="check" data-check="inheritance" aria-hidden="true"></span>Inheritance</a>
+<a class="side-link" href="../topics/has-a-is-a.html" data-slug="has-a-is-a"><span class="check" data-check="has-a-is-a" aria-hidden="true"></span>Has-a vs Is-a Relationships</a>
+<a class="side-link" href="../topics/polymorphism.html" data-slug="polymorphism"><span class="check" data-check="polymorphism" aria-hidden="true"></span>Polymorphism</a>
+<a class="side-link" href="../topics/abstraction.html" data-slug="abstraction"><span class="check" data-check="abstraction" aria-hidden="true"></span>Abstraction</a>
+<a class="side-link" href="../topics/interface.html" data-slug="interface"><span class="check" data-check="interface" aria-hidden="true"></span>Interfaces</a>
+<a class="side-link" href="../topics/anonymous-inner-class.html" data-slug="anonymous-inner-class"><span class="check" data-check="anonymous-inner-class" aria-hidden="true"></span>Anonymous Inner Class</a>
+<a class="side-link" href="../topics/collections-framework.html" data-slug="collections-framework"><span class="check" data-check="collections-framework" aria-hidden="true"></span>Collections Framework</a>
+<a class="side-link" href="../topics/exception-handling.html" data-slug="exception-handling"><span class="check" data-check="exception-handling" aria-hidden="true"></span>Exception Handling</a>
+<a class="side-link" href="../topics/file-handling.html" data-slug="file-handling"><span class="check" data-check="file-handling" aria-hidden="true"></span>File Handling</a>
+<a class="side-link" href="../topics/generics.html" data-slug="generics"><span class="check" data-check="generics" aria-hidden="true"></span>Generics</a>
+<a class="side-link" href="../topics/stream-api.html" data-slug="stream-api"><span class="check" data-check="stream-api" aria-hidden="true"></span>Stream API</a>
+<a class="side-link" href="../topics/multithreading.html" data-slug="multithreading"><span class="check" data-check="multithreading" aria-hidden="true"></span>Multithreading</a>
+<a class="side-link" href="../topics/executorservice.html" data-slug="executorservice"><span class="check" data-check="executorservice" aria-hidden="true"></span>ExecutorService</a>
+<a class="side-link" href="../topics/completablefuture.html" data-slug="completablefuture"><span class="check" data-check="completablefuture" aria-hidden="true"></span>CompletableFuture</a>
+<a class="side-link" href="../topics/atomic-classes.html" data-slug="atomic-classes"><span class="check" data-check="atomic-classes" aria-hidden="true"></span>Atomic Classes</a>
+<a class="side-link" href="../topics/concurrent-collections.html" data-slug="concurrent-collections"><span class="check" data-check="concurrent-collections" aria-hidden="true"></span>Concurrent Collections</a>
+<a class="side-link" href="../topics/jdbc.html" data-slug="jdbc"><span class="check" data-check="jdbc" aria-hidden="true"></span>JDBC</a>
+<a class="side-link" href="../topics/servlet.html" data-slug="servlet"><span class="check" data-check="servlet" aria-hidden="true"></span>Servlets</a>
+<a class="side-link" href="../topics/jsp.html" data-slug="jsp"><span class="check" data-check="jsp" aria-hidden="true"></span>JSP</a>
+<a class="side-link" href="../topics/hibernate.html" data-slug="hibernate"><span class="check" data-check="hibernate" aria-hidden="true"></span>Hibernate</a>
+<a class="side-link" href="../topics/spring-mvc.html" data-slug="spring-mvc"><span class="check" data-check="spring-mvc" aria-hidden="true"></span>Spring MVC</a>
+<a class="side-link" href="../topics/session-management.html" data-slug="session-management"><span class="check" data-check="session-management" aria-hidden="true"></span>Session Management</a>
+<a class="side-link" href="../topics/maven.html" data-slug="maven"><span class="check" data-check="maven" aria-hidden="true"></span>Maven</a>
+<a class="side-link" href="../topics/servlet-vs-spring-core.html" data-slug="servlet-vs-spring-core"><span class="check" data-check="servlet-vs-spring-core" aria-hidden="true"></span>Servlet vs Spring Core</a>
+<a class="side-link" href="../topics/ioc-and-di.html" aria-current="page" data-slug="ioc-and-di"><span class="check" data-check="ioc-and-di" aria-hidden="true"></span>IoC &amp; Dependency Injection</a>
+<a class="side-link" href="../topics/autowiring.html" data-slug="autowiring"><span class="check" data-check="autowiring" aria-hidden="true"></span>Autowiring</a>
+<a class="side-link" href="../topics/bean-configuration.html" data-slug="bean-configuration"><span class="check" data-check="bean-configuration" aria-hidden="true"></span>Bean Configuration &amp; Annotations</a>
+<a class="side-link" href="../topics/bean-lifecycle.html" data-slug="bean-lifecycle"><span class="check" data-check="bean-lifecycle" aria-hidden="true"></span>Bean Lifecycle</a>
+<a class="side-link" href="../topics/bean-lifecycle-aop.html" data-slug="bean-lifecycle-aop"><span class="check" data-check="bean-lifecycle-aop" aria-hidden="true"></span>Bean Lifecycle &amp; Where AOP Fits</a>
+<a class="side-link" href="../topics/spring-aop.html" data-slug="spring-aop"><span class="check" data-check="spring-aop" aria-hidden="true"></span>Spring AOP</a>
+<a class="side-link" href="../topics/spring-transactions.html" data-slug="spring-transactions"><span class="check" data-check="spring-transactions" aria-hidden="true"></span>Spring Transactions</a>
+<a class="side-link" href="../topics/spring-data.html" data-slug="spring-data"><span class="check" data-check="spring-data" aria-hidden="true"></span>Spring Data (JPA)</a>
+<a class="side-link" href="../topics/spring-profiles.html" data-slug="spring-profiles"><span class="check" data-check="spring-profiles" aria-hidden="true"></span>Spring Profiles &amp; Config</a>
+<a class="side-link" href="../topics/spring-security.html" data-slug="spring-security"><span class="check" data-check="spring-security" aria-hidden="true"></span>Spring Security Flow</a>
+<a class="side-link" href="../topics/filters-and-interceptors.html" data-slug="filters-and-interceptors"><span class="check" data-check="filters-and-interceptors" aria-hidden="true"></span>Filters &amp; Interceptors</a>
+<a class="side-link" href="../topics/core-java-deep-dive.html" data-slug="core-java-deep-dive"><span class="check" data-check="core-java-deep-dive" aria-hidden="true"></span>Core Java Deep-Dive</a></nav>
+  <p class="side-progress"><span data-progress-text></span></p>
+</aside>
+<main class="content">
+  <header class="topic-head">
+    <p class="crumb"><a href="../index.html">Roadmap</a> / Phase 7 · Backend Development</p>
+    <h1>IoC &amp; Dependency Injection</h1>
+    <p class="summary">The IoC container, BeanFactory vs ApplicationContext and injection styles.</p>
+    <div class="head-row">
+      <div class="tags"><span class="tag">spring</span><span class="tag">ioc</span><span class="tag">di</span></div>
+      <button class="read-btn" data-read-btn data-slug="ioc-and-di"><span class="read-icon">○</span> Mark as read</button>
+    </div>
+  </header>
+  <div class="tabs" role="tablist">
+    <button class="tab active" role="tab" data-tab="notes" aria-selected="true">Notes</button>
+    <button class="tab" role="tab" data-tab="examples" aria-selected="false">Code examples</button>
+  </div>
+  <section class="panel active" data-panel="notes" role="tabpanel">
+    <article class="prose"><p>Q.1 What is Spring Framework? why we Use it? what is Spring container? how Spring create configure and manage objects?</p>
+<p><strong>Spring Framework is a Java framework used to develop enterprise and web applications. It provides many features, annotations, and built-in functionalities that reduce boilerplate code, allowing developers to focus more on business logic.</strong></p>
+<p>Spring provides several important features such as <strong>IoC (Inversion of Control), Dependency Injection, Spring AOP, Spring MVC, Spring Security, and transaction management</strong>. These features simplify development and make applications easier to maintain.</p>
+<p>In a traditional Servlet-based application, developers need to manually create and manage objects, handle dependencies, and write a lot of configuration and boilerplate code. As the application grows, manually managing objects, dependencies, configurations, and other concerns becomes difficult. Spring solves these problems by providing an <strong>IoC container</strong>.</p>
+<p>The <strong>IoC container is responsible for creating, configuring, and managing the lifecycle of application objects, which are called Spring Beans</strong>.</p>
+<p>We commonly interact with the Spring IoC container through the <strong><code>ApplicationContext</code> interface</strong>. One implementation of this interface is <strong><code>AnnotationConfigApplicationContext</code></strong>, which is used for Java-based configuration.</p>
+<p>For example:</p>
+<div class="codehilite"><div class="highlight"><pre><span></span><span class="n">ApplicationContext</span><span class="w"> </span><span class="n">context</span><span class="w"> </span><span class="o">=</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">AnnotationConfigApplicationContext</span><span class="p">(</span><span class="n">AppConfig</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Here, <code>AppConfig</code> is a configuration class:</p>
+<div class="codehilite"><div class="highlight"><pre><span></span><span class="nd">@Configuration</span>
+<span class="nd">@ComponentScan</span><span class="p">(</span><span class="s">"com.example"</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">AppConfig</span><span class="w"> </span><span class="p">{</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code>@Configuration</code> annotation indicates that the class contains Spring configuration, while <code>@ComponentScan</code> tells Spring to scan the specified package for classes annotated with <code>@Component</code> and its specialized annotations such as <code>@Service</code> and <code>@Repository</code>.</p>
+<p>Spring uses this configuration metadata to identify the objects that need to be created. It then creates those objects as <strong>Spring Beans</strong>, manages their lifecycle, and injects their required dependencies.</p>
+<p>Therefore, Spring reduces boilerplate code, promotes loose coupling through Dependency Injection, and makes large applications easier to develop, maintain, and manage.</p>
+<div class="codehilite"><div class="highlight"><pre><span></span>
+**Interview tip:** After giving this answer, the interviewer will very likely ask **“What is IoC?”** or **“What is Dependency Injection?”** So those should be your next two concepts to master.
+
+Q.2 Major Spring modules
+
+- Spring Core / IoC
+- Spring AOP
+- Spring Data Access
+- Spring Web / Spring MVC
+- Spring Test
+- Spring Integration, etc.
+
+Q.3 Spring Core
+
+Spring Core is the fundamental part of Spring Framework that provides the IoC container and Dependency Injection.
+
+Q.4 POJO
+
+POJO stands for Plain Old Java Object. It is a normal Java class that does not need to extend or implement a framework-specific class or interface.
+
+Q.5 BeanFactory
+
+BeanFactory is the basic IoC container provided by Spring. It is responsible for creating and managing beans.
+
+Q6 BeanFactory vs ApplicationContext
+
+ApplicationContext is more feature-rich than BeanFactory. It provides features such as event publishing, internationalization, automatic detection of certain components, and integration with Spring's other facilities.
+
+Q.7 Spring vs Spring Boot
+
+Spring Framework provides the core features and requires more configuration, while Spring Boot is built on top of Spring and provides auto-configuration, starter dependencies, embedded servers, and production-ready features to simplify application development.
+
+“In traditional Spring applications, the application is typically deployed to an external web server or servlet container such as Tomcat. Spring Boot simplifies this by providing an embedded server, such as Tomcat, so we can run the application directly without deploying a WAR file to an external server.”
+
+**Q.8** IOC, Dependency Injection ,Loose coupling ,Tight coupling , Ways To inject Dependency 
+
+**IoC stands for Inversion of Control. It is a principle in which the responsibility of creating, configuring, and managing application objects is transferred from the application code to the Spring IoC container.**
+
+We can interact with the Spring IoC container through the `ApplicationContext` interface.
+
+Before using IoC and Dependency Injection, developers often created dependent objects manually using the `new` keyword. This can lead to **tight coupling**.
+
+For example, suppose `UserService` depends on `UserRepository`:
+
+```java
+class UserService {
+    private UserRepository userRepository = new UserRepository();
+}
+</pre></div>
+</div>
+<p>Here, <code>UserService</code> is tightly coupled with <code>UserRepository</code> because <code>UserService</code> is responsible for creating its dependency. If we want to replace <code>UserRepository</code> with another implementation, we may need to modify <code>UserService</code>.</p>
+<p>With <strong>loose coupling</strong>, <code>UserService</code> does not create the <code>UserRepository</code> object itself. Instead, the dependency is provided from outside the class.</p>
+<p>This is where <strong>Dependency Injection</strong> comes into the picture.</p>
+<p>Dependency Injection is a technique used to provide the required dependencies to an object from an external source, such as the Spring IoC container.</p>
+<p>Spring can identify and manage objects using configuration metadata provided through annotations such as <code>@Component</code>, <code>@Service</code>, and <code>@Repository</code>. These objects are managed by Spring as <strong>Spring Beans</strong>.</p>
+<p>There are three common types of Dependency Injection:</p>
+<ol>
+<li><strong>Constructor Injection</strong></li>
+<li><strong>Setter Injection</strong></li>
+<li><strong>Field Injection</strong></li>
+</ol>
+<p>In <strong>Field Injection</strong>, we use <code>@Autowired</code> directly on a field.</p>
+<p>In <strong>Setter Injection</strong>, we provide the dependency through a setter method, usually using <code>@Autowired</code>.</p>
+<p>In <strong>Constructor Injection</strong>, the dependency is provided through the constructor. Constructor injection is generally preferred because it supports immutability, makes dependencies explicit, and makes unit testing easier.</p>
+<p>The dependency is provided when the object is created.</p>
+<p>For example:</p>
+<div class="codehilite"><div class="highlight"><pre><span></span><span class="nd">@Service</span>
+<span class="kd">class</span> <span class="nc">UserService</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">UserRepository</span><span class="w"> </span><span class="n">userRepository</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">UserService</span><span class="p">(</span><span class="n">UserRepository</span><span class="w"> </span><span class="n">userRepository</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">userRepository</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">userRepository</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>If the class has only one constructor, we generally do not need to use <code>@Autowired</code> on that constructor. Spring automatically uses it for dependency injection.</p>
+<p>Therefore, <strong>IoC is the principle of transferring object-creation and management responsibility to the Spring container, while Dependency Injection is the technique through which the required dependencies are provided to objects.</strong></p>
+<ol>
+<li>Constructor vs Setter Injection</li>
+</ol>
+<p>Constructor injection
+- Dependency is provided during object creation.
+- Good for required dependencies.
+- Can use final fields.
+- Object cannot be created without required dependencies.
+Setter injection
+- Dependency is provided after object creation.
+- Useful for optional dependencies.
+- Dependency can potentially be changed later.</p>
+<ol start="2">
+<li>Real-world IoC example</li>
+</ol>
+<p>Think about a car.
+Without IoC, the car itself creates its engine:
+class Car {
+    Engine engine = new Engine();
+}</p>
+<p>The Car is responsible for creating the Engine.
+With IoC, the engine is provided from outside:
+class Car {
+    private Engine engine;</p>
+<div class="codehilite"><div class="highlight"><pre><span></span>public Car(Engine engine) {
+    this.engine = engine;
+}
+</pre></div>
+</div>
+<p>}</p>
+<p>The Car doesn't control the creation of its Engine. The responsibility is transferred outside—this demonstrates Inversion of Control.</p>
+<ol start="3">
+<li>Can Spring inject dependencies without annotations?</li>
+</ol>
+<p>Yes.
+For example, with Java configuration:</p>
+<p>@Configuration
+public class AppConfig {</p>
+<div class="codehilite"><div class="highlight"><pre><span></span>@Bean
+public UserRepository userRepository() {
+    return new UserRepository();
+}
+
+@Bean
+public UserService userService(UserRepository repository) {
+    return new UserService(repository);
+}
+</pre></div>
+</div>
+<p>}</p>
+<p>Here, we're using @Bean configuration rather than putting @Autowired on the constructor.
+Also, if a class has only one constructor, Spring can use that constructor automatically without @Autowired.</p>
+<ol start="4">
+<li>Dependency Inversion</li>
+</ol>
+<p>Dependency Inversion Principle (DIP) says that high-level classes should not directly depend on low-level concrete classes. Both should depend on abstractions.</p>
+<p>For example:
+interface NotificationService {
+    void notify();
+}</p>
+<p>class orderService {
+    private final NotificationService noti;</p>
+<div class="codehilite"><div class="highlight"><pre><span></span>public orderService(NotificationService noti) {
+    this.noti= noti;
+}
+</pre></div>
+</div>
+<p>}</p>
+<p>orderService depends on the NotificationService abstraction, not a specific implementation.
+This is one reason Spring's Dependency Injection helps us achieve loose coupling.</p></article>
+  </section>
+  <section class="panel" data-panel="examples" role="tabpanel" hidden>
+    <article class="prose"><h3>IoC without Spring vs with Spring</h3>
+<div class="codehilite"><div class="highlight"><pre><span></span><span class="c1">// Tight coupling: the class builds its own dependencies</span>
+<span class="kd">class</span> <span class="nc">OrderService</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">MySqlUserRepository</span><span class="w"> </span><span class="n">repo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MySqlUserRepository</span><span class="p">();</span><span class="w"> </span><span class="c1">// stuck</span>
+<span class="p">}</span>
+
+<span class="c1">// Dependency Inversion: depend on an abstraction</span>
+<span class="kd">interface</span> <span class="nc">OrderRepository</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">save</span><span class="p">(</span><span class="n">Order</span><span class="w"> </span><span class="n">order</span><span class="p">);</span><span class="w"> </span><span class="p">}</span>
+
+<span class="kd">class</span> <span class="nc">BetterOrderService</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">OrderRepository</span><span class="w"> </span><span class="n">repo</span><span class="p">;</span>
+<span class="w">    </span><span class="n">BetterOrderService</span><span class="p">(</span><span class="n">OrderRepository</span><span class="w"> </span><span class="n">repo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">repo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">repo</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w">  </span><span class="c1">// injected</span>
+<span class="p">}</span>
+
+<span class="c1">// Spring = the IoC container that performs this injection for you</span>
+</pre></div>
+</div>
+<h3>Declaring beans: component scan vs @Bean</h3>
+<div class="codehilite"><div class="highlight"><pre><span></span><span class="nd">@Component</span><span class="w">                      </span><span class="c1">// stereotype: scanned and registered</span>
+<span class="kd">class</span> <span class="nc">EmailNotifier</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+
+<span class="nd">@Configuration</span><span class="w">                  </span><span class="c1">// source of bean definitions</span>
+<span class="kd">class</span> <span class="nc">AppConfig</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Bean</span><span class="w">                        </span><span class="c1">// method-produced beans (third-party classes)</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">RestTemplate</span><span class="w"> </span><span class="nf">restTemplate</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RestTemplate</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Bean</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">OrderService</span><span class="w"> </span><span class="nf">orderService</span><span class="p">(</span><span class="n">OrderRepository</span><span class="w"> </span><span class="n">repo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">  </span><span class="c1">// args auto-injected</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OrderService</span><span class="p">(</span><span class="n">repo</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Bootstrapping the container</span>
+<span class="n">ApplicationContext</span><span class="w"> </span><span class="n">ctx</span><span class="w"> </span><span class="o">=</span>
+<span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="n">AnnotationConfigApplicationContext</span><span class="p">(</span><span class="n">AppConfig</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
+<span class="n">OrderService</span><span class="w"> </span><span class="n">svc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ctx</span><span class="p">.</span><span class="na">getBean</span><span class="p">(</span><span class="n">OrderService</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
+</pre></div>
+</div>
+<h3>The three injection styles</h3>
+<div class="codehilite"><div class="highlight"><pre><span></span><span class="c1">// 1. Constructor injection — RECOMMENDED: immutable, testable, fails fast</span>
+<span class="nd">@Service</span>
+<span class="kd">class</span> <span class="nc">CheckoutService</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">PaymentGateway</span><span class="w"> </span><span class="n">gateway</span><span class="p">;</span>
+<span class="w">    </span><span class="n">CheckoutService</span><span class="p">(</span><span class="n">PaymentGateway</span><span class="w"> </span><span class="n">gateway</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">gateway</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">gateway</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// 2. Setter injection — for optional dependencies</span>
+<span class="nd">@Service</span>
+<span class="kd">class</span> <span class="nc">ReportService</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Mailer</span><span class="w"> </span><span class="n">mailer</span><span class="p">;</span>
+<span class="w">    </span><span class="nd">@Autowired</span><span class="p">(</span><span class="n">required</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">)</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">setMailer</span><span class="p">(</span><span class="n">Mailer</span><span class="w"> </span><span class="n">mailer</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">mailer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mailer</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// 3. Field injection — works but hides dependencies, hard to unit test</span>
+<span class="nd">@Service</span>
+<span class="kd">class</span> <span class="nc">LegacyService</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Autowired</span><span class="w"> </span><span class="kd">private</span><span class="w"> </span><span class="n">Mailer</span><span class="w"> </span><span class="n">mailer</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<h3>BeanFactory vs ApplicationContext</h3>
+<div class="codehilite"><div class="highlight"><pre><span></span><span class="c1">// BeanFactory: lazy container — creates a bean when getBean is called</span>
+<span class="n">BeanFactory</span><span class="w"> </span><span class="n">lazy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">XmlBeanFactory</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">ClassPathResource</span><span class="p">(</span><span class="s">"beans.xml"</span><span class="p">));</span>
+
+<span class="c1">// ApplicationContext: adds events, i18n, AOP, eager singletons.</span>
+<span class="c1">// In Spring Boot you almost always use ApplicationContext.</span>
+<span class="nd">@SpringBootApplication</span><span class="w">          </span><span class="c1">// includes @ComponentScan + @AutoConfiguration</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">App</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">ApplicationContext</span><span class="w"> </span><span class="n">ctx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SpringApplication</span><span class="p">.</span><span class="na">run</span><span class="p">(</span><span class="n">App</span><span class="p">.</span><span class="na">class</span><span class="p">,</span><span class="w"> </span><span class="n">args</span><span class="p">);</span>
+<span class="w">        </span><span class="n">ctx</span><span class="p">.</span><span class="na">getBean</span><span class="p">(</span><span class="n">CheckoutService</span><span class="p">.</span><span class="na">class</span><span class="p">).</span><span class="na">checkout</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div></article>
+  </section>
+  <nav class="prev-next"><a class="pn previous" href="servlet-vs-spring-core.html"><span class="pn-label">Previous</span><span class="pn-title">Servlet vs Spring Core</span></a><a class="pn next" href="autowiring.html"><span class="pn-label">Next</span><span class="pn-title">Autowiring</span></a></nav>
+</main>
+<script src="../assets/app.js"></script>
+</body>
+</html>

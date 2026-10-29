@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JSP · Night Java</title>
+<meta name="description" content="JavaServer Pages, directives, scriptlets, JSTL and the MVC pattern.">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body class="topic-body">
+<aside class="sidebar">
+  <a class="brand" href="../index.html"><span class="brand-mark">J</span> Night Java</a>
+  <input class="side-filter" type="search" placeholder="Filter topics…" aria-label="Filter topics">
+  <div class="side-phase-wrap"><label class="side-phase-label" for="side-phase">Jump to phase</label>
+  <select id="side-phase" class="side-phase"><option value="1">Phase 1 · Programming Basics</option>
+<option value="2">Phase 2 · OOP</option>
+<option value="3">Phase 3 · Core Java Advanced</option>
+<option value="4">Phase 4 · Advanced Java</option>
+<option value="5">Phase 5 · DSA</option>
+<option value="6">Phase 6 · Database</option>
+<option value="7">Phase 7 · Backend Development</option>
+<option value="8">Phase 8 · Frontend</option>
+<option value="9">Phase 9 · DevOps + Deployment</option>
+<option value="10">Phase 10 · LLD</option>
+<option value="11">Phase 11 · HLD</option>
+<option value="12">Phase 12 · Interview Topics</option></select></div>
+  <nav class="side-nav" aria-label="Topics in roadmap order"><a class="side-link" href="../topics/java-fundamentals.html" data-slug="java-fundamentals"><span class="check" data-check="java-fundamentals" aria-hidden="true"></span>Java Fundamentals Q&amp;A</a>
+<a class="side-link" href="../topics/oops-encapsulation.html" data-slug="oops-encapsulation"><span class="check" data-check="oops-encapsulation" aria-hidden="true"></span>OOPs &amp; Encapsulation</a>
+<a class="side-link" href="../topics/inheritance.html" data-slug="inheritance"><span class="check" data-check="inheritance" aria-hidden="true"></span>Inheritance</a>
+<a class="side-link" href="../topics/has-a-is-a.html" data-slug="has-a-is-a"><span class="check" data-check="has-a-is-a" aria-hidden="true"></span>Has-a vs Is-a Relationships</a>
+<a class="side-link" href="../topics/polymorphism.html" data-slug="polymorphism"><span class="check" data-check="polymorphism" aria-hidden="true"></span>Polymorphism</a>
+<a class="side-link" href="../topics/abstraction.html" data-slug="abstraction"><span class="check" data-check="abstraction" aria-hidden="true"></span>Abstraction</a>
+<a class="side-link" href="../topics/interface.html" data-slug="interface"><span class="check" data-check="interface" aria-hidden="true"></span>Interfaces</a>
+<a class="side-link" href="../topics/anonymous-inner-class.html" data-slug="anonymous-inner-class"><span class="check" data-check="anonymous-inner-class" aria-hidden="true"></span>Anonymous Inner Class</a>
+<a class="side-link" href="../topics/collections-framework.html" data-slug="collections-framework"><span class="check" data-check="collections-framework" aria-hidden="true"></span>Collections Framework</a>
+<a class="side-link" href="../topics/exception-handling.html" data-slug="exception-handling"><span class="check" data-check="exception-handling" aria-hidden="true"></span>Exception Handling</a>
+<a class="side-link" href="../topics/file-handling.html" data-slug="file-handling"><span class="check" data-check="file-handling" aria-hidden="true"></span>File Handling</a>
+<a class="side-link" href="../topics/generics.html" data-slug="generics"><span class="check" data-check="generics" aria-hidden="true"></span>Generics</a>
+<a class="side-link" href="../topics/stream-api.html" data-slug="stream-api"><span class="check" data-check="stream-api" aria-hidden="true"></span>Stream API</a>
+<a class="side-link" href="../topics/multithreading.html" data-slug="multithreading"><span class="check" data-check="multithreading" aria-hidden="true"></span>Multithreading</a>
+<a class="side-link" href="../topics/executorservice.html" data-slug="executorservice"><span class="check" data-check="executorservice" aria-hidden="true"></span>ExecutorService</a>
+<a class="side-link" href="../topics/completablefuture.html" data-slug="completablefuture"><span class="check" data-check="completablefuture" aria-hidden="true"></span>CompletableFuture</a>
+<a class="side-link" href="../topics/atomic-classes.html" data-slug="atomic-classes"><span class="check" data-check="atomic-classes" aria-hidden="true"></span>Atomic Classes</a>
+<a class="side-link" href="../topics/concurrent-collections.html" data-slug="concurrent-collections"><span class="check" data-check="concurrent-collections" aria-hidden="true"></span>Concurrent Collections</a>
+<a class="side-link" href="../topics/jdbc.html" data-slug="jdbc"><span class="check" data-check="jdbc" aria-hidden="true"></span>JDBC</a>
+<a class="side-link" href="../topics/servlet.html" data-slug="servlet"><span class="check" data-check="servlet" aria-hidden="true"></span>Servlets</a>
+<a class="side-link" href="../topics/jsp.html" aria-current="page" data-slug="jsp"><span class="check" data-check="jsp" aria-hidden="true"></span>JSP</a>
+<a class="side-link" href="../topics/hibernate.html" data-slug="hibernate"><span class="check" data-check="hibernate" aria-hidden="true"></span>Hibernate</a>
+<a class="side-link" href="../topics/spring-mvc.html" data-slug="spring-mvc"><span class="check" data-check="spring-mvc" aria-hidden="true"></span>Spring MVC</a>
+<a class="side-link" href="../topics/session-management.html" data-slug="session-management"><span class="check" data-check="session-management" aria-hidden="true"></span>Session Management</a>
+<a class="side-link" href="../topics/maven.html" data-slug="maven"><span class="check" data-check="maven" aria-hidden="true"></span>Maven</a>
+<a class="side-link" href="../topics/servlet-vs-spring-core.html" data-slug="servlet-vs-spring-core"><span class="check" data-check="servlet-vs-spring-core" aria-hidden="true"></span>Servlet vs Spring Core</a>
+<a class="side-link" href="../topics/ioc-and-di.html" data-slug="ioc-and-di"><span class="check" data-check="ioc-and-di" aria-hidden="true"></span>IoC &amp; Dependency Injection</a>
+<a class="side-link" href="../topics/autowiring.html" data-slug="autowiring"><span class="check" data-check="autowiring" aria-hidden="true"></span>Autowiring</a>
+<a class="side-link" href="../topics/bean-configuration.html" data-slug="bean-configuration"><span class="check" data-check="bean-configuration" aria-hidden="true"></span>Bean Configuration &amp; Annotations</a>
+<a class="side-link" href="../topics/bean-lifecycle.html" data-slug="bean-lifecycle"><span class="check" data-check="bean-lifecycle" aria-hidden="true"></span>Bean Lifecycle</a>
+<a class="side-link" href="../topics/bean-lifecycle-aop.html" data-slug="bean-lifecycle-aop"><span class="check" data-check="bean-lifecycle-aop" aria-hidden="true"></span>Bean Lifecycle &amp; Where AOP Fits</a>
+<a class="side-link" href="../topics/spring-aop.html" data-slug="spring-aop"><span class="check" data-check="spring-aop" aria-hidden="true"></span>Spring AOP</a>
+<a class="side-link" href="../topics/spring-transactions.html" data-slug="spring-transactions"><span class="check" data-check="spring-transactions" aria-hidden="true"></span>Spring Transactions</a>
+<a class="side-link" href="../topics/spring-data.html" data-slug="spring-data"><span class="check" data-check="spring-data" aria-hidden="true"></span>Spring Data (JPA)</a>
+<a class="side-link" href="../topics/spring-profiles.html" data-slug="spring-profiles"><span class="check" data-check="spring-profiles" aria-hidden="true"></span>Spring Profiles &amp; Config</a>
+<a class="side-link" href="../topics/spring-security.html" data-slug="spring-security"><span class="check" data-check="spring-security" aria-hidden="true"></span>Spring Security Flow</a>
+<a class="side-link" href="../topics/filters-and-interceptors.html" data-slug="filters-and-interceptors"><span class="check" data-check="filters-and-interceptors" aria-hidden="true"></span>Filters &amp; Interceptors</a>
+<a class="side-link" href="../topics/core-java-deep-dive.html" data-slug="core-java-deep-dive"><span class="check" data-check="core-java-deep-dive" aria-hidden="true"></span>Core Java Deep-Dive</a></nav>
+  <p class="side-progress"><span data-progress-text></span></p>
+</aside>
+<main class="content">
+  <header class="topic-head">
+    <p class="crumb"><a href="../index.html">Roadmap</a> / Phase 4 · Advanced Java</p>
+    <h1>JSP</h1>
+    <p class="summary">JavaServer Pages, directives, scriptlets, JSTL and the MVC pattern.</p>
+    <div class="head-row">
+      <div class="tags"><span class="tag">web</span><span class="tag">views</span><span class="tag">el</span></div>
+      <button class="read-btn" data-read-btn data-slug="jsp"><span class="read-icon">○</span> Mark as read</button>
+    </div>
+  </header>
+  <div class="tabs" role="tablist">
+    <button class="tab active" role="tab" data-tab="notes" aria-selected="true">Notes</button>
+    <button class="tab" role="tab" data-tab="examples" aria-selected="false">Code examples</button>
+  </div>
+  <section class="panel active" data-panel="notes" role="tabpanel">
+    <article class="prose"><ol>
+<li>What is JSP?</li>
+</ol>
+<p>JSP (JavaServer Pages) is a server-side technology used to create dynamic web pages by combining HTML with Java-based dynamic content.</p>
+<p>It separates the presentation layer (HTML) from the business logic, making web applications easier to develop and maintain.</p>
+<ol start="2">
+<li>Why do we use JSP?</li>
+</ol>
+<p>Before JSP, developers often used Servlets to generate HTML using PrintWriter. This made the code lengthy and difficult to maintain.</p>
+<p>Servlet example:</p>
+<p>PrintWriter out = response.getWriter();
+out.println("<html>");
+out.println("<body>");
+out.println("<h1>Welcome " + name + "</h1>");
+out.println("</body>");
+out.println("</html>");</p>
+<p>JSP example (welcome.jsp):</p>
+<html>
+<body>
+    <h1>Welcome ${name}</h1>
+</body>
+</html>
+
+<p>Here, ${name} is an Expression Language (EL) expression that displays the value of the name attribute.</p>
+<ol start="3">
+<li>How does JSP work?</li>
+</ol>
+<p>Client sends a request</p>
+<p>Servlet processes the request</p>
+<p>Business logic and data processing</p>
+<p>JSP displays dynamic data</p>
+<p>HTML + dynamic content</p>
+<p>HTML response sent to the browser</p>
+<p>Important: A JSP is internally translated into a Servlet by the web container and then compiled and executed.</p>
+<ol start="4">
+<li>Ways to write dynamic content in JSP</li>
+</ol>
+<p>Syntax                          Purpose
+&lt;%= expression %&gt;           Prints the value of a Java expression</p>
+<p>${name}                 Displays a value using Expression Language (EL)</p>
+<p>&lt;% Java code %&gt;             Writes Java code inside a JSP scriptlet</p>
+<p>Example:</p>
+<h1>Welcome <%= request.getAttribute("name") %></h1>
+
+<p>Modern JSP development generally prefers EL and JSTL over scriptlets.</p>
+<p>Interview-ready answer</p>
+<p>Question: What is JSP, and why do we use it?</p>
+<p>JSP stands for JavaServer Pages. It is a server-side technology used to create dynamic web pages by combining HTML with dynamic data.</p>
+<p>Before JSP, developers used Servlets to generate HTML using PrintWriter, which made the code lengthy and difficult to maintain. JSP simplifies this by allowing HTML to be written separately and dynamic data to be included using EL expressions.</p>
+<p>JSP is internally converted into a Servlet by the web container.</p>
+<p>Key interview points</p>
+<p>JSP is used for the presentation layer.</p>
+<p>Servlets are commonly used for request processing and control flow.</p>
+<p>JSP supports Expression Language (EL), JSTL, and JSP actions.</p>
+<p>JSP is translated into a Servlet and executed on the server.</p>
+<p>JSP is part of the Java web technology stack and is commonly used with MVC architecture.</p>
+<ol start="2">
+<li>What is the JSP life cycle?</li>
+</ol>
+<p>The JSP life cycle consists of these steps:</p>
+<p>Translation of JSP into a Servlet.</p>
+<p>Compilation of the Servlet.</p>
+<p>Class loading and object creation.</p>
+<p>jspInit() — called once during initialization.</p>
+<p>_jspService() — handles each request.</p>
+<p>jspDestroy() — called before the JSP is removed.</p>
+<ol start="3">
+<li>What are JSP implicit objects?</li>
+</ol>
+<p>Implicit objects are predefined objects available in JSP without explicitly creating them.</p>
+<p>Common examples:</p>
+<p>request — handles client request data.</p>
+<p>response — sends the response.</p>
+<p>session — stores user-specific session data.</p>
+<p>application — shares data across the application.</p>
+<p>out — writes content to the response.</p>
+<p>config — provides JSP configuration.</p>
+<p>pageContext — provides access to JSP context and scopes.</p>
+<p>page — refers to the current JSP's Servlet instance.</p>
+<p>exception — provides exception information on error pages.</p>
+<p>What are JSP scripting elements?</p>
+<p>There are three main scripting elements:</p>
+<p>Element                 Syntax</p>
+<p>Declaration         &lt;%! int count = 0; %&gt;</p>
+<p>Scriptlet            &lt;% int a = 10; %&gt;</p>
+<p>Expression            &lt;%= a %&gt;</p>
+<p>What is Expression Language (EL) in JSP?</p>
+<p>EL is used to access data and evaluate expressions without writing Java code directly.</p>
+<p>Example:</p>
+<p>${user.name}</p>
+<ol start="10">
+<li>What is JSTL?</li>
+</ol>
+<p>JSTL stands for JavaServer Pages Standard Tag Library. It provides tags for common tasks such as iteration, conditional statements, and formatting, reducing the need for Java scriptlets in JSP.</p>
+<ol start="11">
+<li>What are JSP scopes?</li>
+</ol>
+<p>JSP has four scopes:</p>
+<p>Scope                           Lifetime</p>
+<p>Page                        Current JSP page execution.</p>
+<p>Request                         Current request.</p>
+<p>Session                         User's session.</p>
+<p>Application                         Entire web application.</p></article>
+  </section>
+  <section class="panel" data-panel="examples" role="tabpanel" hidden>
+    <article class="prose"><h3>A basic JSP page</h3>
+<div class="codehilite"><div class="highlight"><pre><span></span><span class="k">&lt;%@</span><span class="w"> </span><span class="n">page</span><span class="w"> </span><span class="n">contentType</span><span class="o">=</span><span class="s">"text/html;charset=UTF-8"</span><span class="w"> </span><span class="n">language</span><span class="o">=</span><span class="s">"java"</span><span class="w"> </span><span class="k">%&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;&lt;title&gt;</span>First<span class="w"> </span>JSP<span class="nt">&lt;/title&gt;&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+<span class="w">    </span><span class="k">&lt;%-</span><span class="o">-</span><span class="w"> </span><span class="n">comment</span><span class="p">:</span><span class="w"> </span><span class="n">not</span><span class="w"> </span><span class="n">sent</span><span class="w"> </span><span class="kd">to</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">browser</span><span class="w"> </span><span class="o">--</span><span class="k">%&gt;</span>
+
+<span class="w">    </span><span class="k">&lt;%</span><span class="w"> </span><span class="c1">// scriptlet: Java code embedded in the page</span>
+<span class="w">       </span><span class="n">String</span><span class="w"> </span><span class="n">user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">request</span><span class="p">.</span><span class="na">getParameter</span><span class="p">(</span><span class="s">"user"</span><span class="p">);</span>
+<span class="w">       </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">user</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="n">user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"guest"</span><span class="p">;</span>
+<span class="w">    </span><span class="k">%&gt;</span>
+
+<span class="w">    </span><span class="nt">&lt;h1&gt;</span>Hello<span class="w"> </span><span class="k">&lt;%=</span><span class="w"> </span><span class="n">user</span><span class="w"> </span><span class="k">%&gt;</span>!<span class="nt">&lt;/h1&gt;</span><span class="w">              </span><span class="k">&lt;%-</span><span class="o">-</span><span class="w"> </span><span class="n">expression</span><span class="p">:</span><span class="w"> </span><span class="n">printed</span><span class="w"> </span><span class="n">out</span><span class="w"> </span><span class="o">--</span><span class="k">%&gt;</span>
+
+<span class="w">    </span><span class="k">&lt;%!</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">hitCounter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="k">%&gt;</span><span class="w">               </span><span class="k">&lt;%-</span><span class="o">-</span><span class="w"> </span><span class="n">declaration</span><span class="p">:</span><span class="w"> </span><span class="n">instance</span><span class="w"> </span><span class="n">level</span><span class="w"> </span><span class="o">--</span><span class="k">%&gt;</span>
+<span class="w">    </span><span class="k">&lt;%+</span><span class="o">+</span><span class="n">hitCounter</span><span class="p">;</span><span class="w"> </span><span class="k">%&gt;</span>
+<span class="w">    </span><span class="nt">&lt;p&gt;</span>Hits:<span class="w"> </span><span class="k">&lt;%=</span><span class="w"> </span><span class="n">hitCounter</span><span class="w"> </span><span class="k">%&gt;</span><span class="nt">&lt;/p&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<h3>Directives</h3>
+<div class="codehilite"><div class="highlight"><pre><span></span><span class="k">&lt;%@</span><span class="w"> </span><span class="n">page</span><span class="w"> </span><span class="n">language</span><span class="o">=</span><span class="s">"java"</span><span class="w"> </span><span class="n">import</span><span class="o">=</span><span class="s">"java.util.Date"</span><span class="w"> </span><span class="k">%&gt;</span><span class="w">   </span><span class="k">&lt;%-</span><span class="o">-</span><span class="w"> </span><span class="n">page</span><span class="w"> </span><span class="n">config</span><span class="w"> </span><span class="o">--</span><span class="k">%&gt;</span>
+<span class="k">&lt;%@</span><span class="w"> </span><span class="n">include</span><span class="w"> </span><span class="n">file</span><span class="o">=</span><span class="s">"header.jsp"</span><span class="w"> </span><span class="k">%&gt;</span><span class="w">                      </span><span class="k">&lt;%-</span><span class="o">-</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">include</span><span class="w"> </span><span class="n">at</span><span class="w"> </span><span class="n">translation</span><span class="w"> </span><span class="o">--</span><span class="k">%&gt;</span>
+<span class="k">&lt;%@</span><span class="w"> </span><span class="n">taglib</span><span class="w"> </span><span class="n">prefix</span><span class="o">=</span><span class="s">"c"</span><span class="w"> </span><span class="n">uri</span><span class="o">=</span><span class="s">"jakarta.tags.core"</span><span class="w"> </span><span class="k">%&gt;</span><span class="w">      </span><span class="k">&lt;%-</span><span class="o">-</span><span class="w"> </span><span class="n">JSTL</span><span class="w"> </span><span class="n">tag</span><span class="w"> </span><span class="n">library</span><span class="w"> </span><span class="o">--</span><span class="k">%&gt;</span>
+</pre></div>
+</div>
+<h3>JSTL + EL: the preferred style (no scriptlets)</h3>
+<div class="codehilite"><div class="highlight"><pre><span></span><span class="k">&lt;%@</span><span class="w"> </span><span class="n">taglib</span><span class="w"> </span><span class="n">prefix</span><span class="o">=</span><span class="s">"c"</span><span class="w"> </span><span class="n">uri</span><span class="o">=</span><span class="s">"jakarta.tags.core"</span><span class="w"> </span><span class="k">%&gt;</span>
+<span class="nt">&lt;c:forEach</span><span class="w"> </span><span class="na">var=</span><span class="s">"item"</span><span class="w"> </span><span class="na">items=</span><span class="s">"${requestScope.cart}"</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;tr&gt;</span>
+<span class="w">        </span><span class="nt">&lt;td&gt;</span>${item.name}<span class="nt">&lt;/td&gt;</span>
+<span class="w">        </span><span class="nt">&lt;td&gt;</span>${item.price}<span class="nt">&lt;/td&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/tr&gt;</span>
+<span class="nt">&lt;/c:forEach&gt;</span>
+
+<span class="nt">&lt;c:if</span><span class="w"> </span><span class="na">test=</span><span class="s">"${user.role == 'admin'}"</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;a</span><span class="w"> </span><span class="na">href=</span><span class="s">"/admin"</span><span class="nt">&gt;</span>Admin<span class="w"> </span>panel<span class="nt">&lt;/a&gt;</span>
+<span class="nt">&lt;/c:if&gt;</span>
+</pre></div>
+</div>
+<h3>MVC with a servlet controller and JSP view</h3>
+<div class="codehilite"><div class="highlight"><pre><span></span><span class="c1">// Controller (servlet) — fetches data, forwards to the view</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.servlet.http.*</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.servlet.annotation.WebServlet</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.List</span><span class="p">;</span>
+
+<span class="nd">@WebServlet</span><span class="p">(</span><span class="s">"/products"</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ProductController</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">HttpServlet</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">doGet</span><span class="p">(</span><span class="n">HttpServletRequest</span><span class="w"> </span><span class="n">req</span><span class="p">,</span><span class="w"> </span><span class="n">HttpServletResponse</span><span class="w"> </span><span class="n">resp</span><span class="p">)</span>
+<span class="w">            </span><span class="kd">throws</span><span class="w"> </span><span class="n">jakarta</span><span class="p">.</span><span class="na">servlet</span><span class="p">.</span><span class="na">ServletException</span><span class="p">,</span><span class="w"> </span><span class="n">java</span><span class="p">.</span><span class="na">io</span><span class="p">.</span><span class="na">IOException</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">products</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">List</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">"Laptop"</span><span class="p">,</span><span class="w"> </span><span class="s">"Phone"</span><span class="p">,</span><span class="w"> </span><span class="s">"Tablet"</span><span class="p">);</span>
+<span class="w">        </span><span class="n">req</span><span class="p">.</span><span class="na">setAttribute</span><span class="p">(</span><span class="s">"products"</span><span class="p">,</span><span class="w"> </span><span class="n">products</span><span class="p">);</span><span class="w">            </span><span class="c1">// Model passed as attribute</span>
+<span class="w">        </span><span class="n">req</span><span class="p">.</span><span class="na">getRequestDispatcher</span><span class="p">(</span><span class="s">"/products.jsp"</span><span class="p">).</span><span class="na">forward</span><span class="p">(</span><span class="n">req</span><span class="p">,</span><span class="w"> </span><span class="n">resp</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="codehilite"><div class="highlight"><pre><span></span><span class="k">&lt;%-</span><span class="o">-</span><span class="w"> </span><span class="n">View</span><span class="w"> </span><span class="p">(</span><span class="n">products</span><span class="p">.</span><span class="na">jsp</span><span class="p">)</span><span class="w"> </span><span class="err">—</span><span class="w"> </span><span class="n">only</span><span class="w"> </span><span class="n">presentation</span><span class="w"> </span><span class="o">--</span><span class="k">%&gt;</span>
+<span class="nt">&lt;c:forEach</span><span class="w"> </span><span class="na">var=</span><span class="s">"p"</span><span class="w"> </span><span class="na">items=</span><span class="s">"${products}"</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;li&gt;</span>${p}<span class="nt">&lt;/li&gt;</span>
+<span class="nt">&lt;/c:forEach&gt;</span>
+</pre></div>
+</div></article>
+  </section>
+  <nav class="prev-next"><a class="pn previous" href="servlet.html"><span class="pn-label">Previous</span><span class="pn-title">Servlets</span></a><a class="pn next" href="hibernate.html"><span class="pn-label">Next</span><span class="pn-title">Hibernate</span></a></nav>
+</main>
+<script src="../assets/app.js"></script>
+</body>
+</html>

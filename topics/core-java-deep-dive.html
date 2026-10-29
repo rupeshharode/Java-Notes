@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Core Java Deep-Dive · Night Java</title>
+<meta name="description" content="JVM, sealed classes, immutability, records and other interview heavyweights.">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body class="topic-body">
+<aside class="sidebar">
+  <a class="brand" href="../index.html"><span class="brand-mark">J</span> Night Java</a>
+  <input class="side-filter" type="search" placeholder="Filter topics…" aria-label="Filter topics">
+  <div class="side-phase-wrap"><label class="side-phase-label" for="side-phase">Jump to phase</label>
+  <select id="side-phase" class="side-phase"><option value="1">Phase 1 · Programming Basics</option>
+<option value="2">Phase 2 · OOP</option>
+<option value="3">Phase 3 · Core Java Advanced</option>
+<option value="4">Phase 4 · Advanced Java</option>
+<option value="5">Phase 5 · DSA</option>
+<option value="6">Phase 6 · Database</option>
+<option value="7">Phase 7 · Backend Development</option>
+<option value="8">Phase 8 · Frontend</option>
+<option value="9">Phase 9 · DevOps + Deployment</option>
+<option value="10">Phase 10 · LLD</option>
+<option value="11">Phase 11 · HLD</option>
+<option value="12">Phase 12 · Interview Topics</option></select></div>
+  <nav class="side-nav" aria-label="Topics in roadmap order"><a class="side-link" href="../topics/java-fundamentals.html" data-slug="java-fundamentals"><span class="check" data-check="java-fundamentals" aria-hidden="true"></span>Java Fundamentals Q&amp;A</a>
+<a class="side-link" href="../topics/oops-encapsulation.html" data-slug="oops-encapsulation"><span class="check" data-check="oops-encapsulation" aria-hidden="true"></span>OOPs &amp; Encapsulation</a>
+<a class="side-link" href="../topics/inheritance.html" data-slug="inheritance"><span class="check" data-check="inheritance" aria-hidden="true"></span>Inheritance</a>
+<a class="side-link" href="../topics/has-a-is-a.html" data-slug="has-a-is-a"><span class="check" data-check="has-a-is-a" aria-hidden="true"></span>Has-a vs Is-a Relationships</a>
+<a class="side-link" href="../topics/polymorphism.html" data-slug="polymorphism"><span class="check" data-check="polymorphism" aria-hidden="true"></span>Polymorphism</a>
+<a class="side-link" href="../topics/abstraction.html" data-slug="abstraction"><span class="check" data-check="abstraction" aria-hidden="true"></span>Abstraction</a>
+<a class="side-link" href="../topics/interface.html" data-slug="interface"><span class="check" data-check="interface" aria-hidden="true"></span>Interfaces</a>
+<a class="side-link" href="../topics/anonymous-inner-class.html" data-slug="anonymous-inner-class"><span class="check" data-check="anonymous-inner-class" aria-hidden="true"></span>Anonymous Inner Class</a>
+<a class="side-link" href="../topics/collections-framework.html" data-slug="collections-framework"><span class="check" data-check="collections-framework" aria-hidden="true"></span>Collections Framework</a>
+<a class="side-link" href="../topics/exception-handling.html" data-slug="exception-handling"><span class="check" data-check="exception-handling" aria-hidden="true"></span>Exception Handling</a>
+<a class="side-link" href="../topics/file-handling.html" data-slug="file-handling"><span class="check" data-check="file-handling" aria-hidden="true"></span>File Handling</a>
+<a class="side-link" href="../topics/generics.html" data-slug="generics"><span class="check" data-check="generics" aria-hidden="true"></span>Generics</a>
+<a class="side-link" href="../topics/stream-api.html" data-slug="stream-api"><span class="check" data-check="stream-api" aria-hidden="true"></span>Stream API</a>
+<a class="side-link" href="../topics/multithreading.html" data-slug="multithreading"><span class="check" data-check="multithreading" aria-hidden="true"></span>Multithreading</a>
+<a class="side-link" href="../topics/executorservice.html" data-slug="executorservice"><span class="check" data-check="executorservice" aria-hidden="true"></span>ExecutorService</a>
+<a class="side-link" href="../topics/completablefuture.html" data-slug="completablefuture"><span class="check" data-check="completablefuture" aria-hidden="true"></span>CompletableFuture</a>
+<a class="side-link" href="../topics/atomic-classes.html" data-slug="atomic-classes"><span class="check" data-check="atomic-classes" aria-hidden="true"></span>Atomic Classes</a>
+<a class="side-link" href="../topics/concurrent-collections.html" data-slug="concurrent-collections"><span class="check" data-check="concurrent-collections" aria-hidden="true"></span>Concurrent Collections</a>
+<a class="side-link" href="../topics/jdbc.html" data-slug="jdbc"><span class="check" data-check="jdbc" aria-hidden="true"></span>JDBC</a>
+<a class="side-link" href="../topics/servlet.html" data-slug="servlet"><span class="check" data-check="servlet" aria-hidden="true"></span>Servlets</a>
+<a class="side-link" href="../topics/jsp.html" data-slug="jsp"><span class="check" data-check="jsp" aria-hidden="true"></span>JSP</a>
+<a class="side-link" href="../topics/hibernate.html" data-slug="hibernate"><span class="check" data-check="hibernate" aria-hidden="true"></span>Hibernate</a>
+<a class="side-link" href="../topics/spring-mvc.html" data-slug="spring-mvc"><span class="check" data-check="spring-mvc" aria-hidden="true"></span>Spring MVC</a>
+<a class="side-link" href="../topics/session-management.html" data-slug="session-management"><span class="check" data-check="session-management" aria-hidden="true"></span>Session Management</a>
+<a class="side-link" href="../topics/maven.html" data-slug="maven"><span class="check" data-check="maven" aria-hidden="true"></span>Maven</a>
+<a class="side-link" href="../topics/servlet-vs-spring-core.html" data-slug="servlet-vs-spring-core"><span class="check" data-check="servlet-vs-spring-core" aria-hidden="true"></span>Servlet vs Spring Core</a>
+<a class="side-link" href="../topics/ioc-and-di.html" data-slug="ioc-and-di"><span class="check" data-check="ioc-and-di" aria-hidden="true"></span>IoC &amp; Dependency Injection</a>
+<a class="side-link" href="../topics/autowiring.html" data-slug="autowiring"><span class="check" data-check="autowiring" aria-hidden="true"></span>Autowiring</a>
+<a class="side-link" href="../topics/bean-configuration.html" data-slug="bean-configuration"><span class="check" data-check="bean-configuration" aria-hidden="true"></span>Bean Configuration &amp; Annotations</a>
+<a class="side-link" href="../topics/bean-lifecycle.html" data-slug="bean-lifecycle"><span class="check" data-check="bean-lifecycle" aria-hidden="true"></span>Bean Lifecycle</a>
+<a class="side-link" href="../topics/bean-lifecycle-aop.html" data-slug="bean-lifecycle-aop"><span class="check" data-check="bean-lifecycle-aop" aria-hidden="true"></span>Bean Lifecycle &amp; Where AOP Fits</a>
+<a class="side-link" href="../topics/spring-aop.html" data-slug="spring-aop"><span class="check" data-check="spring-aop" aria-hidden="true"></span>Spring AOP</a>
+<a class="side-link" href="../topics/spring-transactions.html" data-slug="spring-transactions"><span class="check" data-check="spring-transactions" aria-hidden="true"></span>Spring Transactions</a>
+<a class="side-link" href="../topics/spring-data.html" data-slug="spring-data"><span class="check" data-check="spring-data" aria-hidden="true"></span>Spring Data (JPA)</a>
+<a class="side-link" href="../topics/spring-profiles.html" data-slug="spring-profiles"><span class="check" data-check="spring-profiles" aria-hidden="true"></span>Spring Profiles &amp; Config</a>
+<a class="side-link" href="../topics/spring-security.html" data-slug="spring-security"><span class="check" data-check="spring-security" aria-hidden="true"></span>Spring Security Flow</a>
+<a class="side-link" href="../topics/filters-and-interceptors.html" data-slug="filters-and-interceptors"><span class="check" data-check="filters-and-interceptors" aria-hidden="true"></span>Filters &amp; Interceptors</a>
+<a class="side-link" href="../topics/core-java-deep-dive.html" aria-current="page" data-slug="core-java-deep-dive"><span class="check" data-check="core-java-deep-dive" aria-hidden="true"></span>Core Java Deep-Dive</a></nav>
+  <p class="side-progress"><span data-progress-text></span></p>
+</aside>
+<main class="content">
+  <header class="topic-head">
+    <p class="crumb"><a href="../index.html">Roadmap</a> / Phase 12 · Interview Topics</p>
+    <h1>Core Java Deep-Dive</h1>
+    <p class="summary">JVM, sealed classes, immutability, records and other interview heavyweights.</p>
+    <div class="head-row">
+      <div class="tags"><span class="tag">jvm</span><span class="tag">interview</span><span class="tag">sealed</span><span class="tag">records</span></div>
+      <button class="read-btn" data-read-btn data-slug="core-java-deep-dive"><span class="read-icon">○</span> Mark as read</button>
+    </div>
+  </header>
+  <div class="tabs" role="tablist">
+    <button class="tab active" role="tab" data-tab="notes" aria-selected="true">Notes</button>
+    <button class="tab" role="tab" data-tab="examples" aria-selected="false">Code examples</button>
+  </div>
+  <section class="panel active" data-panel="notes" role="tabpanel">
+    <article class="prose"><ul>
+<li>a variable is both a container and a named memory location used to store a data value. Since Java is a statically typed language, we must explicitly declare the data type of a variable at compile time, which ensures type safety and prevents invalid operations</li>
+</ul>
+<h3>what is Data types ?</h3>
+<p>"In Java, data types define what kind of values a variable can hold. This ensures type safety (you can’t assign a string to an integer), prevents invalid operations (like adding a number to text), and allows the JVM to perform efficient memory management.</p>
+<p>For example, if we want to store a person’s age, using short is sufficient because the range (-32,768 to 32,767) easily covers realistic ages. If we use long instead, it would work but unnecessarily consume more memory, leading to inefficiency. Choosing the right data type is therefore critical for writing optimized and reliable code."</p>
+<h3>what is conditional statement ?</h3>
+<p>"In Java, conditional statements are used to make decisions based on a condition. If the condition evaluates to true, a specific block of code executes; otherwise, an alternative path is taken. This allows programs to behave dynamically depending on input or state.</p>
+<p>The main types of conditional statements in Java are:</p>
+<p>if statement → Executes a block only if the condition is true.</p>
+<p>if‑else statement → Provides an alternative block if the condition is false.</p>
+<p>if‑else‑if ladder → Used when multiple conditions need to be checked sequentially.</p>
+<p>nested if‑else → An if inside another if, useful for complex decision logic.</p>
+<p>switch statement → Best for fixed values (like enums, days, menu options)."</p>
+<p>switch -&gt;"In Java, a switch statement is used for decision‑making when we have multiple discrete values to check. Unlike an if‑else ladder, which evaluates conditions one by one, the switch directly jumps to the matching case label, making execution faster and cleaner for fixed values.</p>
+<p>Each case must end with a break; statement to prevent fall‑through (execution continuing into the next case). If no case matches, the default block executes."</p>
+<h3>explain loops in java?</h3>
+<p>"A loop in Java is a block of code that executes repeatedly as long as a given condition evaluates to true. Loops are used to automate repetitive tasks, reduce code duplication, and make programs more efficient." used to traverse array collection</p>
+<p>"In Java, loops are classified into two types based on when the condition is checked:</p>
+<p>Entry‑Controlled Loops</p>
+<p>The condition is evaluated before the loop body executes.</p>
+<p>If the condition is false initially, the loop body may not run at all.</p>
+<p>Examples: for loop, while loop.</p>
+<p>int i = 0;
+while (i &lt; 5) {
+    System.out.println(i);
+    i++;
+}
+Exit‑Controlled Loops</p>
+<p>The condition is evaluated after the loop body executes.</p>
+<p>The loop body runs at least once, even if the condition is false.</p>
+<p>Example: do‑while loop.</p>
+<p>int i = 0;
+do {
+    System.out.println(i);
+    i++;
+} while (i &lt; 5);</p>
+<h3>operators in Java ?</h3>
+<p>"In Java, operators are special symbols used to perform operations on operands. They are the building blocks of expressions and decision‑making in programs. Conceptually, operators can be grouped into three categories:</p>
+<p>Unary Operators → operate on a single operand.</p>
+<p>Increment/Decrement: ++x, x++, --x, x--</p>
+<p>Logical NOT: ! (reverses boolean value)</p>
+<p>Unary plus/minus: +x, -x</p>
+<p>int a = 5;
+System.out.println(++a); // Pre-increment → 6
+System.out.println(a--); // Post-decrement → 6 then 5
+Binary Operators → operate on two operands.</p>
+<p>Arithmetic: +, -, *, /, %</p>
+<p>Relational: ==, !=, &lt;, &gt;, &lt;=, &gt;=</p>
+<p>Logical: &amp;&amp;, ||</p>
+<p>Bitwise: &amp;, |, ^, ~, &lt;&lt;, &gt;&gt;, &gt;&gt;&gt;</p>
+<p>int x = 10, y = 20;
+System.out.println(x + y);       // Arithmetic → 30
+System.out.println(x &lt; y);       // Relational → true
+System.out.println(x &amp; y);       // Bitwise AND
+Ternary Operator → shorthand for if‑else.</p>
+<p>int max = (x &gt; y) ? x : y;
+System.out.println("Max: " + max);</p>
+<h2>explain methods/function?</h2>
+<p>What is a Method in Java?</p>
+<p>In Java, we generally use the term method instead of function because Java organizes executable code inside classes and interfaces.</p>
+<p>A method is a block of code that performs a specific task. Once we define a method, we can call it whenever we need that task instead of writing the same code again and again.</p>
+<p>Therefore, methods provide code reusability, and they also make the program easier to read, maintain, and understand.</p>
+<p>For example:</p>
+<p>class Calculator {</p>
+<div class="codehilite"><div class="highlight"><pre><span></span>int add(int a, int b) {
+    return a + b;
+}
+</pre></div>
+</div>
+<p>}</p>
+<p>Here, add() is a method that performs the addition of two numbers.</p>
+<p>Four Types of Methods Based on Parameters and Return Value</p>
+<p>Methods can commonly be classified into four types based on whether they take parameters and whether they return a value:</p>
+<p>No parameter and no return value</p>
+<p>void greet() {
+    System.out.println("Hello");
+}</p>
+<p>No parameter but returns a value</p>
+<p>int getNumber() {
+    return 10;
+}</p>
+<p>Takes parameters but does not return a value</p>
+<p>void printNumber(int n) {
+    System.out.println(n);
+}</p>
+<p>Takes parameters and returns a value</p>
+<p>int add(int a, int b) {
+    return a + b;
+}</p>
+<p>In simple words:</p>
+<p>Take nothing means the method does not accept parameters.</p>
+<p>Take something means the method accepts parameters.</p>
+<p>Return nothing means the return type is void.</p>
+<p>Return something means the method returns a value.</p>
+<p>Methods Based on Modifiers</p>
+<p>Methods can also be discussed based on the modifiers or characteristics used with them. Some important ones are:</p>
+<p>Instance method — associated with an object and normally called using an object.</p>
+<p>Static method — belongs to the class and can be called using the class name.</p>
+<p>Final method — cannot be overridden by a subclass.</p>
+<p>Abstract method — declared without a method body and implemented by a concrete subclass.</p>
+<p>Synchronized method — used for controlling access to a method when multiple threads are involved.</p>
+<p>Native method — implemented using native code outside Java, commonly through JNI.</p>
+<p>For example:</p>
+<p>class Demo {</p>
+<div class="codehilite"><div class="highlight"><pre><span></span>static void show() {
+    System.out.println("Hello");
+}
+</pre></div>
+</div>
+<p>}</p>
+<p>Here, show() is a static method, so we can call it using:</p>
+<p>Demo.show();</p>
+<p>Interview Answer in Short</p>
+<p>If the interviewer asks, "What is a method in Java?", I would answer:</p>
+<p>"A method in Java is a block of code that performs a specific task. We define a method once and can call it multiple times whenever required, which provides code reusability and improves maintainability. Methods can be classified based on parameters and return values into four common categories: no parameter and no return value, no parameter with a return value, parameters with no return value, and parameters with a return value. Methods can also have modifiers such as static, final, abstract, synchronized, and native."</p>
+<h3>explain array?</h3>
+<p>What is an Array in Java?</p>
+<p>An array is a fixed-size data structure used to store multiple values of the same data type in a single variable.</p>
+<p>Once we declare the size of an array, we cannot change its size during runtime.</p>
+<p>For example:</p>
+<p>int[] numbers = new int[5];</p>
+<p>Here, the array can store exactly 5 integer values.</p>
+<p>Array elements are stored and accessed using an index. The index starts from 0 and goes up to size - 1.</p>
+<p>numbers[0] = 10;
+numbers[1] = 20;
+numbers[2] = 30;</p>
+<p>So, the first element is stored at index 0, the second at index 1, and so on.</p>
+<p>In Java, an array is an object, and its elements are stored in a logically contiguous sequence of array slots. The important point for an interview is that arrays provide constant-time index-based access.</p>
+<p>Interview Answer</p>
+<p>"An array in Java is a fixed-size data structure used to store multiple values of the same data type in a single variable. Once we declare the size of an array, we cannot change its size at runtime. Array elements are accessed using an index, which starts from zero. Arrays are useful when we know the number of elements in advance and want fast index-based access."</p>
+<p>explain string ?</p>
+<p>What is String in Java?</p>
+<p>String is a class in Java that belongs to the java.lang package. It is used to represent a sequence of characters.</p>
+<p>String is a very commonly used class in Java.</p>
+<p>There are several ways to create a String.</p>
+<ol>
+<li>Using String Literal</li>
+</ol>
+<p>We can create a String directly using double quotes:</p>
+<p>String s = "Hello";</p>
+<p>When we create a String using a literal, Java checks the String Constant Pool.</p>
+<p>If a String with the same content already exists in the pool, Java reuses that existing String object instead of creating another pooled object.</p>
+<p>For example:</p>
+<p>String s1 = "Hello";
+String s2 = "Hello";</p>
+<p>Here, s1 and s2 refer to the same pooled String object.</p>
+<p>System.out.println(s1 == s2);  // true</p>
+<ol start="2">
+<li>Using the new Keyword</li>
+</ol>
+<p>We can also create a String using the new keyword:</p>
+<p>String s = new String("Hello");</p>
+<p>In this case, a new String object is explicitly created.</p>
+<p>For example:</p>
+<p>String s1 = new String("Hello");
+String s2 = new String("Hello");</p>
+<p>Here, s1 and s2 refer to different String objects.</p>
+<p>System.out.println(s1 == s2);  // false</p>
+<p>However, both objects contain the same text, so:</p>
+<p>System.out.println(s1.equals(s2));  // true</p>
+<p>This is an important interview point:</p>
+<p>== compares object references.</p>
+<p>equals() compares the content of the Strings.</p>
+<ol start="3">
+<li>Creating String from Character or Byte Arrays</li>
+</ol>
+<p>We can also create a String from a character array:</p>
+<p>char[] arr = {'H', 'e', 'l', 'l', 'o'};
+String s = new String(arr);</p>
+<p>We can also create a String from a byte array:</p>
+<p>byte[] arr = {65, 66, 67};
+String s = new String(arr);</p>
+<p>The result is "ABC" because 65, 66, and 67 represent those characters in the relevant character encoding.</p>
+<p>String is Immutable</p>
+<p>Another very important property of String is that String objects are immutable.</p>
+<p>It means once a String object is created, its content cannot be changed.</p>
+<p>For example:</p>
+<p>String s = "Hello";
+s.concat(" World");</p>
+<p>System.out.println(s);  // Hello</p>
+<p>concat() does not modify the original String. It creates a new String.</p>
+<p>If we write:</p>
+<p>s = s.concat(" World");</p>
+<p>then s refers to the newly created String "Hello World".</p>
+<p>Common String Methods</p>
+<p>Java provides many useful methods for working with Strings, such as:</p>
+<p>length() — returns the length of the String.</p>
+<p>charAt() — returns the character at a particular index.</p>
+<p>indexOf() — returns the index of a character or substring.</p>
+<p>toUpperCase() — converts the String to uppercase.</p>
+<p>toLowerCase() — converts the String to lowercase.</p>
+<p>contains() — checks whether a particular sequence exists.</p>
+<p>replace() — replaces characters or sequences.</p>
+<p>substring() — extracts a portion of a String.</p>
+<p>equals() — compares String contents.</p>
+<p>equalsIgnoreCase() — compares contents while ignoring case.</p>
+<p>Interview Answer</p>
+<p>"String is a class in Java that belongs to the java.lang package and is used to represent a sequence of characters. We can create a String using a String literal, the new keyword, or from character and byte arrays. When we create a String using a literal, Java uses the String Constant Pool and can reuse an existing String with the same content. When we explicitly use new, a new String object is created. String is also immutable, which means its content cannot be changed after the object is created. Java provides many methods such as length(), charAt(), indexOf(), contains(), replace(), substring(), toUpperCase(), and toLowerCase() for String manipulation."</p>
+<h3>why string is immutable?</h3>
+<p>String is immutable in Java, meaning once a String object is created, its content cannot be changed.</p>
+<p>For example:</p>
+<p>String s = "Hello";
+s.concat(" World");</p>
+<p>System.out.println(s);  // Hello</p>
+<p>concat() doesn't modify "Hello"; it creates a new String.</p>
+<p>Why is String immutable?
+There are several important reasons:</p>
+<ol>
+<li>String Pool
+Java maintains a String Constant Pool where String literals can be reused.</li>
+</ol>
+<p>String s1 = "Hello";
+String s2 = "Hello";</p>
+<p>Both can refer to the same String object.</p>
+<p>If Strings were mutable, changing s1 could unexpectedly change what s2 sees. Immutability makes this sharing safe.</p>
+<ol start="2">
+<li>Security
+Strings are commonly used for sensitive information such as:</li>
+</ol>
+<p>File paths</p>
+<p>Database URLs</p>
+<p>Class names</p>
+<p>Network connections</p>
+<p>Authentication-related information</p>
+<p>If a String could change after it was passed to a security-sensitive operation, it could create security problems.</p>
+<ol start="3">
+<li>
+<p>Thread Safety
+Because a String cannot be changed after creation, the same String object can safely be shared between multiple threads without synchronization just to protect its contents.</p>
+</li>
+<li>
+<p>HashCode and HashMap
+Strings are frequently used as keys in collections such as HashMap.</p>
+</li>
+</ol>
+<p>Map<String, Integer> map = new HashMap&lt;&gt;();
+map.put("Java", 100);</p>
+<p>If a String used as a key could change after insertion, its hashCode() could change, making the entry difficult or impossible to find in the expected bucket.</p>
+<p>Immutability prevents this problem.</p>
+<p>Interview Answer
+"String is immutable in Java, which means once a String object is created, its content cannot be changed. The main reasons for String immutability are safe sharing through the String Pool, security, thread safety, and reliable use as keys in hash-based collections like HashMap. Whenever we perform an operation that appears to modify a String, Java actually creates a new String object instead of modifying the existing one."</p>
+<p>Easy way to remember
+String immutable → Safe sharing + Security + Thread safety + HashMap reliability.</p>
+<h3>explain input/output?</h3>
+<p>Input and Output in Java</p>
+<p>In Java, we have several ways to take input and produce output.</p>
+<p>For taking input from the user, one commonly used class is Scanner, which belongs to the java.util package.</p>
+<p>For example:</p>
+<p>import java.util.Scanner;</p>
+<p>Scanner sc = new Scanner(System.in);</p>
+<p>int age = sc.nextInt();
+String name = sc.next();</p>
+<p>However, Scanner is not the only way to take input. Java provides several other mechanisms.</p>
+<p>Common Ways to Take Input</p>
+<p>Scanner</p>
+<p>Belongs to java.util.</p>
+<p>Easy to use.</p>
+<p>Can read different types of data such as int, double, and String.</p>
+<p>Command-Line Arguments</p>
+<p>Input can be passed when starting the Java program.</p>
+<p>It is received through the String[] args parameter of main().</p>
+<p>public static void main(String[] args) {
+    System.out.println(args[0]);
+}</p>
+<p>BufferedReader</p>
+<p>Belongs to java.io.</p>
+<p>Commonly used to read text efficiently.</p>
+<p>It reads character data and provides buffering.</p>
+<p>BufferedReader br =
+    new BufferedReader(new InputStreamReader(System.in));</p>
+<p>InputStream</p>
+<p>Used for reading byte-oriented data.</p>
+<p>System.in is an example of an InputStream.</p>
+<p>FileReader</p>
+<p>Used to read character data from a file.</p>
+<p>It is useful when the input source is a text file.</p>
+<p>Byte Stream and Character Stream</p>
+<p>Java I/O can broadly be understood using two types of streams:</p>
+<p>Byte Streams</p>
+<p>Byte streams deal with 8-bit bytes and are represented mainly by:</p>
+<p>InputStream — used for reading bytes.</p>
+<p>OutputStream — used for writing bytes.</p>
+<p>They are commonly used for binary data such as images, audio, and other binary files.</p>
+<p>Character Streams</p>
+<p>Character streams deal with character data and are represented mainly by:</p>
+<p>Reader — used for reading characters.</p>
+<p>Writer — used for writing characters.</p>
+<p>Examples include:</p>
+<p>FileReader</p>
+<p>FileWriter</p>
+<p>BufferedReader</p>
+<p>BufferedWriter</p>
+<p>InputStreamReader</p>
+<p>InputStreamReader acts as a bridge between byte streams and character streams.</p>
+<p>For example:</p>
+<p>BufferedReader br =
+    new BufferedReader(new InputStreamReader(System.in));</p>
+<p>Here:</p>
+<p>System.in
+   ↓
+InputStream
+   ↓
+InputStreamReader
+   ↓
+BufferedReader</p>
+<p>System.in provides byte-oriented input. InputStreamReader converts those bytes into characters, and BufferedReader allows us to read the character data efficiently.</p>
+<p>Interview Answer</p>
+<p>"In Java, there are multiple ways to take input and provide output. For user input, we commonly use Scanner from the java.util package. We can also take input through command-line arguments, BufferedReader, and various classes from the java.io package. Java I/O is broadly divided into byte streams and character streams. InputStream and OutputStream are used for byte-oriented data, while Reader and Writer are used for character-oriented data. InputStreamReader acts as a bridge between byte streams and character streams by converting bytes into characters."</p>
+<div class="codehilite"><div class="highlight"><pre><span></span>          Java I/O
+             |
+    +--------+--------+
+    |                 |
+</pre></div>
+</div>
+<p>Byte Streams      Character Streams
+        |                 |
+ InputStream         Reader
+ OutputStream        Writer
+        |                 |
+ FileInputStream     FileReader
+ FileOutputStream    FileWriter</p>
+<p>A BufferedReader maintains a character buffer in memory.</p>
+<p>Instead of your program asking the underlying input source for every single character, BufferedReader reads a chunk of characters at once and stores them in its internal buffer.</p>
+<p>For example, imagine the user enters:</p>
+<p>Hello World</p>
+<p>Conceptually:</p>
+<p>Input source
+┌──────────────────────────┐
+│ H e l l o   W o r l d \n │
+└──────────────────────────┘
+             ↓
+       BufferedReader
+      ┌───────────────┐
+Buffer│ H e l l o ... │
+      └───────────────┘
+             ↓
+       readLine()
+             ↓
+        "Hello World"</p>
+<p>When your program calls readLine() or read(), BufferedReader gets the required characters from its buffer.</p>
+<p>If the buffer doesn't have enough data, it goes back to the underlying Reader, reads another chunk, and fills the buffer again.</p>
+<p>Why is buffering useful?
+Reading from an input source can be relatively expensive. If we repeatedly access the underlying source for every character, there can be many I/O operations.</p>
+<p>Buffering reduces the number of such underlying reads.</p>
+<p>So the basic idea is:</p>
+<p>Read a larger chunk → store it in memory → serve smaller reads from the buffer.</p>
+<h3>difference between == and .equals?</h3>
+<p>== vs equals() in Java</p>
+<p>Both == and equals() can be used when comparing objects, but they work differently.</p>
+<p>== Operator</p>
+<p>When we use == with objects, it compares their references, meaning it checks whether both reference variables point to the same object in memory.</p>
+<p>String s1 = new String("Hello");
+String s2 = new String("Hello");</p>
+<p>System.out.println(s1 == s2);  // false</p>
+<p>Here, s1 and s2 contain the same text, but they refer to different objects. Therefore, == returns false.</p>
+<p>equals() Method</p>
+<p>equals() is a method defined in the Object class.</p>
+<p>The default implementation provided by Object essentially compares object identity, but classes can override equals() to provide their own definition of logical equality.</p>
+<p>For example, String overrides equals() to compare the content of two strings.</p>
+<p>String s1 = new String("Hello");
+String s2 = new String("Hello");</p>
+<p>System.out.println(s1.equals(s2));  // true</p>
+<p>Here, both Strings contain the same content, so String's overridden equals() method returns true.</p>
+<p>Wrapper classes such as Integer, Double, and Boolean also override equals() to compare their values.</p>
+<p>Main Difference
+==  equals()
+Operator    Method
+For objects, compares references    Can compare logical/content equality
+Cannot be overridden    Can be overridden
+Checks whether two references point to the same object  Depends on the class's implementation
+Works with primitives as value comparison   Used with objects
+Important Example
+String s1 = "Hello";
+String s2 = "Hello";</p>
+<p>System.out.println(s1 == s2);       // true
+System.out.println(s1.equals(s2));  // true</p>
+<p>== is true here because String literals with the same content can refer to the same object in the String Pool.</p>
+<p>But:</p>
+<p>String s1 = new String("Hello");
+String s2 = new String("Hello");</p>
+<p>System.out.println(s1 == s2);       // false
+System.out.println(s1.equals(s2));  // true</p>
+<p>Here, new creates separate String objects, so their references are different, while their contents are equal.</p>
+<p>Interview Answer</p>
+<p>"== and equals() are used differently for object comparison. When used with objects, == compares references and checks whether two references point to the same object. equals() is a method defined in the Object class. The default Object implementation compares object identity, but classes such as String and wrapper classes override equals() to compare their logical values or contents. Therefore, for objects, we generally use equals() when we want to compare their logical content."</p>
+<h3>how many modifiers we can use with main method?</h3>
+<p>Modifiers of the main() Method</p>
+<p>In Java, the main() method is commonly written as:</p>
+<p>public static void main(String[] args) {
+    // code
+}</p>
+<p>The main() method can be declared with certain modifiers. Commonly discussed modifiers include:</p>
+<p>public</p>
+<p>static</p>
+<p>final</p>
+<p>synchronized</p>
+<p>strictfp</p>
+<ol>
+<li>public</li>
+</ol>
+<p>public allows the JVM to access the main() method from outside the class.</p>
+<p>public static void main(String[] args)</p>
+<p>Without appropriate accessibility, the JVM cannot use the method as the program's entry point.</p>
+<ol start="2">
+<li>static</li>
+</ol>
+<p>static means the method belongs to the class rather than to an object.</p>
+<p>The JVM can invoke main() without creating an object of the class.</p>
+<p>public static void main(String[] args)</p>
+<ol start="3">
+<li>final</li>
+</ol>
+<p>final means the method cannot be overridden by a subclass.</p>
+<p>public static final void main(String[] args) {
+}</p>
+<p>It is valid to declare main() as final, although it is not normally necessary.</p>
+<ol start="4">
+<li>synchronized</li>
+</ol>
+<p>synchronized can be used to make access to the method synchronized.</p>
+<p>public static synchronized void main(String[] args) {
+}</p>
+<p>This means that when the method is invoked, the JVM applies Java's synchronization mechanism to the class object's monitor for a static synchronized method.</p>
+<p>It is valid, but normally there is no practical need to make main() synchronized.</p>
+<ol start="5">
+<li>strictfp</li>
+</ol>
+<p>strictfp was used to require strict IEEE 754 floating-point behavior for calculations performed in a method or class.</p>
+<p>The purpose was to make floating-point calculations more consistent across different platforms.</p>
+<p>However, important modern-Java point: since Java 17, floating-point expressions are always strict, so strictfp is no longer necessary and is deprecated for removal.</p>
+<p>Interview Answer</p>
+<p>"The main() method is commonly declared using public and static modifiers. Other modifiers such as final, synchronized, and historically strictfp can also be used in certain declarations. Public allows the JVM to access the method, static allows the JVM to invoke it without creating an object, final prevents overriding, and synchronized applies synchronization. strictfp was used to enforce strict IEEE 754 floating-point behavior, but since Java 17, floating-point expressions are strict by default, so strictfp is no longer needed."</p>
+<h3>why this/super keywords is used?</h3>
+<p>What is this Keyword in Java?</p>
+<p>this is a reference variable in Java that refers to the current object.</p>
+<p>It is mainly used inside instance methods and constructors when we want to refer to the current object's instance variables, methods, or constructor.</p>
+<ol>
+<li>To differentiate between instance variables and local variables</li>
+</ol>
+<p>If an instance variable and a local variable or parameter have the same name, we use this to refer to the instance variable.</p>
+<p>class Student {</p>
+<div class="codehilite"><div class="highlight"><pre><span></span>int age;
+
+Student(int age) {
+    this.age = age;
+}
+</pre></div>
+</div>
+<p>}</p>
+<p>Here, both variables are named age.</p>
+<p>this.age  → instance variable
+age       → constructor parameter</p>
+<p>So:</p>
+<p>this.age = age;</p>
+<p>means:</p>
+<p>Assign the value of the parameter age to the current object's instance variable age.</p>
+<ol start="2">
+<li>To call the current object's method</li>
+</ol>
+<p>We can use this to call an instance method of the current object.</p>
+<p>class Student {</p>
+<div class="codehilite"><div class="highlight"><pre><span></span>void display() {
+    System.out.println("Hello");
+}
+
+void show() {
+    this.display();
+}
+</pre></div>
+</div>
+<p>}</p>
+<p>Here, this.display() means calling the display() method of the current object.</p>
+<ol start="3">
+<li>To call another constructor of the same class</li>
+</ol>
+<p>this() can be used to call another constructor of the same class.</p>
+<p>class Student {</p>
+<div class="codehilite"><div class="highlight"><pre><span></span>Student() {
+    this(20);
+}
+
+Student(int age) {
+    System.out.println(age);
+}
+</pre></div>
+</div>
+<p>}</p>
+<p>Here, this(20) calls the parameterized constructor of the same class.</p>
+<p>Important Difference</p>
+<p>Don't confuse:</p>
+<p>this</p>
+<p>with:</p>
+<p>this()</p>
+<p>this → refers to the current object.</p>
+<p>this() → calls another constructor of the same class.</p>
+<p>Interview Answer</p>
+<p>"this is a reference variable in Java that refers to the current object. It is mainly used inside instance methods and constructors. One common use is to differentiate between an instance variable and a local variable or parameter when they have the same name. For example, this.age = age means assigning the parameter age to the current object's instance variable age. It can also be used to call the current object's methods and to call another constructor of the same class using this()."</p>
+<p>What is super Keyword in Java?</p>
+<p>super is a keyword in Java that is used inside a child class (subclass) to refer to its immediate parent class (superclass).</p>
+<p>We mainly use super when we want to access the parent class's variables, methods, or constructors.</p>
+<ol>
+<li>Access Parent Class Variable</li>
+</ol>
+<p>If the parent and child class have instance variables with the same name, we can use super to access the parent variable.</p>
+<p>class Parent {
+    int x = 10;
+}</p>
+<p>class Child extends Parent {
+    int x = 20;</p>
+<div class="codehilite"><div class="highlight"><pre><span></span>void display() {
+    System.out.println(super.x);
+}
+</pre></div>
+</div>
+<p>}</p>
+<p>Here:</p>
+<p>x       → Child class variable
+super.x → Parent class variable</p>
+<ol start="2">
+<li>Call Parent Class Method</li>
+</ol>
+<p>If a child class overrides a parent method and we want to call the parent version of that method, we use super.</p>
+<p>class Parent {
+    void display() {
+        System.out.println("Parent method");
+    }
+}</p>
+<p>class Child extends Parent {</p>
+<div class="codehilite"><div class="highlight"><pre><span></span>@Override
+void display() {
+    System.out.println("Child method");
+    super.display();
+}
+</pre></div>
+</div>
+<p>}</p>
+<p>Output:</p>
+<p>Child method
+Parent method</p>
+<p>Here, super.display() calls the parent class's method.</p>
+<ol start="3">
+<li>Call Parent Class Constructor</li>
+</ol>
+<p>We can use super() to call the constructor of the immediate parent class.</p>
+<p>class Parent {</p>
+<div class="codehilite"><div class="highlight"><pre><span></span>Parent() {
+    System.out.println("Parent constructor");
+}
+</pre></div>
+</div>
+<p>}</p>
+<p>class Child extends Parent {</p>
+<div class="codehilite"><div class="highlight"><pre><span></span>Child() {
+    super();
+    System.out.println("Child constructor");
+}
+</pre></div>
+</div>
+<p>}</p>
+<p>When we create a Child object, the parent constructor executes first, followed by the child constructor.</p>
+<p>Parent constructor
+Child constructor</p>
+<p>If we don't explicitly write super() in a child constructor, Java implicitly inserts a call to the no-argument parent constructor, provided that such a constructor is accessible.</p>
+<p>Important Difference</p>
+<p>Don't confuse this and super:</p>
+<p>this   → current class/current object
+super  → immediate parent class</p>
+<p>For example:</p>
+<p>this.x       // current class's variable
+super.x      // parent class's variable</p>
+<p>this()       // another constructor of same class
+super()      // constructor of parent class</p>
+<p>Interview Answer</p>
+<p>"super is a keyword in Java that is used inside a child class to refer to its immediate parent class. We mainly use it to access the parent class's variables, call the parent class's overridden methods, and invoke the parent class's constructor. For example, super.x accesses the parent variable, super.display() calls the parent method, and super() calls the parent constructor."</p>
+<h3>types of variables in java ?</h3>
+<p>Types of Variables in Java</p>
+<p>There are three main types of variables in Java:</p>
+<p>Local variables</p>
+<p>Instance variables</p>
+<p>Static variables</p>
+<ol>
+<li>Local Variable</li>
+</ol>
+<p>A local variable is declared inside a method, constructor, or block.</p>
+<p>Its scope is limited to that particular method, constructor, or block.</p>
+<p>class Student {</p>
+<div class="codehilite"><div class="highlight"><pre><span></span>void display() {
+    int age = 20;  // local variable
+    System.out.println(age);
+}
+</pre></div>
+</div>
+<p>}</p>
+<p>Here, age is a local variable because it is declared inside the display() method.</p>
+<p>A local variable is created when the method/block is executed and cannot be accessed outside its scope.</p>
+<ol start="2">
+<li>Instance Variable</li>
+</ol>
+<p>An instance variable is a variable declared inside a class but outside methods, constructors, and blocks, and it is not declared static.</p>
+<p>An instance variable is associated with an object. Each object gets its own copy.</p>
+<p>class Student {</p>
+<div class="codehilite"><div class="highlight"><pre><span></span>int age;  // instance variable
+</pre></div>
+</div>
+<p>}</p>
+<p>For example:</p>
+<p>Student s1 = new Student();
+Student s2 = new Student();</p>
+<p>s1.age = 20;
+s2.age = 25;</p>
+<p>Here, s1 and s2 have their own separate age variables.</p>
+<ol start="3">
+<li>Static Variable</li>
+</ol>
+<p>A static variable is declared inside a class using the static keyword.</p>
+<p>It belongs to the class, rather than to individual objects.</p>
+<p>class Student {</p>
+<div class="codehilite"><div class="highlight"><pre><span></span>static String college = "ABC College";
+</pre></div>
+</div>
+<p>}</p>
+<p>All objects can share the same static variable:</p>
+<p>Student s1 = new Student();
+Student s2 = new Student();</p>
+<p>System.out.println(Student.college);</p>
+<p>There is generally one class-level copy of a static field for that class, rather than one copy per object.</p>
+<p>Simple Comparison
+Variable    Declared where? Associated with Lifetime/scope
+Local   Inside method/constructor/block Method/block execution  Until execution leaves its scope
+Instance    Inside class, outside methods, non-static   Object  As long as the object is reachable
+Static  Inside class with static    Class   Generally associated with the class's lifetime
+Interview Answer</p>
+<p>"There are three main types of variables in Java: local, instance, and static variables. A local variable is declared inside a method, constructor, or block and its scope is limited to that area. An instance variable is declared inside a class but outside methods and is associated with an object, so each object generally has its own copy. A static variable is declared using the static keyword and belongs to the class, so it is shared among the objects of that class."</p>
+<h3>how Many Keywords/ modifiers are exist in java ?</h3>
+<p>Keywords → Reserved words of Java</p>
+<p>Modifiers
+   ↓
+Access modifiers
+   → public
+   → private
+   → protected
+   → default access</p>
+<p>Non-access modifiers
+   → static
+   → final
+   → abstract
+   → synchronized
+   → volatile
+   → transient
+   → native
+- sealed
+   → non-sealed
+   → etc.</p>
+<p>A sealed class is used when you want to restrict which classes are allowed to extend or implement it.</p>
+<p>sealed class Vehicle permits Car, Bike {
+}</p>
+<p>final class Car extends Vehicle {
+}</p>
+<p>final class Bike extends Vehicle {
+}</p>
+<p>on-sealed
+non-sealed is used on a permitted subclass when you want to remove the inheritance restriction for that branch.</p>
+<p>Example:</p>
+<p>sealed class Vehicle permits Car, Bike {
+}</p>
+<p>non-sealed class Car extends Vehicle {
+}</p>
+<p>final class Bike extends Vehicle {
+}</p>
+<p>Now Car can be extended by any class:</p>
+<p>class SportsCar extends Car {
+}</p>
+<p>But Bike cannot be extended because it is final.</p></article>
+  </section>
+  <section class="panel" data-panel="examples" role="tabpanel" hidden>
+    <article class="prose"><h3>String immutability and the pool</h3>
+<div class="codehilite"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Strings</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"java"</span><span class="p">;</span><span class="w">                  </span><span class="c1">// interned in the String pool</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">String</span><span class="p">(</span><span class="s">"java"</span><span class="p">);</span><span class="w">      </span><span class="c1">// new object on the heap</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">b</span><span class="p">.</span><span class="na">intern</span><span class="p">();</span><span class="w">              </span><span class="c1">// returns the pooled instance</span>
+
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">b</span><span class="p">);</span><span class="w">         </span><span class="c1">// false</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">c</span><span class="p">);</span><span class="w">         </span><span class="c1">// true</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">b</span><span class="p">));</span><span class="w">    </span><span class="c1">// true</span>
+
+<span class="w">        </span><span class="c1">// Immutability makes String thread-safe and hash-key safe</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"jack"</span><span class="p">;</span>
+<span class="w">        </span><span class="n">s</span><span class="p">.</span><span class="na">toUpperCase</span><span class="p">();</span><span class="w">                    </span><span class="c1">// new String returned, s unchanged</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">s</span><span class="p">);</span><span class="w">              </span><span class="c1">// jack</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<h3>Records: immutable data carriers (Java 16+)</h3>
+<div class="codehilite"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">record</span> <span class="nc">Point</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">y</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">Point</span><span class="w"> </span><span class="p">{</span><span class="w">                                  </span><span class="c1">// compact constructor: validate</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalArgumentException</span><span class="p">(</span><span class="s">"negative point"</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="nf">distance</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">Math</span><span class="p">.</span><span class="na">sqrt</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">y</span><span class="p">);</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Free: constructor, accessors x()/y(), equals, hashCode, toString</span>
+<span class="n">Point</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Point</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">);</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="na">x</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">" "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">p</span><span class="p">);</span><span class="w">         </span><span class="c1">// 3 4</span>
+</pre></div>
+</div>
+<h3>Writing an immutable class by hand</h3>
+<div class="codehilite"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">java.util.*</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Config</span><span class="w"> </span><span class="p">{</span><span class="w">                    </span><span class="c1">// 1. final class: no subclassing</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">hosts</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">Config</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">hosts</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">hosts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">List</span><span class="p">.</span><span class="na">copyOf</span><span class="p">(</span><span class="n">hosts</span><span class="p">);</span><span class="w">       </span><span class="c1">// 2. defensive copy on the way IN</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">name</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">name</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">hosts</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">hosts</span><span class="p">;</span><span class="w">                          </span><span class="c1">// 3. List.copyOf is unmodifiable</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<h3>Sealed classes (Java 17+)</h3>
+<div class="codehilite"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">sealed</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Shape</span><span class="w"> </span><span class="kd">permits</span><span class="w"> </span><span class="n">Circle</span><span class="p">,</span><span class="w"> </span><span class="n">Square</span><span class="p">,</span><span class="w"> </span><span class="n">Triangle</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+
+<span class="kd">record</span> <span class="nc">Circle</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">r</span><span class="p">)</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Shape</span><span class="w"> </span><span class="p">{}</span>
+<span class="kd">final</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Square</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Shape</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+<span class="kd">non-sealed</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Triangle</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Shape</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span><span class="w">   </span><span class="c1">// reopens extension here</span>
+
+<span class="c1">// Exhaustive switch over a sealed hierarchy</span>
+<span class="kd">static</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="nf">area</span><span class="p">(</span><span class="n">Shape</span><span class="w"> </span><span class="n">s</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">                       </span><span class="c1">// no default needed — compiler checks all</span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="n">Circle</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">Math</span><span class="p">.</span><span class="na">PI</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">c</span><span class="p">.</span><span class="na">r</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">c</span><span class="p">.</span><span class="na">r</span><span class="p">();</span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="n">Square</span><span class="w"> </span><span class="n">sq</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">sq</span><span class="p">.</span><span class="na">side</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">sq</span><span class="p">.</span><span class="na">side</span><span class="p">();</span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="n">Triangle</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="mf">0.5</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">t</span><span class="p">.</span><span class="na">base</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">t</span><span class="p">.</span><span class="na">height</span><span class="p">();</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<h3>The JVM in three sentences + memory areas</h3>
+<div class="codehilite"><div class="highlight"><pre><span></span><span class="c1">// Class loader loads .class files -&gt; bytecode is verified -&gt;</span>
+<span class="c1">// JIT compiler hotspots to native code at runtime.</span>
+
+<span class="c1">// Runtime data areas:</span>
+<span class="c1">// - Heap: objects live here, shared by all threads, garbage collected</span>
+<span class="c1">// - Stack: one per thread, frames with locals + partial results</span>
+<span class="c1">// - Metaspace: class metadata (moved out of the heap since Java 8)</span>
+<span class="c1">// - PC register + native method stack: per thread</span>
+</pre></div>
+</div>
+<h3>Modifiers on main (interview curveball)</h3>
+<div class="codehilite"><div class="highlight"><pre><span></span><span class="c1">// All of these are legal together:</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span>
+<span class="c1">// public  — callable by the JVM from anywhere</span>
+<span class="c1">// static  — no instance needed before the app starts</span>
+<span class="c1">// void    — JVM ignores any return value</span>
+<span class="c1">// String[] args — command-line arguments</span>
+</pre></div>
+</div></article>
+  </section>
+  <nav class="prev-next"><a class="pn previous" href="filters-and-interceptors.html"><span class="pn-label">Previous</span><span class="pn-title">Filters &amp; Interceptors</span></a><span class="pn"></span></nav>
+</main>
+<script src="../assets/app.js"></script>
+</body>
+</html>

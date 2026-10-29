@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bean Configuration &amp; Annotations · Night Java</title>
+<meta name="description" content="@Component, @Bean, @Configuration, @Lazy, @Scope and component scanning.">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body class="topic-body">
+<aside class="sidebar">
+  <a class="brand" href="../index.html"><span class="brand-mark">J</span> Night Java</a>
+  <input class="side-filter" type="search" placeholder="Filter topics…" aria-label="Filter topics">
+  <div class="side-phase-wrap"><label class="side-phase-label" for="side-phase">Jump to phase</label>
+  <select id="side-phase" class="side-phase"><option value="1">Phase 1 · Programming Basics</option>
+<option value="2">Phase 2 · OOP</option>
+<option value="3">Phase 3 · Core Java Advanced</option>
+<option value="4">Phase 4 · Advanced Java</option>
+<option value="5">Phase 5 · DSA</option>
+<option value="6">Phase 6 · Database</option>
+<option value="7">Phase 7 · Backend Development</option>
+<option value="8">Phase 8 · Frontend</option>
+<option value="9">Phase 9 · DevOps + Deployment</option>
+<option value="10">Phase 10 · LLD</option>
+<option value="11">Phase 11 · HLD</option>
+<option value="12">Phase 12 · Interview Topics</option></select></div>
+  <nav class="side-nav" aria-label="Topics in roadmap order"><a class="side-link" href="../topics/java-fundamentals.html" data-slug="java-fundamentals"><span class="check" data-check="java-fundamentals" aria-hidden="true"></span>Java Fundamentals Q&amp;A</a>
+<a class="side-link" href="../topics/oops-encapsulation.html" data-slug="oops-encapsulation"><span class="check" data-check="oops-encapsulation" aria-hidden="true"></span>OOPs &amp; Encapsulation</a>
+<a class="side-link" href="../topics/inheritance.html" data-slug="inheritance"><span class="check" data-check="inheritance" aria-hidden="true"></span>Inheritance</a>
+<a class="side-link" href="../topics/has-a-is-a.html" data-slug="has-a-is-a"><span class="check" data-check="has-a-is-a" aria-hidden="true"></span>Has-a vs Is-a Relationships</a>
+<a class="side-link" href="../topics/polymorphism.html" data-slug="polymorphism"><span class="check" data-check="polymorphism" aria-hidden="true"></span>Polymorphism</a>
+<a class="side-link" href="../topics/abstraction.html" data-slug="abstraction"><span class="check" data-check="abstraction" aria-hidden="true"></span>Abstraction</a>
+<a class="side-link" href="../topics/interface.html" data-slug="interface"><span class="check" data-check="interface" aria-hidden="true"></span>Interfaces</a>
+<a class="side-link" href="../topics/anonymous-inner-class.html" data-slug="anonymous-inner-class"><span class="check" data-check="anonymous-inner-class" aria-hidden="true"></span>Anonymous Inner Class</a>
+<a class="side-link" href="../topics/collections-framework.html" data-slug="collections-framework"><span class="check" data-check="collections-framework" aria-hidden="true"></span>Collections Framework</a>
+<a class="side-link" href="../topics/exception-handling.html" data-slug="exception-handling"><span class="check" data-check="exception-handling" aria-hidden="true"></span>Exception Handling</a>
+<a class="side-link" href="../topics/file-handling.html" data-slug="file-handling"><span class="check" data-check="file-handling" aria-hidden="true"></span>File Handling</a>
+<a class="side-link" href="../topics/generics.html" data-slug="generics"><span class="check" data-check="generics" aria-hidden="true"></span>Generics</a>
+<a class="side-link" href="../topics/stream-api.html" data-slug="stream-api"><span class="check" data-check="stream-api" aria-hidden="true"></span>Stream API</a>
+<a class="side-link" href="../topics/multithreading.html" data-slug="multithreading"><span class="check" data-check="multithreading" aria-hidden="true"></span>Multithreading</a>
+<a class="side-link" href="../topics/executorservice.html" data-slug="executorservice"><span class="check" data-check="executorservice" aria-hidden="true"></span>ExecutorService</a>
+<a class="side-link" href="../topics/completablefuture.html" data-slug="completablefuture"><span class="check" data-check="completablefuture" aria-hidden="true"></span>CompletableFuture</a>
+<a class="side-link" href="../topics/atomic-classes.html" data-slug="atomic-classes"><span class="check" data-check="atomic-classes" aria-hidden="true"></span>Atomic Classes</a>
+<a class="side-link" href="../topics/concurrent-collections.html" data-slug="concurrent-collections"><span class="check" data-check="concurrent-collections" aria-hidden="true"></span>Concurrent Collections</a>
+<a class="side-link" href="../topics/jdbc.html" data-slug="jdbc"><span class="check" data-check="jdbc" aria-hidden="true"></span>JDBC</a>
+<a class="side-link" href="../topics/servlet.html" data-slug="servlet"><span class="check" data-check="servlet" aria-hidden="true"></span>Servlets</a>
+<a class="side-link" href="../topics/jsp.html" data-slug="jsp"><span class="check" data-check="jsp" aria-hidden="true"></span>JSP</a>
+<a class="side-link" href="../topics/hibernate.html" data-slug="hibernate"><span class="check" data-check="hibernate" aria-hidden="true"></span>Hibernate</a>
+<a class="side-link" href="../topics/spring-mvc.html" data-slug="spring-mvc"><span class="check" data-check="spring-mvc" aria-hidden="true"></span>Spring MVC</a>
+<a class="side-link" href="../topics/session-management.html" data-slug="session-management"><span class="check" data-check="session-management" aria-hidden="true"></span>Session Management</a>
+<a class="side-link" href="../topics/maven.html" data-slug="maven"><span class="check" data-check="maven" aria-hidden="true"></span>Maven</a>
+<a class="side-link" href="../topics/servlet-vs-spring-core.html" data-slug="servlet-vs-spring-core"><span class="check" data-check="servlet-vs-spring-core" aria-hidden="true"></span>Servlet vs Spring Core</a>
+<a class="side-link" href="../topics/ioc-and-di.html" data-slug="ioc-and-di"><span class="check" data-check="ioc-and-di" aria-hidden="true"></span>IoC &amp; Dependency Injection</a>
+<a class="side-link" href="../topics/autowiring.html" data-slug="autowiring"><span class="check" data-check="autowiring" aria-hidden="true"></span>Autowiring</a>
+<a class="side-link" href="../topics/bean-configuration.html" aria-current="page" data-slug="bean-configuration"><span class="check" data-check="bean-configuration" aria-hidden="true"></span>Bean Configuration &amp; Annotations</a>
+<a class="side-link" href="../topics/bean-lifecycle.html" data-slug="bean-lifecycle"><span class="check" data-check="bean-lifecycle" aria-hidden="true"></span>Bean Lifecycle</a>
+<a class="side-link" href="../topics/bean-lifecycle-aop.html" data-slug="bean-lifecycle-aop"><span class="check" data-check="bean-lifecycle-aop" aria-hidden="true"></span>Bean Lifecycle &amp; Where AOP Fits</a>
+<a class="side-link" href="../topics/spring-aop.html" data-slug="spring-aop"><span class="check" data-check="spring-aop" aria-hidden="true"></span>Spring AOP</a>
+<a class="side-link" href="../topics/spring-transactions.html" data-slug="spring-transactions"><span class="check" data-check="spring-transactions" aria-hidden="true"></span>Spring Transactions</a>
+<a class="side-link" href="../topics/spring-data.html" data-slug="spring-data"><span class="check" data-check="spring-data" aria-hidden="true"></span>Spring Data (JPA)</a>
+<a class="side-link" href="../topics/spring-profiles.html" data-slug="spring-profiles"><span class="check" data-check="spring-profiles" aria-hidden="true"></span>Spring Profiles &amp; Config</a>
+<a class="side-link" href="../topics/spring-security.html" data-slug="spring-security"><span class="check" data-check="spring-security" aria-hidden="true"></span>Spring Security Flow</a>
+<a class="side-link" href="../topics/filters-and-interceptors.html" data-slug="filters-and-interceptors"><span class="check" data-check="filters-and-interceptors" aria-hidden="true"></span>Filters &amp; Interceptors</a>
+<a class="side-link" href="../topics/core-java-deep-dive.html" data-slug="core-java-deep-dive"><span class="check" data-check="core-java-deep-dive" aria-hidden="true"></span>Core Java Deep-Dive</a></nav>
+  <p class="side-progress"><span data-progress-text></span></p>
+</aside>
+<main class="content">
+  <header class="topic-head">
+    <p class="crumb"><a href="../index.html">Roadmap</a> / Phase 7 · Backend Development</p>
+    <h1>Bean Configuration &amp; Annotations</h1>
+    <p class="summary">@Component, @Bean, @Configuration, @Lazy, @Scope and component scanning.</p>
+    <div class="head-row">
+      <div class="tags"><span class="tag">spring</span><span class="tag">beans</span><span class="tag">annotations</span></div>
+      <button class="read-btn" data-read-btn data-slug="bean-configuration"><span class="read-icon">○</span> Mark as read</button>
+    </div>
+  </header>
+  <div class="tabs" role="tablist">
+    <button class="tab active" role="tab" data-tab="notes" aria-selected="true">Notes</button>
+    <button class="tab" role="tab" data-tab="examples" aria-selected="false">Code examples</button>
+  </div>
+  <section class="panel active" data-panel="notes" role="tabpanel">
+    <article class="prose"><p>Q.1 ConfigurableApplicationContext vs ApplicationContext vs BeanFactory?</p>
+<p><code>ConfigurableApplicationContext</code> is an interface in Spring that extends <code>ApplicationContext</code> and provides additional methods to configure and control the lifecycle of the Spring application context.</p>
+<p>It provides methods such as <code>refresh()</code>, <code>close()</code>, <code>start()</code>, <code>stop()</code>, and <code>isActive()</code>.</p>
+<p>For example, <code>close()</code> is used to shut down the Spring container and trigger the destruction callbacks of beans.</p>
+<p><code>AnnotationConfigApplicationContext</code> is one of the implementations of <code>ConfigurableApplicationContext</code>.</p>
+<p>*BeanFactory -&gt; <code>BeanFactory</code> is the basic IoC container interface in Spring. It is responsible for creating, configuring, managing, and providing Spring Beans.</p>
+<p>It supports dependency injection, bean lifecycle management, and different bean scopes. We can retrieve a bean from the container using the <code>getBean()</code> method.</p>
+<p>*ApplicationContext<code>-&gt; extends</code>BeanFactory<code>and provides additional features such as event publishing, internationalization, and automatic detection of components. Therefore,</code>ApplicationContext<code>is generally preferred over</code>BeanFactory` in modern Spring applications.</p>
+<p>Q.2 Stereotype annotation </p>
+<p><code>@Component</code> is a general-purpose stereotype annotation used to mark a class as a Spring-managed bean. During component scanning, Spring detects the class and creates and manages its bean.</p>
+<p><code>@Service</code> is a specialized form of <code>@Component</code>. It is generally used to indicate that a class contains business logic or service-layer logic.</p>
+<p><code>@Repository</code> is also a specialized form of <code>@Component</code>. It is generally used for the persistence or data-access layer, where the class interacts with the database. In addition, Spring can apply exception translation to certain persistence exceptions and convert them into Spring's <code>DataAccessException</code> hierarchy.</p>
+<p><code>@Controller</code> is a specialized form of <code>@Component</code> used in the Spring MVC presentation layer. It is used to handle web requests and map requests to handler methods, typically using annotations such as <code>@RequestMapping</code>, <code>@GetMapping</code>, and <code>@PostMapping</code>.</p>
+<p>We use <code>@Service</code> instead of <code>@Component</code> when we want to clearly communicate that the class belongs to the service layer and contains business logic. Similarly, <code>@Repository</code> communicates that the class belongs to the data-access layer.</p>
+<p>Technically, we can use <code>@Component</code> instead of <code>@Service</code> or <code>@Repository</code> for component scanning and bean creation, but we would lose the specific semantic meaning and some specialized behavior, such as repository exception translation.</p>
+<p>Q.3 @configuration , @Bean , @componentScan</p>
+<p><code>@Configuration</code> is a class-level annotation used to indicate that a class contains configuration metadata for the Spring IoC container. It is commonly used to define and configure Spring Beans using <code>@Bean</code> methods.</p>
+<p><code>@Bean</code> is a method-level annotation used to declare a bean explicitly. Spring invokes the annotated method and registers the object returned by that method as a Spring-managed bean.</p>
+<p>For example:</p>
+<div class="codehilite"><div class="highlight"><pre><span></span><span class="nd">@Configuration</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">AppConfig</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@Bean</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">UserRepository</span><span class="w"> </span><span class="nf">userRepository</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">UserRepository</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Bean</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">UserService</span><span class="w"> </span><span class="nf">userService</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">UserService</span><span class="p">(</span><span class="n">userRepository</span><span class="p">());</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Here, <code>AppConfig</code> provides configuration metadata to Spring, and the objects returned by the <code>@Bean</code> methods are registered and managed as Spring Beans.</p>
+<p><code>@Configuration</code> is itself a specialized form of <code>@Component</code>, so the configuration class can also be registered as a Spring bean. However, their purposes are different. <code>@Configuration</code> is used to define configuration and bean definitions, whereas <code>@Component</code> is used to mark a class as a Spring-managed component.</p>
+<p>There are three common approaches to configuring Spring applications:</p>
+<p><strong>1. Java-based configuration:</strong><br>
+We use Java classes with annotations such as <code>@Configuration</code> and <code>@Bean</code>. Bean objects can be instantiated using the <code>new</code> keyword, and Spring manages the returned objects.</p>
+<p><strong>2. XML-based configuration:</strong><br>
+We define beans and their configuration in an XML file using elements such as <code>&lt;beans&gt;</code> and <code>&lt;bean&gt;</code>. Attributes or elements such as <code>id</code>, <code>class</code>, <code>scope</code>, <code>constructor-arg</code>, and <code>property</code> can be used to configure beans.</p>
+<p><strong>3. Annotation-based configuration:</strong><br>
+We use annotations such as <code>@Component</code>, <code>@Service</code>, <code>@Repository</code>, <code>@Controller</code>, <code>@ComponentScan</code>, and <code>@Autowired</code>. Spring detects the annotated classes through component scanning and manages their beans.</p>
+<p>Component scanning means Spring scans the specified packages for classes annotated with stereotype annotations such as <code>@Component</code>, <code>@Service</code>, <code>@Repository</code>, and <code>@Controller</code>.</p>
+<p>For example:</p>
+<div class="codehilite"><div class="highlight"><pre><span></span><span class="nd">@Configuration</span>
+<span class="nd">@ComponentScan</span><span class="p">(</span><span class="s">"com.example.service"</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">AppConfig</span><span class="w"> </span><span class="p">{</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Spring scans the specified package and its subpackages for eligible components. If a component is outside the scanned packages, it will not be discovered through that component scan. However, it can still be registered as a bean through other mechanisms, such as an explicit <code>@Bean</code> method.</p>
+<p>Q.4 Bean lifecycle , @postconstruct @predestroy, inti destroy method, Initilizingbean , desposablebean </p>
+<p>The Spring Bean lifecycle starts when the IoC container is initialized. Spring reads the configuration metadata and creates or registers BeanDefinitions. Based on these definitions, Spring creates the bean instance and resolves its dependencies.</p>
+<p>In the case of constructor injection, dependencies are resolved while the bean is being instantiated because they are required by the constructor. In setter or field injection, the bean is instantiated first and then the dependencies are injected.</p>
+<p>After dependency injection, Spring calls the appropriate Aware interface callbacks if the bean implements any Aware interface. Then the bean goes through its initialization phase, which can include BeanPostProcessor callbacks and initialization callbacks. After initialization is complete, the bean is ready to be used by the application.</p>
+<p><code>@PostConstruct</code> is a method-level annotation used for an initialization callback. The annotated method is called after dependency injection and before the bean is ready for use.</p>
+<p><code>InitializingBean</code> is an interface that provides the <code>afterPropertiesSet()</code> method. Spring calls this method during the bean's initialization phase after the bean's properties have been set.</p>
+<p>Similarly, <code>@PreDestroy</code> is a method-level annotation used for a destruction callback. The annotated method is called when the container is shutting down, before the bean is destroyed.</p>
+<p><code>DisposableBean</code> is an interface that provides the <code>destroy()</code> method, which Spring calls during the destruction phase.</p>
+<p>We can also define custom initialization and destruction methods using <code>initMethod</code> and <code>destroyMethod</code> with the <code>@Bean</code> annotation:</p>
+<div class="codehilite"><div class="highlight"><pre><span></span><span class="nd">@Bean</span><span class="p">(</span><span class="n">initMethod</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"init"</span><span class="p">,</span><span class="w"> </span><span class="n">destroyMethod</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"cleanup"</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="n">UserService</span><span class="w"> </span><span class="nf">userService</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">UserService</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Therefore, the simplified Spring Bean lifecycle is:</p>
+<p>Container startup → Configuration metadata → BeanDefinitions → Bean instantiation → Dependency injection → Aware callbacks → Initialization → Bean ready → Container shutdown → Destruction callbacks → Bean destroyed.
+```</p>
+<h4>One interview detail to remember</h4>
+<p>If the interviewer asks <strong>"When exactly is <code>@PostConstruct</code> called?"</strong>, answer:</p>
+<blockquote>
+<p>"<code>@PostConstruct</code> is called after dependency injection has been completed and before the bean is made available for normal use."</p>
+</blockquote>
+<p>And for <code>@PreDestroy</code>:</p>
+<blockquote>
+<p>"<code>@PreDestroy</code> is called during container shutdown, before the bean is destroyed."</p>
+</blockquote></article>
+  </section>
+  <section class="panel" data-panel="examples" role="tabpanel" hidden>
+    <article class="prose"><h3>Stereotype annotations</h3>
+<div class="codehilite"><div class="highlight"><pre><span></span><span class="nd">@Component</span><span class="w">                       </span><span class="c1">// generic bean</span>
+<span class="kd">class</span> <span class="nc">PlainWorker</span><span class="w"> </span><span class="p">{}</span>
+
+<span class="nd">@Service</span><span class="w">                         </span><span class="c1">// business layer (semantic alias)</span>
+<span class="kd">class</span> <span class="nc">OrderService</span><span class="w"> </span><span class="p">{}</span>
+
+<span class="nd">@Repository</span><span class="w">                      </span><span class="c1">// data layer + translates DB exceptions</span>
+<span class="kd">class</span> <span class="nc">OrderRepository</span><span class="w"> </span><span class="p">{}</span>
+
+<span class="nd">@Controller</span><span class="w">                      </span><span class="c1">// web layer (view MVC)</span>
+<span class="kd">class</span> <span class="nc">ProductPageController</span><span class="w"> </span><span class="p">{}</span>
+
+<span class="nd">@RestController</span><span class="w">                  </span><span class="c1">// @Controller + @ResponseBody (JSON APIs)</span>
+<span class="kd">class</span> <span class="nc">ProductApiController</span><span class="w"> </span><span class="p">{}</span>
+</pre></div>
+</div>
+<h3>@Configuration + @Bean: Java-based configuration</h3>
+<div class="codehilite"><div class="highlight"><pre><span></span><span class="nd">@Configuration</span>
+<span class="nd">@ComponentScan</span><span class="p">(</span><span class="s">"com.jack.app"</span><span class="p">)</span><span class="w">   </span><span class="c1">// where to look for stereotypes</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">AppConfig</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@Bean</span><span class="w">                        </span><span class="c1">// factory method — perfect for 3rd-party classes</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">ObjectMapper</span><span class="w"> </span><span class="nf">objectMapper</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ObjectMapper</span><span class="p">().</span><span class="na">registerModule</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">JavaTimeModule</span><span class="p">());</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Bean</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">DataSource</span><span class="w"> </span><span class="nf">dataSource</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">HikariConfig</span><span class="w"> </span><span class="n">cfg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HikariConfig</span><span class="p">();</span>
+<span class="w">        </span><span class="n">cfg</span><span class="p">.</span><span class="na">setJdbcUrl</span><span class="p">(</span><span class="s">"jdbc:postgresql://localhost:5432/app"</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HikariDataSource</span><span class="p">(</span><span class="n">cfg</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<h3>@Scope and @Lazy</h3>
+<div class="codehilite"><div class="highlight"><pre><span></span><span class="nd">@Configuration</span>
+<span class="kd">class</span> <span class="nc">Scopes</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Bean</span>
+<span class="w">    </span><span class="nd">@Scope</span><span class="p">(</span><span class="s">"singleton"</span><span class="p">)</span><span class="w">                       </span><span class="c1">// default: one per container</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">ConfigHolder</span><span class="w"> </span><span class="nf">configHolder</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ConfigHolder</span><span class="p">();</span><span class="w"> </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Bean</span>
+<span class="w">    </span><span class="nd">@Scope</span><span class="p">(</span><span class="s">"prototype"</span><span class="p">)</span><span class="w">                       </span><span class="c1">// new instance per request</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">TaskBuilder</span><span class="w"> </span><span class="nf">taskBuilder</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">TaskBuilder</span><span class="p">();</span><span class="w"> </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Bean</span>
+<span class="w">    </span><span class="nd">@Lazy</span><span class="w">                                     </span><span class="c1">// created on first use, not at startup</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">HeavyService</span><span class="w"> </span><span class="nf">heavyService</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HeavyService</span><span class="p">();</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Web-aware scopes (need a web context):</span>
+<span class="c1">// @RequestScope, @SessionScope, @ApplicationScope, WebSocket scope</span>
+</pre></div>
+</div>
+<h3>XML configuration (legacy, still asked in interviews)</h3>
+<div class="codehilite"><div class="highlight"><pre><span></span><span class="nt">&lt;beans</span><span class="w"> </span><span class="na">xmlns=</span><span class="s">"http://www.springframework.org/schema/beans"</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;context:component-scan</span><span class="w"> </span><span class="na">base-package=</span><span class="s">"com.jack.app"</span><span class="nt">/&gt;</span>
+
+<span class="w">    </span><span class="nt">&lt;bean</span><span class="w"> </span><span class="na">id=</span><span class="s">"orderService"</span><span class="w"> </span><span class="na">class=</span><span class="s">"com.jack.app.OrderService"</span><span class="nt">&gt;</span>
+<span class="w">        </span><span class="nt">&lt;constructor-arg</span><span class="w"> </span><span class="na">ref=</span><span class="s">"orderRepository"</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/bean&gt;</span>
+
+<span class="w">    </span><span class="nt">&lt;bean</span><span class="w"> </span><span class="na">id=</span><span class="s">"orderRepository"</span><span class="w"> </span><span class="na">class=</span><span class="s">"com.jack.app.JdbcOrderRepository"</span>
+<span class="w">          </span><span class="na">scope=</span><span class="s">"singleton"</span><span class="w"> </span><span class="na">lazy-init=</span><span class="s">"true"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/beans&gt;</span>
+</pre></div>
+</div>
+<h3>Choosing between styles</h3>
+<div class="codehilite"><div class="highlight"><pre><span></span><span class="c1">// Own application classes  -&gt; @Component stereotypes (scanned automatically)</span>
+<span class="c1">// Third-party classes      -&gt; @Bean methods in @Configuration</span>
+<span class="c1">// Legacy system            -&gt; XML (or keep it for the interview question)</span>
+<span class="c1">// The three can be mixed; constructor injection ties them together.</span>
+</pre></div>
+</div></article>
+  </section>
+  <nav class="prev-next"><a class="pn previous" href="autowiring.html"><span class="pn-label">Previous</span><span class="pn-title">Autowiring</span></a><a class="pn next" href="bean-lifecycle.html"><span class="pn-label">Next</span><span class="pn-title">Bean Lifecycle</span></a></nav>
+</main>
+<script src="../assets/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spring Transactions · Night Java</title>
+<meta name="description" content="@Transactional, propagation, isolation levels and rollback rules.">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body class="topic-body">
+<aside class="sidebar">
+  <a class="brand" href="../index.html"><span class="brand-mark">J</span> Night Java</a>
+  <input class="side-filter" type="search" placeholder="Filter topics…" aria-label="Filter topics">
+  <div class="side-phase-wrap"><label class="side-phase-label" for="side-phase">Jump to phase</label>
+  <select id="side-phase" class="side-phase"><option value="1">Phase 1 · Programming Basics</option>
+<option value="2">Phase 2 · OOP</option>
+<option value="3">Phase 3 · Core Java Advanced</option>
+<option value="4">Phase 4 · Advanced Java</option>
+<option value="5">Phase 5 · DSA</option>
+<option value="6">Phase 6 · Database</option>
+<option value="7">Phase 7 · Backend Development</option>
+<option value="8">Phase 8 · Frontend</option>
+<option value="9">Phase 9 · DevOps + Deployment</option>
+<option value="10">Phase 10 · LLD</option>
+<option value="11">Phase 11 · HLD</option>
+<option value="12">Phase 12 · Interview Topics</option></select></div>
+  <nav class="side-nav" aria-label="Topics in roadmap order"><a class="side-link" href="../topics/java-fundamentals.html" data-slug="java-fundamentals"><span class="check" data-check="java-fundamentals" aria-hidden="true"></span>Java Fundamentals Q&amp;A</a>
+<a class="side-link" href="../topics/oops-encapsulation.html" data-slug="oops-encapsulation"><span class="check" data-check="oops-encapsulation" aria-hidden="true"></span>OOPs &amp; Encapsulation</a>
+<a class="side-link" href="../topics/inheritance.html" data-slug="inheritance"><span class="check" data-check="inheritance" aria-hidden="true"></span>Inheritance</a>
+<a class="side-link" href="../topics/has-a-is-a.html" data-slug="has-a-is-a"><span class="check" data-check="has-a-is-a" aria-hidden="true"></span>Has-a vs Is-a Relationships</a>
+<a class="side-link" href="../topics/polymorphism.html" data-slug="polymorphism"><span class="check" data-check="polymorphism" aria-hidden="true"></span>Polymorphism</a>
+<a class="side-link" href="../topics/abstraction.html" data-slug="abstraction"><span class="check" data-check="abstraction" aria-hidden="true"></span>Abstraction</a>
+<a class="side-link" href="../topics/interface.html" data-slug="interface"><span class="check" data-check="interface" aria-hidden="true"></span>Interfaces</a>
+<a class="side-link" href="../topics/anonymous-inner-class.html" data-slug="anonymous-inner-class"><span class="check" data-check="anonymous-inner-class" aria-hidden="true"></span>Anonymous Inner Class</a>
+<a class="side-link" href="../topics/collections-framework.html" data-slug="collections-framework"><span class="check" data-check="collections-framework" aria-hidden="true"></span>Collections Framework</a>
+<a class="side-link" href="../topics/exception-handling.html" data-slug="exception-handling"><span class="check" data-check="exception-handling" aria-hidden="true"></span>Exception Handling</a>
+<a class="side-link" href="../topics/file-handling.html" data-slug="file-handling"><span class="check" data-check="file-handling" aria-hidden="true"></span>File Handling</a>
+<a class="side-link" href="../topics/generics.html" data-slug="generics"><span class="check" data-check="generics" aria-hidden="true"></span>Generics</a>
+<a class="side-link" href="../topics/stream-api.html" data-slug="stream-api"><span class="check" data-check="stream-api" aria-hidden="true"></span>Stream API</a>
+<a class="side-link" href="../topics/multithreading.html" data-slug="multithreading"><span class="check" data-check="multithreading" aria-hidden="true"></span>Multithreading</a>
+<a class="side-link" href="../topics/executorservice.html" data-slug="executorservice"><span class="check" data-check="executorservice" aria-hidden="true"></span>ExecutorService</a>
+<a class="side-link" href="../topics/completablefuture.html" data-slug="completablefuture"><span class="check" data-check="completablefuture" aria-hidden="true"></span>CompletableFuture</a>
+<a class="side-link" href="../topics/atomic-classes.html" data-slug="atomic-classes"><span class="check" data-check="atomic-classes" aria-hidden="true"></span>Atomic Classes</a>
+<a class="side-link" href="../topics/concurrent-collections.html" data-slug="concurrent-collections"><span class="check" data-check="concurrent-collections" aria-hidden="true"></span>Concurrent Collections</a>
+<a class="side-link" href="../topics/jdbc.html" data-slug="jdbc"><span class="check" data-check="jdbc" aria-hidden="true"></span>JDBC</a>
+<a class="side-link" href="../topics/servlet.html" data-slug="servlet"><span class="check" data-check="servlet" aria-hidden="true"></span>Servlets</a>
+<a class="side-link" href="../topics/jsp.html" data-slug="jsp"><span class="check" data-check="jsp" aria-hidden="true"></span>JSP</a>
+<a class="side-link" href="../topics/hibernate.html" data-slug="hibernate"><span class="check" data-check="hibernate" aria-hidden="true"></span>Hibernate</a>
+<a class="side-link" href="../topics/spring-mvc.html" data-slug="spring-mvc"><span class="check" data-check="spring-mvc" aria-hidden="true"></span>Spring MVC</a>
+<a class="side-link" href="../topics/session-management.html" data-slug="session-management"><span class="check" data-check="session-management" aria-hidden="true"></span>Session Management</a>
+<a class="side-link" href="../topics/maven.html" data-slug="maven"><span class="check" data-check="maven" aria-hidden="true"></span>Maven</a>
+<a class="side-link" href="../topics/servlet-vs-spring-core.html" data-slug="servlet-vs-spring-core"><span class="check" data-check="servlet-vs-spring-core" aria-hidden="true"></span>Servlet vs Spring Core</a>
+<a class="side-link" href="../topics/ioc-and-di.html" data-slug="ioc-and-di"><span class="check" data-check="ioc-and-di" aria-hidden="true"></span>IoC &amp; Dependency Injection</a>
+<a class="side-link" href="../topics/autowiring.html" data-slug="autowiring"><span class="check" data-check="autowiring" aria-hidden="true"></span>Autowiring</a>
+<a class="side-link" href="../topics/bean-configuration.html" data-slug="bean-configuration"><span class="check" data-check="bean-configuration" aria-hidden="true"></span>Bean Configuration &amp; Annotations</a>
+<a class="side-link" href="../topics/bean-lifecycle.html" data-slug="bean-lifecycle"><span class="check" data-check="bean-lifecycle" aria-hidden="true"></span>Bean Lifecycle</a>
+<a class="side-link" href="../topics/bean-lifecycle-aop.html" data-slug="bean-lifecycle-aop"><span class="check" data-check="bean-lifecycle-aop" aria-hidden="true"></span>Bean Lifecycle &amp; Where AOP Fits</a>
+<a class="side-link" href="../topics/spring-aop.html" data-slug="spring-aop"><span class="check" data-check="spring-aop" aria-hidden="true"></span>Spring AOP</a>
+<a class="side-link" href="../topics/spring-transactions.html" aria-current="page" data-slug="spring-transactions"><span class="check" data-check="spring-transactions" aria-hidden="true"></span>Spring Transactions</a>
+<a class="side-link" href="../topics/spring-data.html" data-slug="spring-data"><span class="check" data-check="spring-data" aria-hidden="true"></span>Spring Data (JPA)</a>
+<a class="side-link" href="../topics/spring-profiles.html" data-slug="spring-profiles"><span class="check" data-check="spring-profiles" aria-hidden="true"></span>Spring Profiles &amp; Config</a>
+<a class="side-link" href="../topics/spring-security.html" data-slug="spring-security"><span class="check" data-check="spring-security" aria-hidden="true"></span>Spring Security Flow</a>
+<a class="side-link" href="../topics/filters-and-interceptors.html" data-slug="filters-and-interceptors"><span class="check" data-check="filters-and-interceptors" aria-hidden="true"></span>Filters &amp; Interceptors</a>
+<a class="side-link" href="../topics/core-java-deep-dive.html" data-slug="core-java-deep-dive"><span class="check" data-check="core-java-deep-dive" aria-hidden="true"></span>Core Java Deep-Dive</a></nav>
+  <p class="side-progress"><span data-progress-text></span></p>
+</aside>
+<main class="content">
+  <header class="topic-head">
+    <p class="crumb"><a href="../index.html">Roadmap</a> / Phase 7 · Backend Development</p>
+    <h1>Spring Transactions</h1>
+    <p class="summary">@Transactional, propagation, isolation levels and rollback rules.</p>
+    <div class="head-row">
+      <div class="tags"><span class="tag">spring</span><span class="tag">transactions</span><span class="tag">acid</span></div>
+      <button class="read-btn" data-read-btn data-slug="spring-transactions"><span class="read-icon">○</span> Mark as read</button>
+    </div>
+  </header>
+  <div class="tabs" role="tablist">
+    <button class="tab active" role="tab" data-tab="notes" aria-selected="true">Notes</button>
+    <button class="tab" role="tab" data-tab="examples" aria-selected="false">Code examples</button>
+  </div>
+  <section class="panel active" data-panel="notes" role="tabpanel">
+    <article class="prose"><p><strong>1. What is a transaction, and what are ACID properties?</strong></p>
+<p>A transaction is a group of database operations that are treated as a single logical unit of work. Transactions help maintain data consistency and follow the ACID properties: Atomicity, Consistency, Isolation, and Durability.</p>
+<ul>
+<li><strong>Atomicity:</strong> All operations within a transaction either complete successfully or are rolled back if the transaction fails.</li>
+<li><strong>Consistency:</strong> A transaction moves the database from one valid state to another valid state while maintaining database constraints.</li>
+<li><strong>Isolation:</strong> Concurrent transactions are isolated from one another according to the selected isolation level.</li>
+<li><strong>Durability:</strong> Once a transaction is successfully committed, its changes remain saved even if the application crashes or shuts down.</li>
+</ul>
+<p><strong>2. What is <code>@Transactional</code>?</strong></p>
+<p>The <code>@Transactional</code> annotation is used to define a method or class whose operations should execute within a transaction. It is commonly used in the service layer, where multiple database operations may need to succeed or fail together.</p>
+<p>Spring typically manages transactions through a transaction manager and AOP proxies. If a transaction fails under the applicable rollback rules, Spring can roll back the database changes.</p>
+<p><strong>3. What is transaction propagation?</strong></p>
+<p>Transaction propagation defines how a method's transaction behaves when it is called from another transactional method.</p>
+<p>The seven propagation types are:</p>
+<ul>
+<li><strong>REQUIRED:</strong> Joins an existing transaction if one exists; otherwise, creates a new transaction. This is the default propagation type.</li>
+<li><strong>REQUIRES_NEW:</strong> Suspends the existing transaction, if present, and starts a new independent transaction.</li>
+<li><strong>SUPPORTS:</strong> Joins an existing transaction if one exists; otherwise, executes without a transaction.</li>
+<li><strong>MANDATORY:</strong> Requires an existing transaction. If none exists, Spring throws an exception.</li>
+<li><strong>NOT_SUPPORTED:</strong> Suspends an existing transaction, if present, and executes without a transaction.</li>
+<li><strong>NEVER:</strong> Executes without a transaction and throws an exception if an existing transaction is present.</li>
+<li><strong>NESTED:</strong> Executes within a nested transaction when supported by the transaction manager, commonly using a savepoint within the existing transaction.</li>
+</ul>
+<p><strong>4. What is transaction isolation?</strong></p>
+<p>Transaction isolation controls how concurrent transactions interact and helps prevent problems such as dirty reads, non-repeatable reads, and phantom reads.</p>
+<p>The four standard isolation levels are:</p>
+<ul>
+<li><strong>READ_UNCOMMITTED:</strong> Allows dirty reads, non-repeatable reads, and phantom reads.</li>
+<li><strong>READ_COMMITTED:</strong> Prevents dirty reads but may allow non-repeatable reads and phantom reads.</li>
+<li><strong>REPEATABLE_READ:</strong> Prevents dirty reads and non-repeatable reads. Phantom reads may still occur, depending on the database implementation.</li>
+<li><strong>SERIALIZABLE:</strong> Provides the strongest standard isolation level and prevents these three anomalies, subject to the database's implementation.</li>
+</ul>
+<p><strong>5. What is rollback, and when does Spring roll back a transaction?</strong></p>
+<p>Rollback means undoing the database changes made by a transaction that has not been committed, restoring the database to its state before that transaction's changes.</p>
+<p>By default, Spring rolls back a declarative transaction when an unchecked exception (<code>RuntimeException</code>) or an <code>Error</code> escapes the transactional method. Checked exceptions do not trigger rollback by default, but rollback rules can be customized using <code>rollbackFor</code> and <code>noRollbackFor</code>.</p>
+<p><strong>6. Why is <code>@Transactional</code> usually placed in the service layer?</strong></p>
+<p>The service layer contains business logic and often coordinates multiple database operations. Using <code>@Transactional</code> at this layer helps ensure that related operations succeed or fail as a unit.</p>
+<p>For example, when transferring money between two bank accounts, the debit and credit operations should both succeed. If either operation fails, the transaction should roll back the changes made by that transaction.</p>
+<h3>*</h3>
+<p>Can @Transactional work on a private method?</p>
+<p>In Spring's usual proxy-based transaction management, private methods are not intercepted as transactional entry points.</p>
+<h3>****</h3>
+<p>What happens if a checked exception occurs? </p>
+<p>By default, Spring does not roll back for checked exceptions. You can specify @Transactional(rollbackFor = Exception.class).</p>
+<h3>**</h3>
+<p>Does @Transactional always work when one method calls another method in the same class? </p>
+<p>Not necessarily. Self-invocation bypasses the usual Spring proxy, so the called method's transactional annotation may not be applied.</p>
+<h3>*</h3>
+<p>Does rollback undo every operation? </p>
+<p>It rolls back transactional database changes managed by the transaction. External actions, such as sending an email, are not automatically undone.</p></article>
+  </section>
+  <section class="panel" data-panel="examples" role="tabpanel" hidden>
+    <article class="prose"><h3>@Transactional basics</h3>
+<div class="codehilite"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.transaction.annotation.*</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.stereotype.Service</span><span class="p">;</span>
+
+<span class="nd">@Service</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">OrderService</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@Transactional</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">placeOrder</span><span class="p">(</span><span class="n">Order</span><span class="w"> </span><span class="n">order</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">orderRepository</span><span class="p">.</span><span class="na">save</span><span class="p">(</span><span class="n">order</span><span class="p">);</span><span class="w">          </span><span class="c1">// INSERT</span>
+<span class="w">        </span><span class="n">paymentService</span><span class="p">.</span><span class="na">charge</span><span class="p">(</span><span class="n">order</span><span class="p">.</span><span class="na">total</span><span class="p">());</span><span class="w"> </span><span class="c1">// if this throws, the INSERT rolls back</span>
+<span class="w">        </span><span class="n">inventoryService</span><span class="p">.</span><span class="na">reduce</span><span class="p">(</span><span class="n">order</span><span class="p">.</span><span class="na">items</span><span class="p">());</span>
+<span class="w">    </span><span class="p">}</span><span class="w">   </span><span class="c1">// commit happens here — all or nothing</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<h3>Rollback rules (the interview trap)</h3>
+<div class="codehilite"><div class="highlight"><pre><span></span><span class="nd">@Service</span>
+<span class="kd">class</span> <span class="nc">Rules</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Default: rollback on unchecked (RuntimeException, Error) ONLY.</span>
+<span class="w">    </span><span class="nd">@Transactional</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">a</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Exception</span><span class="p">(</span><span class="s">"checked"</span><span class="p">);</span><span class="w"> </span><span class="p">}</span><span class="w">   </span><span class="c1">// NO rollback!</span>
+
+<span class="w">    </span><span class="c1">// Explicit: include checked exceptions</span>
+<span class="w">    </span><span class="nd">@Transactional</span><span class="p">(</span><span class="n">rollbackFor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Exception</span><span class="p">.</span><span class="na">class</span><span class="p">)</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">b</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Exception</span><span class="p">(</span><span class="s">"checked"</span><span class="p">);</span><span class="w"> </span><span class="p">}</span><span class="w">   </span><span class="c1">// rolls back</span>
+
+<span class="w">    </span><span class="c1">// Or exclude a specific runtime exception</span>
+<span class="w">    </span><span class="nd">@Transactional</span><span class="p">(</span><span class="n">noRollbackFor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">IllegalStateException</span><span class="p">.</span><span class="na">class</span><span class="p">)</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">c</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalStateException</span><span class="p">(</span><span class="s">"keep the data anyway"</span><span class="p">);</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<h3>Propagation — what happens when transactions meet</h3>
+<div class="codehilite"><div class="highlight"><pre><span></span><span class="nd">@Service</span>
+<span class="kd">class</span> <span class="nc">Outer</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Transactional</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">outer</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">inner</span><span class="p">.</span><span class="na">required</span><span class="p">();</span><span class="w"> </span><span class="n">inner</span><span class="p">.</span><span class="na">newOne</span><span class="p">();</span><span class="w"> </span><span class="n">inner</span><span class="p">.</span><span class="na">nested</span><span class="p">();</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nd">@Service</span>
+<span class="kd">class</span> <span class="nc">Inner</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Transactional</span><span class="p">(</span><span class="n">propagation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Propagation</span><span class="p">.</span><span class="na">REQUIRED</span><span class="p">)</span><span class="w">      </span><span class="c1">// default: join existing</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">required</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Transactional</span><span class="p">(</span><span class="n">propagation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Propagation</span><span class="p">.</span><span class="na">REQUIRES_NEW</span><span class="p">)</span><span class="w">  </span><span class="c1">// suspend outer, own tx</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">newOne</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Transactional</span><span class="p">(</span><span class="n">propagation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Propagation</span><span class="p">.</span><span class="na">NESTED</span><span class="p">)</span><span class="w">        </span><span class="c1">// savepoint inside outer</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">nested</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Transactional</span><span class="p">(</span><span class="n">propagation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Propagation</span><span class="p">.</span><span class="na">MANDATORY</span><span class="p">)</span><span class="w">     </span><span class="c1">// fail if no tx exists</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">mandatory</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Transactional</span><span class="p">(</span><span class="n">propagation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Propagation</span><span class="p">.</span><span class="na">NEVER</span><span class="p">)</span><span class="w">         </span><span class="c1">// fail if a tx exists</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">never</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<h3>Isolation levels</h3>
+<div class="codehilite"><div class="highlight"><pre><span></span><span class="c1">// READ UNCOMMITTED — dirty reads possible</span>
+<span class="c1">// READ COMMITTED   — no dirty reads; non-repeatable reads possible (Postgres default)</span>
+<span class="c1">// REPEATABLE READ  — stable rows; phantoms possible (MySQL InnoDB default)</span>
+<span class="c1">// SERIALIZABLE     — full isolation, lowest throughput</span>
+
+<span class="nd">@Service</span>
+<span class="kd">class</span> <span class="nc">Reports</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Transactional</span><span class="p">(</span><span class="n">isolation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Isolation</span><span class="p">.</span><span class="na">REPEATABLE_READ</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Report</span><span class="w"> </span><span class="nf">generate</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// two reads of the same rows see the same data</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">reportRepository</span><span class="p">.</span><span class="na">build</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<h3>The self-invocation trap again</h3>
+<div class="codehilite"><div class="highlight"><pre><span></span><span class="nd">@Service</span>
+<span class="kd">class</span> <span class="nc">Trap</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">run</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// internal call bypasses the proxy -&gt; NO transaction starts</span>
+<span class="w">        </span><span class="n">doWork</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Transactional</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">doWork</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div></article>
+  </section>
+  <nav class="prev-next"><a class="pn previous" href="spring-aop.html"><span class="pn-label">Previous</span><span class="pn-title">Spring AOP</span></a><a class="pn next" href="spring-data.html"><span class="pn-label">Next</span><span class="pn-title">Spring Data (JPA)</span></a></nav>
+</main>
+<script src="../assets/app.js"></script>
+</body>
+</html>

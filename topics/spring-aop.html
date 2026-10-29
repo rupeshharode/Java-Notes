@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spring AOP · Night Java</title>
+<meta name="description" content="Aspects, advice types, pointcuts and cross-cutting concerns.">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body class="topic-body">
+<aside class="sidebar">
+  <a class="brand" href="../index.html"><span class="brand-mark">J</span> Night Java</a>
+  <input class="side-filter" type="search" placeholder="Filter topics…" aria-label="Filter topics">
+  <div class="side-phase-wrap"><label class="side-phase-label" for="side-phase">Jump to phase</label>
+  <select id="side-phase" class="side-phase"><option value="1">Phase 1 · Programming Basics</option>
+<option value="2">Phase 2 · OOP</option>
+<option value="3">Phase 3 · Core Java Advanced</option>
+<option value="4">Phase 4 · Advanced Java</option>
+<option value="5">Phase 5 · DSA</option>
+<option value="6">Phase 6 · Database</option>
+<option value="7">Phase 7 · Backend Development</option>
+<option value="8">Phase 8 · Frontend</option>
+<option value="9">Phase 9 · DevOps + Deployment</option>
+<option value="10">Phase 10 · LLD</option>
+<option value="11">Phase 11 · HLD</option>
+<option value="12">Phase 12 · Interview Topics</option></select></div>
+  <nav class="side-nav" aria-label="Topics in roadmap order"><a class="side-link" href="../topics/java-fundamentals.html" data-slug="java-fundamentals"><span class="check" data-check="java-fundamentals" aria-hidden="true"></span>Java Fundamentals Q&amp;A</a>
+<a class="side-link" href="../topics/oops-encapsulation.html" data-slug="oops-encapsulation"><span class="check" data-check="oops-encapsulation" aria-hidden="true"></span>OOPs &amp; Encapsulation</a>
+<a class="side-link" href="../topics/inheritance.html" data-slug="inheritance"><span class="check" data-check="inheritance" aria-hidden="true"></span>Inheritance</a>
+<a class="side-link" href="../topics/has-a-is-a.html" data-slug="has-a-is-a"><span class="check" data-check="has-a-is-a" aria-hidden="true"></span>Has-a vs Is-a Relationships</a>
+<a class="side-link" href="../topics/polymorphism.html" data-slug="polymorphism"><span class="check" data-check="polymorphism" aria-hidden="true"></span>Polymorphism</a>
+<a class="side-link" href="../topics/abstraction.html" data-slug="abstraction"><span class="check" data-check="abstraction" aria-hidden="true"></span>Abstraction</a>
+<a class="side-link" href="../topics/interface.html" data-slug="interface"><span class="check" data-check="interface" aria-hidden="true"></span>Interfaces</a>
+<a class="side-link" href="../topics/anonymous-inner-class.html" data-slug="anonymous-inner-class"><span class="check" data-check="anonymous-inner-class" aria-hidden="true"></span>Anonymous Inner Class</a>
+<a class="side-link" href="../topics/collections-framework.html" data-slug="collections-framework"><span class="check" data-check="collections-framework" aria-hidden="true"></span>Collections Framework</a>
+<a class="side-link" href="../topics/exception-handling.html" data-slug="exception-handling"><span class="check" data-check="exception-handling" aria-hidden="true"></span>Exception Handling</a>
+<a class="side-link" href="../topics/file-handling.html" data-slug="file-handling"><span class="check" data-check="file-handling" aria-hidden="true"></span>File Handling</a>
+<a class="side-link" href="../topics/generics.html" data-slug="generics"><span class="check" data-check="generics" aria-hidden="true"></span>Generics</a>
+<a class="side-link" href="../topics/stream-api.html" data-slug="stream-api"><span class="check" data-check="stream-api" aria-hidden="true"></span>Stream API</a>
+<a class="side-link" href="../topics/multithreading.html" data-slug="multithreading"><span class="check" data-check="multithreading" aria-hidden="true"></span>Multithreading</a>
+<a class="side-link" href="../topics/executorservice.html" data-slug="executorservice"><span class="check" data-check="executorservice" aria-hidden="true"></span>ExecutorService</a>
+<a class="side-link" href="../topics/completablefuture.html" data-slug="completablefuture"><span class="check" data-check="completablefuture" aria-hidden="true"></span>CompletableFuture</a>
+<a class="side-link" href="../topics/atomic-classes.html" data-slug="atomic-classes"><span class="check" data-check="atomic-classes" aria-hidden="true"></span>Atomic Classes</a>
+<a class="side-link" href="../topics/concurrent-collections.html" data-slug="concurrent-collections"><span class="check" data-check="concurrent-collections" aria-hidden="true"></span>Concurrent Collections</a>
+<a class="side-link" href="../topics/jdbc.html" data-slug="jdbc"><span class="check" data-check="jdbc" aria-hidden="true"></span>JDBC</a>
+<a class="side-link" href="../topics/servlet.html" data-slug="servlet"><span class="check" data-check="servlet" aria-hidden="true"></span>Servlets</a>
+<a class="side-link" href="../topics/jsp.html" data-slug="jsp"><span class="check" data-check="jsp" aria-hidden="true"></span>JSP</a>
+<a class="side-link" href="../topics/hibernate.html" data-slug="hibernate"><span class="check" data-check="hibernate" aria-hidden="true"></span>Hibernate</a>
+<a class="side-link" href="../topics/spring-mvc.html" data-slug="spring-mvc"><span class="check" data-check="spring-mvc" aria-hidden="true"></span>Spring MVC</a>
+<a class="side-link" href="../topics/session-management.html" data-slug="session-management"><span class="check" data-check="session-management" aria-hidden="true"></span>Session Management</a>
+<a class="side-link" href="../topics/maven.html" data-slug="maven"><span class="check" data-check="maven" aria-hidden="true"></span>Maven</a>
+<a class="side-link" href="../topics/servlet-vs-spring-core.html" data-slug="servlet-vs-spring-core"><span class="check" data-check="servlet-vs-spring-core" aria-hidden="true"></span>Servlet vs Spring Core</a>
+<a class="side-link" href="../topics/ioc-and-di.html" data-slug="ioc-and-di"><span class="check" data-check="ioc-and-di" aria-hidden="true"></span>IoC &amp; Dependency Injection</a>
+<a class="side-link" href="../topics/autowiring.html" data-slug="autowiring"><span class="check" data-check="autowiring" aria-hidden="true"></span>Autowiring</a>
+<a class="side-link" href="../topics/bean-configuration.html" data-slug="bean-configuration"><span class="check" data-check="bean-configuration" aria-hidden="true"></span>Bean Configuration &amp; Annotations</a>
+<a class="side-link" href="../topics/bean-lifecycle.html" data-slug="bean-lifecycle"><span class="check" data-check="bean-lifecycle" aria-hidden="true"></span>Bean Lifecycle</a>
+<a class="side-link" href="../topics/bean-lifecycle-aop.html" data-slug="bean-lifecycle-aop"><span class="check" data-check="bean-lifecycle-aop" aria-hidden="true"></span>Bean Lifecycle &amp; Where AOP Fits</a>
+<a class="side-link" href="../topics/spring-aop.html" aria-current="page" data-slug="spring-aop"><span class="check" data-check="spring-aop" aria-hidden="true"></span>Spring AOP</a>
+<a class="side-link" href="../topics/spring-transactions.html" data-slug="spring-transactions"><span class="check" data-check="spring-transactions" aria-hidden="true"></span>Spring Transactions</a>
+<a class="side-link" href="../topics/spring-data.html" data-slug="spring-data"><span class="check" data-check="spring-data" aria-hidden="true"></span>Spring Data (JPA)</a>
+<a class="side-link" href="../topics/spring-profiles.html" data-slug="spring-profiles"><span class="check" data-check="spring-profiles" aria-hidden="true"></span>Spring Profiles &amp; Config</a>
+<a class="side-link" href="../topics/spring-security.html" data-slug="spring-security"><span class="check" data-check="spring-security" aria-hidden="true"></span>Spring Security Flow</a>
+<a class="side-link" href="../topics/filters-and-interceptors.html" data-slug="filters-and-interceptors"><span class="check" data-check="filters-and-interceptors" aria-hidden="true"></span>Filters &amp; Interceptors</a>
+<a class="side-link" href="../topics/core-java-deep-dive.html" data-slug="core-java-deep-dive"><span class="check" data-check="core-java-deep-dive" aria-hidden="true"></span>Core Java Deep-Dive</a></nav>
+  <p class="side-progress"><span data-progress-text></span></p>
+</aside>
+<main class="content">
+  <header class="topic-head">
+    <p class="crumb"><a href="../index.html">Roadmap</a> / Phase 7 · Backend Development</p>
+    <h1>Spring AOP</h1>
+    <p class="summary">Aspects, advice types, pointcuts and cross-cutting concerns.</p>
+    <div class="head-row">
+      <div class="tags"><span class="tag">spring</span><span class="tag">aop</span><span class="tag">aspects</span></div>
+      <button class="read-btn" data-read-btn data-slug="spring-aop"><span class="read-icon">○</span> Mark as read</button>
+    </div>
+  </header>
+  <div class="tabs" role="tablist">
+    <button class="tab active" role="tab" data-tab="notes" aria-selected="true">Notes</button>
+    <button class="tab" role="tab" data-tab="examples" aria-selected="false">Code examples</button>
+  </div>
+  <section class="panel active" data-panel="notes" role="tabpanel">
+    <article class="prose"><p>AOP stands for Aspect-Oriented Programming. It is a programming approach used to separate cross-cutting concerns from the main business logic.</p>
+<p>Cross-cutting concerns are functionalities that are required across multiple classes or methods, such as logging, security checks, transaction management, and performance monitoring.</p>
+<p>For example, if we want to measure the execution time of multiple service methods, we could write timing logic in every method. This would duplicate code and make the business logic harder to maintain. Using Spring AOP, we can define this logic in a separate aspect and apply it to the required methods.</p>
+<p>Spring AOP uses proxies to intercept method calls and execute the required advice around the target method. It commonly uses JDK dynamic proxies or CGLIB-based proxies.</p>
+<p>Spring's AOP infrastructure can use BeanPostProcessors to create and return proxy objects for eligible beans during bean initialization.</p>
+<p>The main benefit of AOP is that it improves separation of concerns, reduces code duplication, and makes the application easier to maintain.</p>
+<h2>work flow</h2>
+<p>Client calls a Spring bean
+    |
+Proxy intercepts the method call
+Matches the applicable pointcut
+    |
+Advice executes
+For example, logging or a security check
+    |
+Target method executes
+    |
+Advice completes and the result returns</p>
+<hr>
+<p>The three main AOP terms: Where, When, and What</p>
+<p>Term            Answers                           Meaning
+Pointcut    Where?                    Selects the method executions where advice should apply
+Advice       When and what?           Defines the action and when it runs
+Aspect      What is grouped together?     Combines pointcut and advice into a reusable concern</p>
+<hr>
+<p>What are the main AOP terms?</p>
+<p>Term                    Correct meaning
+Aspect          A module that groups a cross-cutting concern, usually containing advice and pointcuts
+Join point      A point during execution where advice could be applied; Spring AOP supports method-execution join points
+Pointcut        A predicate or expression that selects matching join points
+Advice          The action executed at a selected join point
+Target object       The actual object whose method is being advised
+Proxy           The object through which intercepted calls are handled
+Weaving         The process of connecting aspects with the target program; Spring AOP generally does this through proxies at runtime
+Cross-cutting concern   Functionality used across multiple parts of an application, such as logging or transactions</p>
+<hr>
+<p>@Before
+Runs before the target method executes.
+@Before("serviceMethods()")
+public void logBefore() {
+    System.out.println("Before method");
+}</p>
+<p>@AfterReturning
+Runs after the target method returns successfully. It can access the returned value.
+@AfterReturning(
+    pointcut = "serviceMethods()",
+    returning = "result"
+)
+public void logResult(Object result) {
+    System.out.println(result);
+}</p>
+<p>@AfterThrowing
+Runs when the target method exits by throwing an exception.
+@AfterThrowing(
+    pointcut = "serviceMethods()",
+    throwing = "ex"
+)
+public void logError(Exception ex) {
+    System.out.println(ex.getMessage());
+}</p>
+<p>@After
+Runs after the target method completes, whether it returns normally or throws an exception. It is similar to a finally block.
+@After("serviceMethods()")
+public void logCompletion() {
+    System.out.println("Method completed");
+}</p>
+<p>@Around
+Provides the greatest control over method execution. It can run logic before and after the target method, decide whether to proceed, and inspect or transform arguments and the returned value.
+@Around("serviceMethods()")
+public Object measureTime(
+        ProceedingJoinPoint joinPoint)
+        throws Throwable {</p>
+<div class="codehilite"><div class="highlight"><pre><span></span>long start = System.currentTimeMillis();
+
+try {
+    return joinPoint.proceed();
+} finally {
+    long end = System.currentTimeMillis();
+    System.out.println("Time: " + (end - start));
+}
+</pre></div>
+</div>
+<p>}</p>
+<p>Important: @Around can modify method arguments using proceed(args) and transform a compatible return value. It doesn't automatically provide arbitrary access to HTTP requests or responses; those require appropriate objects or framework APIs.</p>
+<h3>**</h3>
+<p>Designator              Purpose Example
+execution           Matches method executions by signature  execution(* com.example.service.<em>.</em>(..))
+within              Matches methods within specified types  within(com.example.service.*)
+args                Matches based on runtime argument types args(String)
+@annotation         Matches methods with a specified annotation @annotation(com.example.Loggable)
+@within             Matches based on an annotation on the declaring type    @within(org.springframework.stereotype.Service)
+@target             Matches target objects whose class has an annotation    @target(org.springframework.stereotype.Service)
+this                Matches based on the proxy type this(com.example.service.UserService)
+target              Matches based on the target object's type   target(com.example.service.UserService)
+@args               Matches based on annotations on runtime argument types  @args(com.example.Validated)</p>
+<h3>*</h3>
+<p>JDK dynamic proxy example</p>
+<p>public interface PaymentService {
+    void pay();
+}</p>
+<p>@Service
+public class PaymentServiceImpl
+        implements PaymentService {</p>
+<div class="codehilite"><div class="highlight"><pre><span></span>public void pay() {
+    System.out.println("Payment processed");
+}
+</pre></div>
+</div>
+<p>}</p>
+<p>when JDK proxying is used, the proxy implements PaymentService. You normally access it through the interface:
+PaymentService service = context.getBean(PaymentService.class);
+service.pay();</p>
+<p>CGLIB proxy example
+A CGLIB proxy creates a subclass of the target class and overrides eligible methods to add interception behavior.
+One important nuance: Spring Boot commonly defaults to class-based proxies, while Spring Framework proxy selection depends on configuration. JDK proxies can be used when interface-based proxying is selected.</p>
+<h3>*</h3>
+<ol start="196">
+<li>What is the difference between Spring AOP and AspectJ?</li>
+</ol>
+<p>Answer: Spring AOP and AspectJ are used to implement Aspect-Oriented Programming, but they differ in how they apply aspects.
+Spring AOP                                  AspectJ
+Primarily uses runtime proxies.             Supports compile-time, post-compile, and load-time weaving.
+Supports method-execution join points.          Supports a wider range of join points, including field access and method calls.
+Works primarily with Spring-managed beans.      Can also apply aspects to objects that are not Spring-managed.
+Easier to configure for common Spring applications. Provides more advanced features and may require additional configuration.
+Self-invocation bypasses proxy-based advice.        Can handle self-invocation when the relevant code is woven.</p>
+<p>Example: Spring AOP can be used to log service method executions, while AspectJ can also intercept field access when configured with the appropriate weaving mechanism.</p>
+<ol start="197">
+<li>How do you enable AOP in Spring using @EnableAspectJAutoProxy?</li>
+</ol>
+<p>Answer: @EnableAspectJAutoProxy enables support for processing @Aspect beans and applying their advice through Spring AOP proxies.
+Example:
+@Configuration
+@EnableAspectJAutoProxy
+@ComponentScan("com.example")
+public class AppConfig {
+}</p>
+<p>Here:
+- @Configuration defines a Spring configuration class.
+- @EnableAspectJAutoProxy enables proxy-based AOP.
+- @ComponentScan discovers Spring components, including aspect classes annotated with @Component.
+In Spring Boot, AOP may be configured automatically when the required dependency is present, so this annotation is not always necessary.</p>
+<ol start="198">
+<li>How do you define an aspect using @Aspect and @Component?</li>
+</ol>
+<p>Answer: We use @Aspect to declare a class as an aspect and @Component to register it as a Spring bean.
+Example:
+@Aspect
+@Component
+public class LoggingAspect {</p>
+<div class="codehilite"><div class="highlight"><pre><span></span>@Before("execution(* com.example.service.*.*(..))")
+public void logBefore() {
+    System.out.println("Before method execution");
+}
+</pre></div>
+</div>
+<p>}</p>
+<p>Here:
+- @Aspect identifies the class as an aspect.
+- @Component registers it as a Spring-managed bean.
+- @Before defines the advice that executes before a matching method.
+- execution() specifies which method executions should be intercepted.</p>
+<ol start="199">
+<li>How do you pass method arguments to advice using args()?</li>
+</ol>
+<p>Answer: The args() pointcut designator matches methods based on their runtime argument types. It can also bind method arguments to parameters in the advice method.
+Example:
+@Before(
+    value = "execution(* com.example.service.<em>.</em>(..)) &amp;&amp; args(name)",
+    argNames = "name"
+)
+public void logArgument(String name) {
+    System.out.println("Argument: " + name);
+}</p>
+<p>This advice matches methods in the specified package that have one argument compatible with String and passes that argument to logArgument().
+For example, if a matching method receives "Rupesh", the advice prints:
+Argument: Rupesh</p>
+<ol start="200">
+<li>How do you access the return value in @AfterReturning?</li>
+</ol>
+<p>Answer: We use the returning attribute of @AfterReturning to access the value returned by a successfully executed target method.
+Example:
+@AfterReturning(
+    pointcut = "execution(* com.example.service.<em>.</em>(..))",
+    returning = "result"
+)
+public void logResult(Object result) {
+    System.out.println("Returned value: " + result);
+}</p>
+<p>Here, returning = "result" binds the target method's return value to the result parameter.
+This advice executes only when the target method completes successfully.</p>
+<ol start="201">
+<li>How do you access the exception in @AfterThrowing?
+Answer: We use the throwing attribute of @AfterThrowing to access an exception thrown by the target method.
+Example:
+@AfterThrowing(
+    pointcut = "execution(* com.example.service.<em>.</em>(..))",
+    throwing = "ex"
+)
+public void logException(Exception ex) {
+    System.out.println("Exception: " + ex.getMessage());
+}</li>
+</ol>
+<p>Here, throwing = "ex" binds a compatible thrown exception to the ex parameter.
+This advice is useful for exception logging and monitoring. It does not automatically handle or suppress the exception.</p>
+<ol start="202">
+<li>
+<p>What is ProceedingJoinPoint?
+Answer: ProceedingJoinPoint is an interface used in @Around advice. It provides information about the intercepted method and allows us to continue its execution using the proceed() method.
+Example:
+@Around("execution(* com.example.service.<em>.</em>(..))")
+public Object logExecution(ProceedingJoinPoint pjp)
+        throws Throwable {</p>
+<p>System.out.println("Before method");</p>
+<p>Object result = pjp.proceed();</p>
+<p>System.out.println("After method");</p>
+<p>return result;
+}</p>
+</li>
+</ol>
+<p>Here:
+- pjp.proceed() continues the target invocation.
+- result stores the returned value.
+- The method returns the original result to the caller.
+If proceed() is not called, the target invocation does not proceed through this advice.</p>
+<ol start="203">
+<li>Can Spring AOP intercept private or final methods
+?
+Answer: No, Spring's proxy-based AOP cannot intercept private methods through the proxy because they cannot be overridden. Similarly, CGLIB cannot override final methods or subclass final classes.
+JDK dynamic proxies intercept calls made through the proxied interface, not direct calls to private or final implementation methods.
+If we need to advise these kinds of join points, AspectJ weaving may be an alternative.</li>
+<li>What is the difference between @After and @AfterReturning?
+Answer: The main difference is that @After executes after the method finishes regardless of success or failure, whereas @AfterReturning executes only after successful completion.
+@After  @AfterReturning
+Executes after normal or exceptional completion.    Executes only after normal completion.
+Similar to a finally block. Runs after a successful return.
+Does not provide a returning attribute for binding the result.  Can access the returned value using returning.
+Useful for cleanup and completion logging.  Useful for logging successful results.
+Example: Use @After to log that a method has finished, and @AfterReturning to log the user object returned by a successful service call.</li>
+<li>How do you apply an aspect to a specific package or class?
+Answer: We use pointcut expressions such as execution() and within() to select methods in a specific class or package.
+Example 1: Target a specific class
+@Before("execution(* com.example.service.UserService.*(..))")
+public void logUserService() {
+    System.out.println("UserService method called");
+}</li>
+</ol>
+<p>This expression matches method executions in UserService.
+Example 2: Target types in a package
+@Before("within(com.example.service.*)")
+public void logServiceMethods() {
+    System.out.println("Service method called");
+}</p>
+<p>This expression selects methods declared within types directly in com.example.service.</p></article>
+  </section>
+  <section class="panel" data-panel="examples" role="tabpanel" hidden>
+    <article class="prose"><h3>The AOP vocabulary in one aspect</h3>
+<div class="codehilite"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">org.aspectj.lang.annotation.*</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.aspectj.lang.*</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.stereotype.Component</span><span class="p">;</span>
+
+<span class="nd">@Aspect</span><span class="w">                          </span><span class="c1">// a module of cross-cutting logic</span>
+<span class="nd">@Component</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">LoggingAspect</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="c1">// Pointcut: WHERE advice applies</span>
+<span class="w">    </span><span class="nd">@Pointcut</span><span class="p">(</span><span class="s">"execution(* com.jack.service.*.*(..))"</span><span class="p">)</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">serviceMethods</span><span class="p">()</span><span class="w"> </span><span class="p">{}</span>
+
+<span class="w">    </span><span class="nd">@Before</span><span class="p">(</span><span class="s">"serviceMethods()"</span><span class="p">)</span><span class="w">                    </span><span class="c1">// advice type: BEFORE</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">before</span><span class="p">(</span><span class="n">JoinPoint</span><span class="w"> </span><span class="n">jp</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">"entering "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">jp</span><span class="p">.</span><span class="na">getSignature</span><span class="p">().</span><span class="na">getName</span><span class="p">());</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@AfterReturning</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"serviceMethods()"</span><span class="p">,</span><span class="w"> </span><span class="n">returning</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"result"</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">afterReturn</span><span class="p">(</span><span class="n">JoinPoint</span><span class="w"> </span><span class="n">jp</span><span class="p">,</span><span class="w"> </span><span class="n">Object</span><span class="w"> </span><span class="n">result</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">"returned "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">result</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@AfterThrowing</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"serviceMethods()"</span><span class="p">,</span><span class="w"> </span><span class="n">throwing</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"ex"</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onError</span><span class="p">(</span><span class="n">JoinPoint</span><span class="w"> </span><span class="n">jp</span><span class="p">,</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="n">ex</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">"failed: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">ex</span><span class="p">.</span><span class="na">getMessage</span><span class="p">());</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@After</span><span class="p">(</span><span class="s">"serviceMethods()"</span><span class="p">)</span><span class="w">                     </span><span class="c1">// finally-style</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">after</span><span class="p">(</span><span class="n">JoinPoint</span><span class="w"> </span><span class="n">jp</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* always runs */</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<h3>@Around — the most powerful advice</h3>
+<div class="codehilite"><div class="highlight"><pre><span></span><span class="nd">@Around</span><span class="p">(</span><span class="s">"serviceMethods()"</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="n">Object</span><span class="w"> </span><span class="nf">time</span><span class="p">(</span><span class="n">ProceedingJoinPoint</span><span class="w"> </span><span class="n">pjp</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Throwable</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">long</span><span class="w"> </span><span class="n">start</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="na">nanoTime</span><span class="p">();</span>
+<span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">pjp</span><span class="p">.</span><span class="na">proceed</span><span class="p">();</span><span class="w">          </span><span class="c1">// invoke the real method</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">finally</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">long</span><span class="w"> </span><span class="n">ms</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">System</span><span class="p">.</span><span class="na">nanoTime</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">start</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">1_000_000</span><span class="p">;</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">pjp</span><span class="p">.</span><span class="na">getSignature</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">" took "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">ms</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">" ms"</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<h3>Common pointcut expressions</h3>
+<div class="codehilite"><div class="highlight"><pre><span></span><span class="c1">// execution(modifiers? return-type declaring-type?name(params) throws?)</span>
+<span class="nd">@Around</span><span class="p">(</span><span class="s">"execution(public * com.jack..*Service.*(..))"</span><span class="p">)</span><span class="w">   </span><span class="c1">// all Service beans</span>
+
+<span class="nd">@AfterReturning</span><span class="p">(</span><span class="s">"within(@org.springframework.stereotype.Service *)"</span><span class="p">)</span><span class="w">  </span><span class="c1">// inside @Service</span>
+
+<span class="nd">@Before</span><span class="p">(</span><span class="s">"@annotation(com.jack.annotation.Audited)"</span><span class="p">)</span><span class="w">       </span><span class="c1">// beans carrying a marker</span>
+<span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">audited</span><span class="p">(</span><span class="n">JoinPoint</span><span class="w"> </span><span class="n">jp</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* only methods annotated @Audited */</span><span class="w"> </span><span class="p">}</span>
+
+<span class="nd">@Before</span><span class="p">(</span><span class="s">"bean(orderService)"</span><span class="p">)</span><span class="w">                              </span><span class="c1">// a specific bean</span>
+
+<span class="nd">@Around</span><span class="p">(</span><span class="s">"execution(* com.jack..*(..)) &amp;&amp; args(java.lang.Long, ..)"</span><span class="p">)</span><span class="w">  </span><span class="c1">// first arg Long</span>
+</pre></div>
+</div>
+<h3>A practical use: retry via AOP</h3>
+<div class="codehilite"><div class="highlight"><pre><span></span><span class="nd">@Around</span><span class="p">(</span><span class="s">"@annotation(Retryable)"</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="n">Object</span><span class="w"> </span><span class="nf">retry</span><span class="p">(</span><span class="n">ProceedingJoinPoint</span><span class="w"> </span><span class="n">pjp</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Throwable</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">attempt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">attempt</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span><span class="w"> </span><span class="n">attempt</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">pjp</span><span class="p">.</span><span class="na">proceed</span><span class="p">();</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">RuntimeException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">attempt</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="k">throw</span><span class="w"> </span><span class="n">e</span><span class="p">;</span>
+<span class="w">            </span><span class="n">Thread</span><span class="p">.</span><span class="na">sleep</span><span class="p">(</span><span class="mi">200</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">attempt</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalStateException</span><span class="p">(</span><span class="s">"unreachable"</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">interface</span> <span class="nc">Retryable</span><span class="w"> </span><span class="p">{}</span><span class="w">        </span><span class="c1">// marker annotation: @Retryable on any method</span>
+</pre></div>
+</div></article>
+  </section>
+  <nav class="prev-next"><a class="pn previous" href="bean-lifecycle-aop.html"><span class="pn-label">Previous</span><span class="pn-title">Bean Lifecycle &amp; Where AOP Fits</span></a><a class="pn next" href="spring-transactions.html"><span class="pn-label">Next</span><span class="pn-title">Spring Transactions</span></a></nav>
+</main>
+<script src="../assets/app.js"></script>
+</body>
+</html>

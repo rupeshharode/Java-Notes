@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Has-a vs Is-a Relationships · Night Java</title>
+<meta name="description" content="Composition vs inheritance — when to prefer which and why.">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body class="topic-body">
+<aside class="sidebar">
+  <a class="brand" href="../index.html"><span class="brand-mark">J</span> Night Java</a>
+  <input class="side-filter" type="search" placeholder="Filter topics…" aria-label="Filter topics">
+  <div class="side-phase-wrap"><label class="side-phase-label" for="side-phase">Jump to phase</label>
+  <select id="side-phase" class="side-phase"><option value="1">Phase 1 · Programming Basics</option>
+<option value="2">Phase 2 · OOP</option>
+<option value="3">Phase 3 · Core Java Advanced</option>
+<option value="4">Phase 4 · Advanced Java</option>
+<option value="5">Phase 5 · DSA</option>
+<option value="6">Phase 6 · Database</option>
+<option value="7">Phase 7 · Backend Development</option>
+<option value="8">Phase 8 · Frontend</option>
+<option value="9">Phase 9 · DevOps + Deployment</option>
+<option value="10">Phase 10 · LLD</option>
+<option value="11">Phase 11 · HLD</option>
+<option value="12">Phase 12 · Interview Topics</option></select></div>
+  <nav class="side-nav" aria-label="Topics in roadmap order"><a class="side-link" href="../topics/java-fundamentals.html" data-slug="java-fundamentals"><span class="check" data-check="java-fundamentals" aria-hidden="true"></span>Java Fundamentals Q&amp;A</a>
+<a class="side-link" href="../topics/oops-encapsulation.html" data-slug="oops-encapsulation"><span class="check" data-check="oops-encapsulation" aria-hidden="true"></span>OOPs &amp; Encapsulation</a>
+<a class="side-link" href="../topics/inheritance.html" data-slug="inheritance"><span class="check" data-check="inheritance" aria-hidden="true"></span>Inheritance</a>
+<a class="side-link" href="../topics/has-a-is-a.html" aria-current="page" data-slug="has-a-is-a"><span class="check" data-check="has-a-is-a" aria-hidden="true"></span>Has-a vs Is-a Relationships</a>
+<a class="side-link" href="../topics/polymorphism.html" data-slug="polymorphism"><span class="check" data-check="polymorphism" aria-hidden="true"></span>Polymorphism</a>
+<a class="side-link" href="../topics/abstraction.html" data-slug="abstraction"><span class="check" data-check="abstraction" aria-hidden="true"></span>Abstraction</a>
+<a class="side-link" href="../topics/interface.html" data-slug="interface"><span class="check" data-check="interface" aria-hidden="true"></span>Interfaces</a>
+<a class="side-link" href="../topics/anonymous-inner-class.html" data-slug="anonymous-inner-class"><span class="check" data-check="anonymous-inner-class" aria-hidden="true"></span>Anonymous Inner Class</a>
+<a class="side-link" href="../topics/collections-framework.html" data-slug="collections-framework"><span class="check" data-check="collections-framework" aria-hidden="true"></span>Collections Framework</a>
+<a class="side-link" href="../topics/exception-handling.html" data-slug="exception-handling"><span class="check" data-check="exception-handling" aria-hidden="true"></span>Exception Handling</a>
+<a class="side-link" href="../topics/file-handling.html" data-slug="file-handling"><span class="check" data-check="file-handling" aria-hidden="true"></span>File Handling</a>
+<a class="side-link" href="../topics/generics.html" data-slug="generics"><span class="check" data-check="generics" aria-hidden="true"></span>Generics</a>
+<a class="side-link" href="../topics/stream-api.html" data-slug="stream-api"><span class="check" data-check="stream-api" aria-hidden="true"></span>Stream API</a>
+<a class="side-link" href="../topics/multithreading.html" data-slug="multithreading"><span class="check" data-check="multithreading" aria-hidden="true"></span>Multithreading</a>
+<a class="side-link" href="../topics/executorservice.html" data-slug="executorservice"><span class="check" data-check="executorservice" aria-hidden="true"></span>ExecutorService</a>
+<a class="side-link" href="../topics/completablefuture.html" data-slug="completablefuture"><span class="check" data-check="completablefuture" aria-hidden="true"></span>CompletableFuture</a>
+<a class="side-link" href="../topics/atomic-classes.html" data-slug="atomic-classes"><span class="check" data-check="atomic-classes" aria-hidden="true"></span>Atomic Classes</a>
+<a class="side-link" href="../topics/concurrent-collections.html" data-slug="concurrent-collections"><span class="check" data-check="concurrent-collections" aria-hidden="true"></span>Concurrent Collections</a>
+<a class="side-link" href="../topics/jdbc.html" data-slug="jdbc"><span class="check" data-check="jdbc" aria-hidden="true"></span>JDBC</a>
+<a class="side-link" href="../topics/servlet.html" data-slug="servlet"><span class="check" data-check="servlet" aria-hidden="true"></span>Servlets</a>
+<a class="side-link" href="../topics/jsp.html" data-slug="jsp"><span class="check" data-check="jsp" aria-hidden="true"></span>JSP</a>
+<a class="side-link" href="../topics/hibernate.html" data-slug="hibernate"><span class="check" data-check="hibernate" aria-hidden="true"></span>Hibernate</a>
+<a class="side-link" href="../topics/spring-mvc.html" data-slug="spring-mvc"><span class="check" data-check="spring-mvc" aria-hidden="true"></span>Spring MVC</a>
+<a class="side-link" href="../topics/session-management.html" data-slug="session-management"><span class="check" data-check="session-management" aria-hidden="true"></span>Session Management</a>
+<a class="side-link" href="../topics/maven.html" data-slug="maven"><span class="check" data-check="maven" aria-hidden="true"></span>Maven</a>
+<a class="side-link" href="../topics/servlet-vs-spring-core.html" data-slug="servlet-vs-spring-core"><span class="check" data-check="servlet-vs-spring-core" aria-hidden="true"></span>Servlet vs Spring Core</a>
+<a class="side-link" href="../topics/ioc-and-di.html" data-slug="ioc-and-di"><span class="check" data-check="ioc-and-di" aria-hidden="true"></span>IoC &amp; Dependency Injection</a>
+<a class="side-link" href="../topics/autowiring.html" data-slug="autowiring"><span class="check" data-check="autowiring" aria-hidden="true"></span>Autowiring</a>
+<a class="side-link" href="../topics/bean-configuration.html" data-slug="bean-configuration"><span class="check" data-check="bean-configuration" aria-hidden="true"></span>Bean Configuration &amp; Annotations</a>
+<a class="side-link" href="../topics/bean-lifecycle.html" data-slug="bean-lifecycle"><span class="check" data-check="bean-lifecycle" aria-hidden="true"></span>Bean Lifecycle</a>
+<a class="side-link" href="../topics/bean-lifecycle-aop.html" data-slug="bean-lifecycle-aop"><span class="check" data-check="bean-lifecycle-aop" aria-hidden="true"></span>Bean Lifecycle &amp; Where AOP Fits</a>
+<a class="side-link" href="../topics/spring-aop.html" data-slug="spring-aop"><span class="check" data-check="spring-aop" aria-hidden="true"></span>Spring AOP</a>
+<a class="side-link" href="../topics/spring-transactions.html" data-slug="spring-transactions"><span class="check" data-check="spring-transactions" aria-hidden="true"></span>Spring Transactions</a>
+<a class="side-link" href="../topics/spring-data.html" data-slug="spring-data"><span class="check" data-check="spring-data" aria-hidden="true"></span>Spring Data (JPA)</a>
+<a class="side-link" href="../topics/spring-profiles.html" data-slug="spring-profiles"><span class="check" data-check="spring-profiles" aria-hidden="true"></span>Spring Profiles &amp; Config</a>
+<a class="side-link" href="../topics/spring-security.html" data-slug="spring-security"><span class="check" data-check="spring-security" aria-hidden="true"></span>Spring Security Flow</a>
+<a class="side-link" href="../topics/filters-and-interceptors.html" data-slug="filters-and-interceptors"><span class="check" data-check="filters-and-interceptors" aria-hidden="true"></span>Filters &amp; Interceptors</a>
+<a class="side-link" href="../topics/core-java-deep-dive.html" data-slug="core-java-deep-dive"><span class="check" data-check="core-java-deep-dive" aria-hidden="true"></span>Core Java Deep-Dive</a></nav>
+  <p class="side-progress"><span data-progress-text></span></p>
+</aside>
+<main class="content">
+  <header class="topic-head">
+    <p class="crumb"><a href="../index.html">Roadmap</a> / Phase 2 · OOP</p>
+    <h1>Has-a vs Is-a Relationships</h1>
+    <p class="summary">Composition vs inheritance — when to prefer which and why.</p>
+    <div class="head-row">
+      <div class="tags"><span class="tag">oop</span><span class="tag">composition</span><span class="tag">aggregation</span></div>
+      <button class="read-btn" data-read-btn data-slug="has-a-is-a"><span class="read-icon">○</span> Mark as read</button>
+    </div>
+  </header>
+  <div class="tabs" role="tablist">
+    <button class="tab active" role="tab" data-tab="notes" aria-selected="true">Notes</button>
+    <button class="tab" role="tab" data-tab="examples" aria-selected="false">Code examples</button>
+  </div>
+  <section class="panel active" data-panel="notes" role="tabpanel">
+    <article class="prose"><p>** Has-a &amp; Is-a</p>
+<p>IS-A Relationship</p>
+<p>An IS-A relationship represents an inheritance relationship where a child class is a specialized type of the parent class.</p>
+<p>For example:</p>
+<p>Dog IS-A Animal</p>
+<p>class Animal {
+    void eat() {
+        System.out.println("Animal eats");
+    }
+}</p>
+<p>class Dog extends Animal {
+    void bark() {
+        System.out.println("Dog barks");
+    }
+}</p>
+<p>Here, Dog inherits from Animal.</p>
+<p>Animal
+   ↑
+  Dog</p>
+<p>Because Dog is tightly connected to the Animal class through inheritance, changes to the parent class can potentially affect the child class.</p>
+<p>IS-A → Inheritance → extends</p>
+<p>HAS-A Relationship</p>
+<p>A HAS-A relationship represents a relationship where one class contains or uses an object of another class.</p>
+<p>For example:</p>
+<p>Car HAS-A Engine</p>
+<p>class Engine {
+    void start() {
+        System.out.println("Engine starts");
+    }
+}</p>
+<p>class Car {
+    Engine engine = new Engine();</p>
+<div class="codehilite"><div class="highlight"><pre><span></span>void startCar() {
+    engine.start();
+    System.out.println("Car starts");
+}
+</pre></div>
+</div>
+<p>}</p>
+<p>Here, Car has an Engine object.</p>
+<p>Car
+ ↓
+Engine</p>
+<p>There is no inheritance between Car and Engine. The relationship is created through object composition/aggregation.</p>
+<p>HAS-A → Composition/Aggregation → Object reference</p>
+<p>Easy way to remember</p>
+<p>IS-A → "What is it?" → Inheritance</p>
+<p>Dog IS-A Animal</p>
+<p>Car IS-A Vehicle</p>
+<p>HAS-A → "What does it contain/have?" → Composition/Aggregation</p>
+<p>Car HAS-A Engine</p>
+<p>House HAS-A Room</p>
+<p>Library HAS-A Book</p>
+<p>Composition
+In composition, one object is an integral part of another.</p>
+<p>For example, a House has Rooms. If the house is considered destroyed, its rooms don't meaningfully exist as rooms of that house.</p>
+<p>class House {
+    private Room room = new Room();
+}</p>
+<p>Conceptually:</p>
+<p>House ◆──── Room</p>
+<p>The House strongly owns the Room.</p>
+<p>Aggregation
+In aggregation, one object contains or uses another object, but that object can exist independently.</p>
+<p>For example, a Department has Teachers. A teacher can exist even if that particular department is removed and could move to another department.</p>
+<p>class Department {
+    private Teacher teacher;</p>
+<div class="codehilite"><div class="highlight"><pre><span></span>Department(Teacher teacher) {
+    this.teacher = teacher;
+}
+</pre></div>
+</div>
+<p>}</p></article>
+  </section>
+  <section class="panel" data-panel="examples" role="tabpanel" hidden>
+    <article class="prose"><h3>Is-a: inheritance. Has-a: composition.</h3>
+<div class="codehilite"><div class="highlight"><pre><span></span><span class="c1">// IS-A: a Car "is a" Vehicle — inheritance</span>
+<span class="kd">class</span> <span class="nc">Vehicle</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">start</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">"Starting engine"</span><span class="p">);</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nc">Car</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Vehicle</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span><span class="w">        </span><span class="c1">// Car IS-A Vehicle</span>
+
+<span class="c1">// HAS-A: an Engine "is part of" a Car — composition/aggregation</span>
+<span class="kd">class</span> <span class="nc">Engine</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">ignite</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">"Engine ignited"</span><span class="p">);</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nc">ModernCar</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Engine</span><span class="w"> </span><span class="n">engine</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Engine</span><span class="p">();</span><span class="w">   </span><span class="c1">// ModernCar HAS-A Engine</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">drive</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">engine</span><span class="p">.</span><span class="na">ignite</span><span class="p">();</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<h3>Aggregation vs composition</h3>
+<div class="codehilite"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">java.util.List</span><span class="p">;</span>
+
+<span class="c1">// Aggregation — the parts can exist without the whole (weak ownership)</span>
+<span class="kd">class</span> <span class="nc">Department</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Teacher</span><span class="o">&gt;</span><span class="w"> </span><span class="n">teachers</span><span class="p">;</span>
+<span class="w">    </span><span class="n">Department</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Teacher</span><span class="o">&gt;</span><span class="w"> </span><span class="n">teachers</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">teachers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">teachers</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="c1">// Teacher objects live on even if the Department is deleted</span>
+<span class="p">}</span>
+
+<span class="c1">// Composition — the parts die with the whole (strong ownership)</span>
+<span class="kd">class</span> <span class="nc">House</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Room</span><span class="w"> </span><span class="n">room</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Room</span><span class="p">();</span><span class="w">   </span><span class="c1">// Room has no life outside House</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nc">Room</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+<span class="kd">class</span> <span class="nc">Teacher</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+</pre></div>
+</div>
+<h3>Why composition is usually preferred ("favor composition over inheritance")</h3>
+<div class="codehilite"><div class="highlight"><pre><span></span><span class="c1">// Inheritance locks you into one hierarchy and exposes parent internals.</span>
+<span class="c1">// Composition lets you swap behaviour at runtime:</span>
+
+<span class="kd">interface</span> <span class="nc">FlyBehaviour</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">fly</span><span class="p">();</span><span class="w"> </span><span class="p">}</span>
+<span class="kd">class</span> <span class="nc">JetEngine</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">FlyBehaviour</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">fly</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">"Jet flight"</span><span class="p">);</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+<span class="kd">class</span> <span class="nc">Wings</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">FlyBehaviour</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">fly</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">"Flap flap"</span><span class="p">);</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nc">Bird</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">FlyBehaviour</span><span class="w"> </span><span class="n">behaviour</span><span class="p">;</span><span class="w">              </span><span class="c1">// injectable</span>
+<span class="w">    </span><span class="n">Bird</span><span class="p">(</span><span class="n">FlyBehaviour</span><span class="w"> </span><span class="n">behaviour</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">behaviour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">behaviour</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">performFly</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">behaviour</span><span class="p">.</span><span class="na">fly</span><span class="p">();</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nc">Demo</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="n">Bird</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Wings</span><span class="p">()).</span><span class="na">performFly</span><span class="p">();</span><span class="w">      </span><span class="c1">// Flap flap</span>
+<span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="n">Bird</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">JetEngine</span><span class="p">()).</span><span class="na">performFly</span><span class="p">();</span><span class="w">  </span><span class="c1">// Jet flight</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div></article>
+  </section>
+  <nav class="prev-next"><a class="pn previous" href="inheritance.html"><span class="pn-label">Previous</span><span class="pn-title">Inheritance</span></a><a class="pn next" href="polymorphism.html"><span class="pn-label">Next</span><span class="pn-title">Polymorphism</span></a></nav>
+</main>
+<script src="../assets/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Servlets · Night Java</title>
+<meta name="description" content="Server-side request handling: lifecycle, HttpServlet, config and filters.">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body class="topic-body">
+<aside class="sidebar">
+  <a class="brand" href="../index.html"><span class="brand-mark">J</span> Night Java</a>
+  <input class="side-filter" type="search" placeholder="Filter topics…" aria-label="Filter topics">
+  <div class="side-phase-wrap"><label class="side-phase-label" for="side-phase">Jump to phase</label>
+  <select id="side-phase" class="side-phase"><option value="1">Phase 1 · Programming Basics</option>
+<option value="2">Phase 2 · OOP</option>
+<option value="3">Phase 3 · Core Java Advanced</option>
+<option value="4">Phase 4 · Advanced Java</option>
+<option value="5">Phase 5 · DSA</option>
+<option value="6">Phase 6 · Database</option>
+<option value="7">Phase 7 · Backend Development</option>
+<option value="8">Phase 8 · Frontend</option>
+<option value="9">Phase 9 · DevOps + Deployment</option>
+<option value="10">Phase 10 · LLD</option>
+<option value="11">Phase 11 · HLD</option>
+<option value="12">Phase 12 · Interview Topics</option></select></div>
+  <nav class="side-nav" aria-label="Topics in roadmap order"><a class="side-link" href="../topics/java-fundamentals.html" data-slug="java-fundamentals"><span class="check" data-check="java-fundamentals" aria-hidden="true"></span>Java Fundamentals Q&amp;A</a>
+<a class="side-link" href="../topics/oops-encapsulation.html" data-slug="oops-encapsulation"><span class="check" data-check="oops-encapsulation" aria-hidden="true"></span>OOPs &amp; Encapsulation</a>
+<a class="side-link" href="../topics/inheritance.html" data-slug="inheritance"><span class="check" data-check="inheritance" aria-hidden="true"></span>Inheritance</a>
+<a class="side-link" href="../topics/has-a-is-a.html" data-slug="has-a-is-a"><span class="check" data-check="has-a-is-a" aria-hidden="true"></span>Has-a vs Is-a Relationships</a>
+<a class="side-link" href="../topics/polymorphism.html" data-slug="polymorphism"><span class="check" data-check="polymorphism" aria-hidden="true"></span>Polymorphism</a>
+<a class="side-link" href="../topics/abstraction.html" data-slug="abstraction"><span class="check" data-check="abstraction" aria-hidden="true"></span>Abstraction</a>
+<a class="side-link" href="../topics/interface.html" data-slug="interface"><span class="check" data-check="interface" aria-hidden="true"></span>Interfaces</a>
+<a class="side-link" href="../topics/anonymous-inner-class.html" data-slug="anonymous-inner-class"><span class="check" data-check="anonymous-inner-class" aria-hidden="true"></span>Anonymous Inner Class</a>
+<a class="side-link" href="../topics/collections-framework.html" data-slug="collections-framework"><span class="check" data-check="collections-framework" aria-hidden="true"></span>Collections Framework</a>
+<a class="side-link" href="../topics/exception-handling.html" data-slug="exception-handling"><span class="check" data-check="exception-handling" aria-hidden="true"></span>Exception Handling</a>
+<a class="side-link" href="../topics/file-handling.html" data-slug="file-handling"><span class="check" data-check="file-handling" aria-hidden="true"></span>File Handling</a>
+<a class="side-link" href="../topics/generics.html" data-slug="generics"><span class="check" data-check="generics" aria-hidden="true"></span>Generics</a>
+<a class="side-link" href="../topics/stream-api.html" data-slug="stream-api"><span class="check" data-check="stream-api" aria-hidden="true"></span>Stream API</a>
+<a class="side-link" href="../topics/multithreading.html" data-slug="multithreading"><span class="check" data-check="multithreading" aria-hidden="true"></span>Multithreading</a>
+<a class="side-link" href="../topics/executorservice.html" data-slug="executorservice"><span class="check" data-check="executorservice" aria-hidden="true"></span>ExecutorService</a>
+<a class="side-link" href="../topics/completablefuture.html" data-slug="completablefuture"><span class="check" data-check="completablefuture" aria-hidden="true"></span>CompletableFuture</a>
+<a class="side-link" href="../topics/atomic-classes.html" data-slug="atomic-classes"><span class="check" data-check="atomic-classes" aria-hidden="true"></span>Atomic Classes</a>
+<a class="side-link" href="../topics/concurrent-collections.html" data-slug="concurrent-collections"><span class="check" data-check="concurrent-collections" aria-hidden="true"></span>Concurrent Collections</a>
+<a class="side-link" href="../topics/jdbc.html" data-slug="jdbc"><span class="check" data-check="jdbc" aria-hidden="true"></span>JDBC</a>
+<a class="side-link" href="../topics/servlet.html" aria-current="page" data-slug="servlet"><span class="check" data-check="servlet" aria-hidden="true"></span>Servlets</a>
+<a class="side-link" href="../topics/jsp.html" data-slug="jsp"><span class="check" data-check="jsp" aria-hidden="true"></span>JSP</a>
+<a class="side-link" href="../topics/hibernate.html" data-slug="hibernate"><span class="check" data-check="hibernate" aria-hidden="true"></span>Hibernate</a>
+<a class="side-link" href="../topics/spring-mvc.html" data-slug="spring-mvc"><span class="check" data-check="spring-mvc" aria-hidden="true"></span>Spring MVC</a>
+<a class="side-link" href="../topics/session-management.html" data-slug="session-management"><span class="check" data-check="session-management" aria-hidden="true"></span>Session Management</a>
+<a class="side-link" href="../topics/maven.html" data-slug="maven"><span class="check" data-check="maven" aria-hidden="true"></span>Maven</a>
+<a class="side-link" href="../topics/servlet-vs-spring-core.html" data-slug="servlet-vs-spring-core"><span class="check" data-check="servlet-vs-spring-core" aria-hidden="true"></span>Servlet vs Spring Core</a>
+<a class="side-link" href="../topics/ioc-and-di.html" data-slug="ioc-and-di"><span class="check" data-check="ioc-and-di" aria-hidden="true"></span>IoC &amp; Dependency Injection</a>
+<a class="side-link" href="../topics/autowiring.html" data-slug="autowiring"><span class="check" data-check="autowiring" aria-hidden="true"></span>Autowiring</a>
+<a class="side-link" href="../topics/bean-configuration.html" data-slug="bean-configuration"><span class="check" data-check="bean-configuration" aria-hidden="true"></span>Bean Configuration &amp; Annotations</a>
+<a class="side-link" href="../topics/bean-lifecycle.html" data-slug="bean-lifecycle"><span class="check" data-check="bean-lifecycle" aria-hidden="true"></span>Bean Lifecycle</a>
+<a class="side-link" href="../topics/bean-lifecycle-aop.html" data-slug="bean-lifecycle-aop"><span class="check" data-check="bean-lifecycle-aop" aria-hidden="true"></span>Bean Lifecycle &amp; Where AOP Fits</a>
+<a class="side-link" href="../topics/spring-aop.html" data-slug="spring-aop"><span class="check" data-check="spring-aop" aria-hidden="true"></span>Spring AOP</a>
+<a class="side-link" href="../topics/spring-transactions.html" data-slug="spring-transactions"><span class="check" data-check="spring-transactions" aria-hidden="true"></span>Spring Transactions</a>
+<a class="side-link" href="../topics/spring-data.html" data-slug="spring-data"><span class="check" data-check="spring-data" aria-hidden="true"></span>Spring Data (JPA)</a>
+<a class="side-link" href="../topics/spring-profiles.html" data-slug="spring-profiles"><span class="check" data-check="spring-profiles" aria-hidden="true"></span>Spring Profiles &amp; Config</a>
+<a class="side-link" href="../topics/spring-security.html" data-slug="spring-security"><span class="check" data-check="spring-security" aria-hidden="true"></span>Spring Security Flow</a>
+<a class="side-link" href="../topics/filters-and-interceptors.html" data-slug="filters-and-interceptors"><span class="check" data-check="filters-and-interceptors" aria-hidden="true"></span>Filters &amp; Interceptors</a>
+<a class="side-link" href="../topics/core-java-deep-dive.html" data-slug="core-java-deep-dive"><span class="check" data-check="core-java-deep-dive" aria-hidden="true"></span>Core Java Deep-Dive</a></nav>
+  <p class="side-progress"><span data-progress-text></span></p>
+</aside>
+<main class="content">
+  <header class="topic-head">
+    <p class="crumb"><a href="../index.html">Roadmap</a> / Phase 4 · Advanced Java</p>
+    <h1>Servlets</h1>
+    <p class="summary">Server-side request handling: lifecycle, HttpServlet, config and filters.</p>
+    <div class="head-row">
+      <div class="tags"><span class="tag">web</span><span class="tag">tomcat</span><span class="tag">http</span></div>
+      <button class="read-btn" data-read-btn data-slug="servlet"><span class="read-icon">○</span> Mark as read</button>
+    </div>
+  </header>
+  <div class="tabs" role="tablist">
+    <button class="tab active" role="tab" data-tab="notes" aria-selected="true">Notes</button>
+    <button class="tab" role="tab" data-tab="examples" aria-selected="false">Code examples</button>
+  </div>
+  <section class="panel active" data-panel="notes" role="tabpanel">
+    <article class="prose"><p>Servlet is a sever side applets</p>
+<p>Applets -&gt;
+"Java Applets are small Java programs designed to run on the client side, usually inside a web browser or an applet viewer. We write applet code in a separate Java file by extending the Applet class, and historically, we used the HTML applet tag to embed it in a webpage. The main disadvantage of applets was that the client machine needed a compatible Java runtime environment and browser support to execute them. Applets are now obsolete and are no longer supported by modern browsers."</p>
+<p>Important: Applets were deprecated in Java 9 and permanently removed from the JDK in Java 17</p>
+<p>Example :</p>
+<p>import java.applet.Applet;
+import java.awt.Graphics;</p>
+<p>public class MyApplet extends Applet {</p>
+<div class="codehilite"><div class="highlight"><pre><span></span>public void paint(Graphics g) {
+    g.drawString("Hello Java Applet", 50, 50);
+}
+</pre></div>
+</div>
+<p>}</p>
+<html>
+<head>
+    <title>My Java Applet</title>
+</head>
+<body>
+    <h2>Java Applet Example</h2>
+
+    <applet code="MyApplet.class" width="300" height="200">
+    </applet>
+
+</body>
+</html>
+
+<p>**IN webpage applet screen is embedded</p>
+<p>**Servlet -&gt;</p>
+<p>A Servlet is a server-side Java component used to handle client requests, process data, and generate dynamic responses.</p>
+<p>A servlet runs inside a servlet container such as Apache Tomcat. </p>
+<p>we need to use web.xml file or @webServlet annotation to map a user request to a specific servlet</p>
+<p>servlet provide response using printwriter class </p>
+<ol>
+<li>How to create a Servlet?</li>
+</ol>
+<p>We can create a servlet by extending either:</p>
+<p>GenericServlet – A protocol-independent abstract class.</p>
+<p>HttpServlet – A class designed specifically for handling HTTP requests.</p>
+<p>Both classes belong to the Servlet API.</p>
+<ol start="2">
+<li>Difference between GenericServlet and HttpServlet</li>
+</ol>
+<p>GenericServlet                  HttpServlet</p>
+<p>Protocol-independent                Designed for HTTP</p>
+<p>Provides the service() method          Provides doGet(), doPost(), doPut(), doDelete(), etc.</p>
+<p>We override service() to handle requests    We typically override HTTP-specific methods</p>
+<p>Does not provide HTTP-specific methods      Supports HTTP request methods</p>
+<p>Important correction: HttpServlet also has a service() method. It dispatches HTTP requests to the appropriate methods, such as doGet() and doPost().</p>
+<p>import java.io.<em>;
+import jakarta.servlet.</em>;</p>
+<p>public class MyServlet extends GenericServlet {</p>
+<div class="codehilite"><div class="highlight"><pre><span></span>@Override
+public void service(ServletRequest req,
+                    ServletResponse res)
+                    throws IOException {
+
+    res.setContentType("text/plain");
+
+    PrintWriter out = res.getWriter();
+    out.println("Hello from GenericServlet");
+}
+</pre></div>
+</div>
+<p>}</p>
+<p>import java.io.<em>;
+import jakarta.servlet.</em>;
+import jakarta.servlet.http.*;
+import jakarta.servlet.annotation.WebServlet;</p>
+<p>@WebServlet("/hello")
+public class MyServlet extends HttpServlet {</p>
+<div class="codehilite"><div class="highlight"><pre><span></span>@Override
+protected void doGet(HttpServletRequest req,
+                     HttpServletResponse res)
+                     throws IOException {
+
+    res.setContentType("text/plain");
+
+    PrintWriter out = res.getWriter();
+    out.println("Hello from HttpServlet");
+}
+</pre></div>
+</div>
+<p>}</p>
+<p>HTML does not run on the server; it is generated by the servlet on the server and then sent to the browser.</p>
+<p>How it works</p>
+<p>The servlet executes on the server, such as Apache Tomcat.</p>
+<p>We use PrintWriter to generate HTML code dynamically.</p>
+<p>The server sends the generated HTML as an HTTP response.</p>
+<p>The browser receives the HTML and renders it for the user.</p>
+<p>Example
+PrintWriter out = response.getWriter();</p>
+<p>out.println("<html>");
+out.println("<body>");
+out.println("<h1>Hello Jack</h1>");
+out.println("</body>");
+out.println("</html>");</p>
+<ol start="3">
+<li>Difference between RequestDispatcher and sendRedirect()</li>
+</ol>
+<p>This is a very common interview question.</p>
+<p>RequestDispatcher.forward()                 sendRedirect()</p>
+<p>Works on the server side            Sends a redirect response to the browser</p>
+<p>Does not change the browser URL             Changes the browser URL</p>
+<p>Uses the same request and response          Creates a new request</p>
+<p>Generally faster                Requires an additional browser request</p>
+<p>RequestDispatcher is used to forward a request from one servlet to another servlet or resource on the server.
+When we use RequestDispatcher, the browser does not know that the request has been forwarded to another servlet because the URL in the browser remains unchanged.</p>
+<p>whereas in senRedirect() browser url is change and need new request from browser
+Example:</p>
+<p>// Forward
+request.getRequestDispatcher("home.jsp")
+       .forward(request, response);</p>
+<p>// Redirect
+response.sendRedirect("home.jsp");</p>
+<ol start="4">
+<li>Session Management</li>
+</ol>
+<p>HTTP is a stateless protocol, meaning the server does not automatically remember previous requests from the same client.</p>
+<p>Servlets provide session management mechanisms:</p>
+<p>HttpSession – Stores user-specific data across requests.</p>
+<p>Cookies – Store small pieces of data in the browser.</p>
+<p>URL rewriting – Adds session information to a URL when needed.</p>
+<p>Hidden form fields – Carry data between form submissions.</p>
+<p>Example:</p>
+<p>HttpSession session = request.getSession();
+session.setAttribute("username", "Jack");</p>
+<p>String name = (String) session.getAttribute("username");</p>
+<p>Interview question: Why do we use HttpSession?</p>
+<p>Answer: To maintain user-specific information across multiple HTTP requests, such as login details.</p>
+<ol start="7">
+<li>Servlet Filters</li>
+</ol>
+<p>A Filter is used to intercept requests and responses before or after they reach a servlet.</p>
+<p>Common uses:</p>
+<p>Authentication and authorization.</p>
+<p>Logging.</p>
+<p>Request validation.</p>
+<p>Setting response headers.</p>
+<p>Example use case: Checking whether a user is logged in before allowing access to a protected page.</p>
+<ol start="8">
+<li>servletConfig &amp; ServletContext</li>
+</ol></article>
+  </section>
+  <section class="panel" data-panel="examples" role="tabpanel" hidden>
+    <article class="prose"><h3>A minimal HttpServlet</h3>
+<div class="codehilite"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.servlet.http.*</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.servlet.annotation.WebServlet</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.io.IOException</span><span class="p">;</span>
+
+<span class="nd">@WebServlet</span><span class="p">(</span><span class="s">"/hello"</span><span class="p">)</span><span class="w">   </span><span class="c1">// maps the URL /hello to this servlet</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">HelloServlet</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">HttpServlet</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">doGet</span><span class="p">(</span><span class="n">HttpServletRequest</span><span class="w"> </span><span class="n">req</span><span class="p">,</span><span class="w"> </span><span class="n">HttpServletResponse</span><span class="w"> </span><span class="n">resp</span><span class="p">)</span>
+<span class="w">            </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">resp</span><span class="p">.</span><span class="na">setContentType</span><span class="p">(</span><span class="s">"text/html"</span><span class="p">);</span>
+<span class="w">        </span><span class="n">resp</span><span class="p">.</span><span class="na">getWriter</span><span class="p">().</span><span class="na">println</span><span class="p">(</span><span class="s">"&lt;h1&gt;Hello from a Servlet&lt;/h1&gt;"</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">doPost</span><span class="p">(</span><span class="n">HttpServletRequest</span><span class="w"> </span><span class="n">req</span><span class="p">,</span><span class="w"> </span><span class="n">HttpServletResponse</span><span class="w"> </span><span class="n">resp</span><span class="p">)</span>
+<span class="w">            </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">req</span><span class="p">.</span><span class="na">getParameter</span><span class="p">(</span><span class="s">"name"</span><span class="p">);</span><span class="w">   </span><span class="c1">// form data</span>
+<span class="w">        </span><span class="n">resp</span><span class="p">.</span><span class="na">getWriter</span><span class="p">().</span><span class="na">println</span><span class="p">(</span><span class="s">"Posted: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">name</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<h3>The servlet lifecycle</h3>
+<div class="codehilite"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.servlet.http.*</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.servlet.annotation.WebServlet</span><span class="p">;</span>
+
+<span class="nd">@WebServlet</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"/life"</span><span class="p">,</span><span class="w"> </span><span class="n">loadOnStartup</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">LifeServlet</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">HttpServlet</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@Override</span><span class="w"> </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">init</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">                 </span><span class="c1">// once, at startup</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">"init — one instance created"</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span><span class="w"> </span><span class="kd">protected</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">service</span><span class="p">(</span><span class="n">HttpServletRequest</span><span class="w"> </span><span class="n">req</span><span class="p">,</span><span class="w"> </span><span class="n">HttpServletResponse</span><span class="w"> </span><span class="n">resp</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// called per request; dispatches to doGet/doPost/...</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">"service — thread per request"</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span><span class="w"> </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">destroy</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">              </span><span class="c1">// once, at shutdown</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">"destroy — cleanup"</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<h3>Init parameters and config</h3>
+<div class="codehilite"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.servlet.http.*</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.servlet.annotation.WebServlet</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.servlet.ServletConfig</span><span class="p">;</span>
+
+<span class="nd">@WebServlet</span><span class="p">(</span><span class="n">urlPatterns</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"/config"</span><span class="p">,</span><span class="w"> </span><span class="n">initParams</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nd">@WebInitParam</span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"env"</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"prod"</span><span class="p">)</span>
+<span class="p">})</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ConfigServlet</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">HttpServlet</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span><span class="w"> </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">init</span><span class="p">(</span><span class="n">ServletConfig</span><span class="w"> </span><span class="n">config</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">env</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">config</span><span class="p">.</span><span class="na">getInitParameter</span><span class="p">(</span><span class="s">"env"</span><span class="p">);</span><span class="w">   </span><span class="c1">// "prod"</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">"env = "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">env</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<h3>ServletContext and request dispatch</h3>
+<div class="codehilite"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.servlet.http.*</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.servlet.ServletException</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.servlet.RequestDispatcher</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nc">DispatchServlet</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">HttpServlet</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span><span class="w"> </span><span class="kd">protected</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">doGet</span><span class="p">(</span><span class="n">HttpServletRequest</span><span class="w"> </span><span class="n">req</span><span class="p">,</span><span class="w"> </span><span class="n">HttpServletResponse</span><span class="w"> </span><span class="n">resp</span><span class="p">)</span>
+<span class="w">            </span><span class="kd">throws</span><span class="w"> </span><span class="n">ServletException</span><span class="p">,</span><span class="w"> </span><span class="n">java</span><span class="p">.</span><span class="na">io</span><span class="p">.</span><span class="na">IOException</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">        </span><span class="n">req</span><span class="p">.</span><span class="na">setAttribute</span><span class="p">(</span><span class="s">"user"</span><span class="p">,</span><span class="w"> </span><span class="s">"Jack"</span><span class="p">);</span><span class="w">                        </span><span class="c1">// request scope</span>
+
+<span class="w">        </span><span class="n">RequestDispatcher</span><span class="w"> </span><span class="n">rd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">req</span><span class="p">.</span><span class="na">getRequestDispatcher</span><span class="p">(</span><span class="s">"/view.jsp"</span><span class="p">);</span>
+<span class="w">        </span><span class="n">rd</span><span class="p">.</span><span class="na">forward</span><span class="p">(</span><span class="n">req</span><span class="p">,</span><span class="w"> </span><span class="n">resp</span><span class="p">);</span><span class="w">       </span><span class="c1">// same request continues server-side</span>
+<span class="w">        </span><span class="c1">// resp.sendRedirect("/login");  // vs redirect: new browser request</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div></article>
+  </section>
+  <nav class="prev-next"><a class="pn previous" href="jdbc.html"><span class="pn-label">Previous</span><span class="pn-title">JDBC</span></a><a class="pn next" href="jsp.html"><span class="pn-label">Next</span><span class="pn-title">JSP</span></a></nav>
+</main>
+<script src="../assets/app.js"></script>
+</body>
+</html>

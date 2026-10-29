@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Filters &amp; Interceptors · Night Java</title>
+<meta name="description" content="Servlet filters vs Spring MVC interceptors and when to reach for each.">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body class="topic-body">
+<aside class="sidebar">
+  <a class="brand" href="../index.html"><span class="brand-mark">J</span> Night Java</a>
+  <input class="side-filter" type="search" placeholder="Filter topics…" aria-label="Filter topics">
+  <div class="side-phase-wrap"><label class="side-phase-label" for="side-phase">Jump to phase</label>
+  <select id="side-phase" class="side-phase"><option value="1">Phase 1 · Programming Basics</option>
+<option value="2">Phase 2 · OOP</option>
+<option value="3">Phase 3 · Core Java Advanced</option>
+<option value="4">Phase 4 · Advanced Java</option>
+<option value="5">Phase 5 · DSA</option>
+<option value="6">Phase 6 · Database</option>
+<option value="7">Phase 7 · Backend Development</option>
+<option value="8">Phase 8 · Frontend</option>
+<option value="9">Phase 9 · DevOps + Deployment</option>
+<option value="10">Phase 10 · LLD</option>
+<option value="11">Phase 11 · HLD</option>
+<option value="12">Phase 12 · Interview Topics</option></select></div>
+  <nav class="side-nav" aria-label="Topics in roadmap order"><a class="side-link" href="../topics/java-fundamentals.html" data-slug="java-fundamentals"><span class="check" data-check="java-fundamentals" aria-hidden="true"></span>Java Fundamentals Q&amp;A</a>
+<a class="side-link" href="../topics/oops-encapsulation.html" data-slug="oops-encapsulation"><span class="check" data-check="oops-encapsulation" aria-hidden="true"></span>OOPs &amp; Encapsulation</a>
+<a class="side-link" href="../topics/inheritance.html" data-slug="inheritance"><span class="check" data-check="inheritance" aria-hidden="true"></span>Inheritance</a>
+<a class="side-link" href="../topics/has-a-is-a.html" data-slug="has-a-is-a"><span class="check" data-check="has-a-is-a" aria-hidden="true"></span>Has-a vs Is-a Relationships</a>
+<a class="side-link" href="../topics/polymorphism.html" data-slug="polymorphism"><span class="check" data-check="polymorphism" aria-hidden="true"></span>Polymorphism</a>
+<a class="side-link" href="../topics/abstraction.html" data-slug="abstraction"><span class="check" data-check="abstraction" aria-hidden="true"></span>Abstraction</a>
+<a class="side-link" href="../topics/interface.html" data-slug="interface"><span class="check" data-check="interface" aria-hidden="true"></span>Interfaces</a>
+<a class="side-link" href="../topics/anonymous-inner-class.html" data-slug="anonymous-inner-class"><span class="check" data-check="anonymous-inner-class" aria-hidden="true"></span>Anonymous Inner Class</a>
+<a class="side-link" href="../topics/collections-framework.html" data-slug="collections-framework"><span class="check" data-check="collections-framework" aria-hidden="true"></span>Collections Framework</a>
+<a class="side-link" href="../topics/exception-handling.html" data-slug="exception-handling"><span class="check" data-check="exception-handling" aria-hidden="true"></span>Exception Handling</a>
+<a class="side-link" href="../topics/file-handling.html" data-slug="file-handling"><span class="check" data-check="file-handling" aria-hidden="true"></span>File Handling</a>
+<a class="side-link" href="../topics/generics.html" data-slug="generics"><span class="check" data-check="generics" aria-hidden="true"></span>Generics</a>
+<a class="side-link" href="../topics/stream-api.html" data-slug="stream-api"><span class="check" data-check="stream-api" aria-hidden="true"></span>Stream API</a>
+<a class="side-link" href="../topics/multithreading.html" data-slug="multithreading"><span class="check" data-check="multithreading" aria-hidden="true"></span>Multithreading</a>
+<a class="side-link" href="../topics/executorservice.html" data-slug="executorservice"><span class="check" data-check="executorservice" aria-hidden="true"></span>ExecutorService</a>
+<a class="side-link" href="../topics/completablefuture.html" data-slug="completablefuture"><span class="check" data-check="completablefuture" aria-hidden="true"></span>CompletableFuture</a>
+<a class="side-link" href="../topics/atomic-classes.html" data-slug="atomic-classes"><span class="check" data-check="atomic-classes" aria-hidden="true"></span>Atomic Classes</a>
+<a class="side-link" href="../topics/concurrent-collections.html" data-slug="concurrent-collections"><span class="check" data-check="concurrent-collections" aria-hidden="true"></span>Concurrent Collections</a>
+<a class="side-link" href="../topics/jdbc.html" data-slug="jdbc"><span class="check" data-check="jdbc" aria-hidden="true"></span>JDBC</a>
+<a class="side-link" href="../topics/servlet.html" data-slug="servlet"><span class="check" data-check="servlet" aria-hidden="true"></span>Servlets</a>
+<a class="side-link" href="../topics/jsp.html" data-slug="jsp"><span class="check" data-check="jsp" aria-hidden="true"></span>JSP</a>
+<a class="side-link" href="../topics/hibernate.html" data-slug="hibernate"><span class="check" data-check="hibernate" aria-hidden="true"></span>Hibernate</a>
+<a class="side-link" href="../topics/spring-mvc.html" data-slug="spring-mvc"><span class="check" data-check="spring-mvc" aria-hidden="true"></span>Spring MVC</a>
+<a class="side-link" href="../topics/session-management.html" data-slug="session-management"><span class="check" data-check="session-management" aria-hidden="true"></span>Session Management</a>
+<a class="side-link" href="../topics/maven.html" data-slug="maven"><span class="check" data-check="maven" aria-hidden="true"></span>Maven</a>
+<a class="side-link" href="../topics/servlet-vs-spring-core.html" data-slug="servlet-vs-spring-core"><span class="check" data-check="servlet-vs-spring-core" aria-hidden="true"></span>Servlet vs Spring Core</a>
+<a class="side-link" href="../topics/ioc-and-di.html" data-slug="ioc-and-di"><span class="check" data-check="ioc-and-di" aria-hidden="true"></span>IoC &amp; Dependency Injection</a>
+<a class="side-link" href="../topics/autowiring.html" data-slug="autowiring"><span class="check" data-check="autowiring" aria-hidden="true"></span>Autowiring</a>
+<a class="side-link" href="../topics/bean-configuration.html" data-slug="bean-configuration"><span class="check" data-check="bean-configuration" aria-hidden="true"></span>Bean Configuration &amp; Annotations</a>
+<a class="side-link" href="../topics/bean-lifecycle.html" data-slug="bean-lifecycle"><span class="check" data-check="bean-lifecycle" aria-hidden="true"></span>Bean Lifecycle</a>
+<a class="side-link" href="../topics/bean-lifecycle-aop.html" data-slug="bean-lifecycle-aop"><span class="check" data-check="bean-lifecycle-aop" aria-hidden="true"></span>Bean Lifecycle &amp; Where AOP Fits</a>
+<a class="side-link" href="../topics/spring-aop.html" data-slug="spring-aop"><span class="check" data-check="spring-aop" aria-hidden="true"></span>Spring AOP</a>
+<a class="side-link" href="../topics/spring-transactions.html" data-slug="spring-transactions"><span class="check" data-check="spring-transactions" aria-hidden="true"></span>Spring Transactions</a>
+<a class="side-link" href="../topics/spring-data.html" data-slug="spring-data"><span class="check" data-check="spring-data" aria-hidden="true"></span>Spring Data (JPA)</a>
+<a class="side-link" href="../topics/spring-profiles.html" data-slug="spring-profiles"><span class="check" data-check="spring-profiles" aria-hidden="true"></span>Spring Profiles &amp; Config</a>
+<a class="side-link" href="../topics/spring-security.html" data-slug="spring-security"><span class="check" data-check="spring-security" aria-hidden="true"></span>Spring Security Flow</a>
+<a class="side-link" href="../topics/filters-and-interceptors.html" aria-current="page" data-slug="filters-and-interceptors"><span class="check" data-check="filters-and-interceptors" aria-hidden="true"></span>Filters &amp; Interceptors</a>
+<a class="side-link" href="../topics/core-java-deep-dive.html" data-slug="core-java-deep-dive"><span class="check" data-check="core-java-deep-dive" aria-hidden="true"></span>Core Java Deep-Dive</a></nav>
+  <p class="side-progress"><span data-progress-text></span></p>
+</aside>
+<main class="content">
+  <header class="topic-head">
+    <p class="crumb"><a href="../index.html">Roadmap</a> / Phase 7 · Backend Development</p>
+    <h1>Filters &amp; Interceptors</h1>
+    <p class="summary">Servlet filters vs Spring MVC interceptors and when to reach for each.</p>
+    <div class="head-row">
+      <div class="tags"><span class="tag">spring</span><span class="tag">filters</span><span class="tag">interceptors</span></div>
+      <button class="read-btn" data-read-btn data-slug="filters-and-interceptors"><span class="read-icon">○</span> Mark as read</button>
+    </div>
+  </header>
+  <div class="tabs" role="tablist">
+    <button class="tab active" role="tab" data-tab="notes" aria-selected="true">Notes</button>
+    <button class="tab" role="tab" data-tab="examples" aria-selected="false">Code examples</button>
+  </div>
+  <section class="panel active" data-panel="notes" role="tabpanel">
+    <article class="prose"><p>A Filter is an interface provided by the jakarta.servlet package. It is used to process HTTP requests and responses before and after they reach the target resource.</p>
+<p>Common use cases:
+- Request and response logging
+- Authentication and security checks
+- CORS handling
+- Request and response wrapping
+- Measuring request processing time</p>
+<p>Example:
+import jakarta.servlet.*;
+import jakarta.servlet.annotation.WebFilter;
+import java.io.IOException;</p>
+<p>@WebFilter("/*")
+public class LoggingFilter implements Filter {</p>
+<div class="codehilite"><div class="highlight"><pre><span></span>@Override
+public void doFilter(
+        ServletRequest request,
+        ServletResponse response,
+        FilterChain chain)
+        throws IOException, ServletException {
+
+    long start = System.currentTimeMillis();
+    System.out.println("Request received");
+
+    chain.doFilter(request, response);
+
+    long end = System.currentTimeMillis();
+    System.out.println("Processing time: "
+            + (end - start) + " ms");
+}
+</pre></div>
+</div>
+<p>}</p>
+<p>Here, chain.doFilter() passes control to the next Filter or the downstream resource. When downstream processing finishes, execution returns to the Filter, allowing it to measure elapsed time.</p>
+<p>In Spring Boot, you can register a Filter using @Component, @WebFilter with @ServletComponentScan, or a FilterRegistrationBean.</p>
+<ol start="2">
+<li>What is an Interceptor in Spring MVC?</li>
+</ol>
+<p>An Interceptor is a Spring MVC mechanism that intercepts requests around Controller handler execution. It implements the HandlerInterceptor interface.</p>
+<p>It is useful for logging, handler-specific checks, and request-processing logic that depends on Controller information.</p>
+<p>Example:
+import jakarta.servlet.http.*;
+import org.springframework.stereotype.Component;
+import org.springframework.web.servlet.HandlerInterceptor;</p>
+<p>@Component
+public class LoggingInterceptor
+        implements HandlerInterceptor {</p>
+<div class="codehilite"><div class="highlight"><pre><span></span>@Override
+public boolean preHandle(
+        HttpServletRequest request,
+        HttpServletResponse response,
+        Object handler) {
+
+    System.out.println("Before controller");
+    return true;
+}
+
+@Override
+public void postHandle(
+        HttpServletRequest request,
+        HttpServletResponse response,
+        Object handler,
+        org.springframework.web.servlet.ModelAndView modelAndView) {
+
+    System.out.println("After handler execution");
+}
+
+@Override
+public void afterCompletion(
+        HttpServletRequest request,
+        HttpServletResponse response,
+        Object handler,
+        Exception ex) {
+
+    System.out.println("Request processing completed");
+}
+</pre></div>
+</div>
+<p>}</p>
+<p>The preHandle() method returns true to continue handler processing or false to stop it.</p>
+<ol start="3">
+<li>What is the difference between Filter and Interceptor?</li>
+</ol>
+<p>Feature Filter  Interceptor
+Provided by Servlet API Spring MVC
+Main interface  jakarta.servlet.Filter  HandlerInterceptor
+Execution point Before and around Servlet processing    Around Controller handler execution
+Main method doFilter()  preHandle()
+Controller information  Not directly provided by the Servlet Filter API Handler information is provided
+Works without Spring MVC    Yes No
+Typical uses    Security filtering, CORS, request wrapping  Logging and handler-specific checks
+Registration    Filter registration, @Component, etc.   WebMvcConfigurer</p>
+<p>Interview tip: A Filter runs before the DispatcherServlet processes a request, while an Interceptor runs inside Spring MVC, around handler execution.</p>
+<ol start="4">
+<li>
+<p>What is the execution flow of Filter and Interceptor?</p>
+</li>
+<li>
+<p>Client sends HTTP request</p>
+</li>
+<li>
+<p>Filter — before chain.doFilter()</p>
+</li>
+<li>
+<p>DispatcherServlet</p>
+</li>
+<li>
+<p>Interceptor — preHandle()</p>
+</li>
+<li>
+<p>Controller handler executes</p>
+</li>
+<li>
+<p>postHandle() and response processing</p>
+</li>
+<li>
+<p>afterCompletion() and Filter cleanup</p>
+</li>
+<li>
+<p>HTTP response returns to client</p>
+</li>
+</ol>
+<p>This represents a typical synchronous request. Exception handling, asynchronous requests, and response-body processing can change some callback details.</p>
+<ol start="5">
+<li>What are init(), doFilter(), and destroy()?</li>
+</ol>
+<p>These are the main lifecycle methods of a Servlet Filter.
+Method  Purpose</p>
+<p>init()  Called when the Filter is initialized; used for setup.</p>
+<p>doFilter()  Executes filtering logic for a request.</p>
+<p>destroy()   Called when the Filter is taken out of service; 
+used for cleanup.
+Example:
+@Override
+public void init(FilterConfig config) {
+    System.out.println("Filter initialized");
+}</p>
+<p>@Override
+public void doFilter(
+        ServletRequest request,
+        ServletResponse response,
+        FilterChain chain)
+        throws IOException, ServletException {</p>
+<div class="codehilite"><div class="highlight"><pre><span></span>System.out.println("Before request");
+chain.doFilter(request, response);
+System.out.println("After request");
+</pre></div>
+</div>
+<p>}</p>
+<p>@Override
+public void destroy() {
+    System.out.println("Filter destroyed");
+}</p>
+<p>The container manages these lifecycle callbacks. They are not necessarily invoked for every HTTP request.</p>
+<ol start="6">
+<li>What are preHandle(), postHandle(), and afterCompletion()?</li>
+</ol>
+<p>These are the three main callback methods of HandlerInterceptor.</p>
+<ul>
+<li>
+<p>preHandle(): Called before the Controller handler executes. Returning false stops handler execution.</p>
+</li>
+<li>
+<p>postHandle(): Called after successful handler execution and before view rendering, when applicable.</p>
+</li>
+<li>
+<p>afterCompletion(): Called after handler request processing finishes, including applicable exception scenarios.</p>
+</li>
+</ul>
+<p>Example:
+@Override
+public boolean preHandle(
+        HttpServletRequest request,
+        HttpServletResponse response,
+        Object handler) {
+    System.out.println("1. Before handler");
+    return true;
+}</p>
+<p>@Override
+public void postHandle(
+        HttpServletRequest request,
+        HttpServletResponse response,
+        Object handler,
+        ModelAndView modelAndView) {
+    System.out.println("2. After handler");
+}</p>
+<p>@Override
+public void afterCompletion(
+        HttpServletRequest request,
+        HttpServletResponse response,
+        Object handler,
+        Exception ex) {
+    System.out.println("3. Processing completed");
+}</p>
+<p>For a typical successful synchronous request, the callback order is preHandle() → Controller → postHandle() → afterCompletion().</p>
+<ol start="7">
+<li>How do you register an Interceptor in Spring Boot?</li>
+</ol>
+<p>Create a configuration class implementing WebMvcConfigurer and override addInterceptors().
+@Configuration
+public class WebConfig implements WebMvcConfigurer {</p>
+<div class="codehilite"><div class="highlight"><pre><span></span>private final LoggingInterceptor interceptor;
+
+public WebConfig(LoggingInterceptor interceptor) {
+    this.interceptor = interceptor;
+}
+
+@Override
+public void addInterceptors(
+        InterceptorRegistry registry) {
+
+    registry.addInterceptor(interceptor)
+            .addPathPatterns("/api/**")
+            .excludePathPatterns("/api/public/**");
+}
+</pre></div>
+</div>
+<p>}</p>
+<p>Here:
+- /api/** includes matching API paths.
+- /api/public/** excludes matching public API paths.
+The Interceptor must be a Spring-managed bean, such as one annotated with @Component, or be supplied through another valid bean configuration.</p>
+<ol start="8">
+<li>Can we create multiple Filters and Interceptors?</li>
+</ol>
+<p>Yes. An application can have multiple Filters and Interceptors.
+For Filters, use supported ordering mechanisms such as FilterRegistrationBean#setOrder() or @Order where applicable.
+Example:
+@Bean
+public FilterRegistrationBean<LoggingFilter> loggingFilter() {
+    FilterRegistrationBean<LoggingFilter> bean =
+            new FilterRegistrationBean&lt;&gt;();</p>
+<div class="codehilite"><div class="highlight"><pre><span></span>bean.setFilter(new LoggingFilter());
+bean.addUrlPatterns("/*");
+bean.setOrder(1);
+
+return bean;
+</pre></div>
+</div>
+<p>}</p>
+<p>For Interceptors, register them in the required order in addInterceptors(). They run in registration order during preHandle(); successful callbacks unwind in reverse order.
+Important: Filters and Interceptors are not chained in exactly the same way. Filters use FilterChain, whereas Spring MVC manages the Interceptor chain.</p>
+<ol start="9">
+<li>What happens if preHandle() returns false?</li>
+</ol>
+<p>If preHandle() returns false, Spring MVC does not execute the Controller handler, and the remaining Interceptors are not invoked normally.
+Example:
+@Override
+public boolean preHandle(
+        HttpServletRequest request,
+        HttpServletResponse response,
+        Object handler) throws IOException {</p>
+<div class="codehilite"><div class="highlight"><pre><span></span>if (!request.isUserInRole("ADMIN")) {
+    response.sendError(
+            HttpServletResponse.SC_FORBIDDEN);
+    return false;
+}
+
+return true;
+</pre></div>
+</div>
+<p>}</p>
+<p>This example blocks requests that do not have the required role. In a real application, use the application's actual authentication and authorization design.
+10. What happens if we do not call chain.doFilter()?
+If a Filter does not call chain.doFilter(), downstream processing does not continue through that chain invocation.
+For example:
+@Override
+public void doFilter(
+        ServletRequest request,
+        ServletResponse response,
+        FilterChain chain)
+        throws IOException, ServletException {</p>
+<div class="codehilite"><div class="highlight"><pre><span></span>HttpServletResponse httpResponse =
+        (HttpServletResponse) response;
+
+httpResponse.sendError(
+        HttpServletResponse.SC_FORBIDDEN);
+</pre></div>
+</div>
+<p>}</p>
+<p>The request is rejected before it reaches the downstream resource. Always ensure the response is handled appropriately when intentionally stopping the chain.</p>
+<ol start="11">
+<li>What is GenericFilterBean?</li>
+</ol>
+<p>GenericFilterBean is a Spring-provided abstract base class that adapts the Servlet Filter API to Spring's bean lifecycle and configuration facilities.
+It is useful when you want a Filter that integrates with Spring.
+public class MyGenericFilter extends GenericFilterBean {</p>
+<div class="codehilite"><div class="highlight"><pre><span></span>@Override
+public void doFilter(
+        ServletRequest request,
+        ServletResponse response,
+        FilterChain chain)
+        throws IOException, ServletException {
+
+    System.out.println("GenericFilterBean executed");
+    chain.doFilter(request, response);
+}
+</pre></div>
+</div>
+<p>}</p>
+<p>It does not automatically guarantee that filtering happens only once per request.</p>
+<ol start="12">
+<li>What is OncePerRequestFilter?</li>
+</ol>
+<p>OncePerRequestFilter is an abstract Spring class that extends GenericFilterBean. It is designed to provide once-per-request filtering semantics, with behavior affected by async and error dispatch settings.
+It is commonly used for custom HTTP Filters, such as JWT authentication filters.
+@Component
+public class CustomFilter extends OncePerRequestFilter {</p>
+<div class="codehilite"><div class="highlight"><pre><span></span>@Override
+protected void doFilterInternal(
+        HttpServletRequest request,
+        HttpServletResponse response,
+        FilterChain filterChain)
+        throws ServletException, IOException {
+
+    System.out.println("Custom filter executed");
+
+    filterChain.doFilter(request, response);
+}
+</pre></div>
+</div>
+<p>}</p>
+<p>It provides HttpServletRequest and HttpServletResponse directly, unlike the generic ServletRequest and ServletResponse parameters of Filter#doFilter().</p>
+<ol start="13">
+<li>Difference between Filter, GenericFilterBean, and OncePerRequestFilter</li>
+</ol>
+<p>Feature Filter  GenericFilterBean   OncePerRequestFilter
+Type    Servlet interface   Spring abstract class   Spring abstract class
+Extends/implements  Implemented directly    Implements Filter   Extends GenericFilterBean
+Spring integration  Depends on registration Spring-aware lifecycle/configuration    Spring-aware lifecycle/configuration
+HTTP-specific method    Generic request/response    Generic request/response    HTTP request/response
+Once-per-request semantics  Not guaranteed  Not guaranteed  Designed to provide them
+Typical use General Servlet filtering   Spring-integrated generic filtering Custom HTTP filtering
+14. How do you configure a Filter using @Component?
+In Spring Boot, a Filter declared as a Spring bean can be registered automatically in common configurations.
+@Component
+public class RequestFilter implements Filter {</p>
+<div class="codehilite"><div class="highlight"><pre><span></span>@Override
+public void doFilter(
+        ServletRequest request,
+        ServletResponse response,
+        FilterChain chain)
+        throws IOException, ServletException {
+
+    System.out.println("Request received");
+    chain.doFilter(request, response);
+}
+</pre></div>
+</div>
+<p>}</p>
+<p>For explicit control over URL patterns and order, use FilterRegistrationBean.
+Be careful not to register the same Filter twice unintentionally.</p>
+<ol start="15">
+<li>What is the difference between @WebFilter and @Component?</li>
+</ol>
+<ul>
+<li>
+<p>@WebFilter is a Servlet annotation used to declare a Filter. In Spring Boot, it generally requires Servlet component scanning, such as @ServletComponentScan.</p>
+</li>
+<li>
+<p>@Component registers the Filter as a Spring bean. Spring Boot commonly auto-registers Servlet Filter beans.
+Use FilterRegistrationBean when you need explicit registration settings.</p>
+</li>
+</ul>
+<ol start="16">
+<li>Can a Filter modify requests and responses?</li>
+</ol>
+<p>Yes. A Filter can modify response headers and status codes, wrap requests or responses, and perform other supported operations.
+Example:
+@Override
+public void doFilter(
+        ServletRequest request,
+        ServletResponse response,
+        FilterChain chain)
+        throws IOException, ServletException {</p>
+<div class="codehilite"><div class="highlight"><pre><span></span>HttpServletResponse httpResponse =
+        (HttpServletResponse) response;
+
+httpResponse.setHeader("X-App", "MyApplication");
+
+chain.doFilter(request, response);
+</pre></div>
+</div>
+<p>}</p>
+<p>Reading or replacing request bodies requires care because the request input stream is normally consumable. Use an appropriate request wrapper if the body must be read and then made available downstream.</p>
+<ol start="17">
+<li>Can an Interceptor modify a request or response?</li>
+</ol>
+<p>Yes. An Interceptor receives HttpServletRequest and HttpServletResponse, so it can modify headers, set status codes, or stop processing.
+However, an Interceptor is not automatically the best choice for wrapping the request body or changing low-level Servlet behavior. Those tasks are often better handled by a Filter or a suitable wrapper.</p>
+<ol start="18">
+<li>Which is better for authentication: Filter or Interceptor?</li>
+</ol>
+<p>For application-wide authentication and authorization, Spring Security's filter chain is generally preferred.
+Reasons include:
+- It can enforce security before requests enter Spring MVC.
+- It provides established authentication and authorization mechanisms.
+- It supports security-context management and security-specific processing.
+- It can protect multiple types of resources, not only Controller handlers.
+Interceptors can still perform additional handler-specific checks, but they should not casually replace Spring Security.</p>
+<ol start="19">
+<li>What is the difference between a Filter and Spring Security filters?</li>
+</ol>
+<p>A Servlet Filter is a general Servlet API component. Spring Security uses a chain of security Filters to implement authentication, authorization, and related protections.
+For example, a JWT authentication Filter can validate a token and establish an authenticated security context before authorization checks take place.
+// Conceptual flow
+Request
+- Spring Security filter chain
+- Authentication
+- Authorization
+- DispatcherServlet
+- Controller</p>
+<p>The exact chain depends on the Spring Security configuration.</p>
+<ol start="20">
+<li>How do you measure API execution time?</li>
+</ol>
+<p>A Filter can measure the total downstream request-processing time.
+long start = System.nanoTime();</p>
+<p>try {
+    chain.doFilter(request, response);
+} finally {
+    long duration = System.nanoTime() - start;
+    System.out.println("Duration in ns: " + duration);
+}</p>
+<p>Using finally ensures the measurement is performed even if downstream processing throws an exception.
+An Interceptor can measure handler execution time using timestamps recorded in preHandle() and calculated in afterCompletion(). This measures a different portion of processing, so choose based on what you want to measure.</p>
+<ol start="21">
+<li>What is the difference between addPathPatterns() and excludePathPatterns()?</li>
+</ol>
+<p>Both methods configure where an Interceptor applies.
+registry.addInterceptor(interceptor)
+        .addPathPatterns("/api/<strong>")
+        .excludePathPatterns("/api/login", "/api/public/</strong>");</p>
+<p>Here, the Interceptor applies to matching /api/** paths except the specified exclusions.</p>
+<ol start="22">
+<li>Can Filters and Interceptors handle exceptions?</li>
+</ol>
+<p>Yes, but their roles differ.
+- A Filter can catch exceptions thrown during downstream processing and handle or rethrow them.
+- An Interceptor's afterCompletion() receives an exception when one is propagated through the handler-processing flow.
+- Spring MVC exception handling, such as @ControllerAdvice, handles many Controller exceptions.
+Do not assume that a Servlet Filter can directly use every Spring MVC exception-handling mechanism. Filters may execute outside the MVC exception-resolution process.</p>
+<ol start="23">
+<li>What is the difference between REQUEST, FORWARD, INCLUDE, ERROR, and ASYNC dispatch types?</li>
+</ol>
+<p>These are Servlet dispatch types that describe how a resource is being invoked.</p>
+<p>Type    Meaning
+REQUEST Initial client request dispatch
+FORWARD Request forwarded to another resource
+INCLUDE Another resource included in processing
+ERROR   Error-page processing
+ASYNC   Asynchronous dispatch</p>
+<p>A Filter's dispatcher types determine which dispatches it applies to. OncePerRequestFilter also provides controls for async and error dispatch behavior.</p>
+<ol start="24">
+<li>Why should we avoid reading the request body repeatedly?</li>
+</ol>
+<p>The request body is generally read through an input stream that is consumed as it is read. If a Filter reads it fully, the Controller may not be able to read it again.
+To support repeated reading, use a suitable HttpServletRequestWrapper that caches the body and exposes it to downstream processing. Be careful with large payloads and sensitive data.</p>
+<ol start="25">
+<li>What are common real-world scenarios for Filters and Interceptors?</li>
+</ol>
+<p>Scenario    Common choice
+JWT authentication  Spring Security Filter chain
+CORS processing Framework configuration or Filter
+Request/response wrapping   Filter
+General request logging Filter or Interceptor
+Controller-specific logging Interceptor
+Measuring total downstream request time Filter
+Measuring handler processing time   Interceptor
+Checking handler annotations    Interceptor
+Rejecting unauthorized requests Usually Spring Security
+Excluding specific Controller URL patterns  Interceptor configuration</p>
+<p>Final revision: 10 questions to prioritize
+If your placement interview is near, prepare these first:
+1. What is a Filter in Java?
+2. What is an Interceptor in Spring MVC?
+3. Filter vs Interceptor.
+4. Explain their execution flow.
+5. Explain doFilter() and chain.doFilter().
+6. Explain preHandle(), postHandle(), and afterCompletion().
+7. What is OncePerRequestFilter?
+8. How do you register a Filter and an Interceptor in Spring Boot?
+9. Why is Spring Security preferred for authentication?
+10. What happens when preHandle() returns false or chain.doFilter() is not called?</p></article>
+  </section>
+  <section class="panel" data-panel="examples" role="tabpanel" hidden>
+    <article class="prose"><h3>Servlet Filter — runs before the DispatcherServlet</h3>
+<div class="codehilite"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.servlet.*</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.servlet.annotation.WebFilter</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.io.IOException</span><span class="p">;</span>
+
+<span class="nd">@WebFilter</span><span class="p">(</span><span class="s">"/*"</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">LoggingFilter</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Filter</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">doFilter</span><span class="p">(</span><span class="n">ServletRequest</span><span class="w"> </span><span class="n">request</span><span class="p">,</span><span class="w"> </span><span class="n">ServletResponse</span><span class="w"> </span><span class="n">response</span><span class="p">,</span>
+<span class="w">                         </span><span class="n">FilterChain</span><span class="w"> </span><span class="n">chain</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="p">,</span><span class="w"> </span><span class="n">ServletException</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">long</span><span class="w"> </span><span class="n">start</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="na">currentTimeMillis</span><span class="p">();</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">"Request received"</span><span class="p">);</span>
+<span class="w">        </span><span class="n">chain</span><span class="p">.</span><span class="na">doFilter</span><span class="p">(</span><span class="n">request</span><span class="p">,</span><span class="w"> </span><span class="n">response</span><span class="p">);</span><span class="w">          </span><span class="c1">// next filter or the resource</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">"took "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">System</span><span class="p">.</span><span class="na">currentTimeMillis</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">start</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">" ms"</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<h3>Spring Boot registration options</h3>
+<div class="codehilite"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.boot.web.servlet.FilterRegistrationBean</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.context.annotation.*</span><span class="p">;</span>
+
+<span class="nd">@Configuration</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">FilterConfig</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Bean</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">FilterRegistrationBean</span><span class="o">&lt;</span><span class="n">LoggingFilter</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">loggingFilter</span><span class="p">(</span><span class="n">LoggingFilter</span><span class="w"> </span><span class="n">filter</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="n">reg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">FilterRegistrationBean</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">filter</span><span class="p">);</span>
+<span class="w">        </span><span class="n">reg</span><span class="p">.</span><span class="na">addUrlPatterns</span><span class="p">(</span><span class="s">"/api/*"</span><span class="p">);</span>
+<span class="w">        </span><span class="n">reg</span><span class="p">.</span><span class="na">setOrder</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span><span class="w">                            </span><span class="c1">// chain order matters</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">reg</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<h3>Spring MVC HandlerInterceptor — around controller execution</h3>
+<div class="codehilite"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.stereotype.Component</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.servlet.HandlerInterceptor</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.servlet.http.*</span><span class="p">;</span>
+
+<span class="nd">@Component</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">TimingInterceptor</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">HandlerInterceptor</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">preHandle</span><span class="p">(</span><span class="n">HttpServletRequest</span><span class="w"> </span><span class="n">req</span><span class="p">,</span><span class="w"> </span><span class="n">HttpServletResponse</span><span class="w"> </span><span class="n">resp</span><span class="p">,</span>
+<span class="w">                             </span><span class="n">Object</span><span class="w"> </span><span class="n">handler</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">req</span><span class="p">.</span><span class="na">setAttribute</span><span class="p">(</span><span class="s">"start"</span><span class="p">,</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="na">currentTimeMillis</span><span class="p">());</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span><span class="w">                                </span><span class="c1">// false stops the chain here</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">afterCompletion</span><span class="p">(</span><span class="n">HttpServletRequest</span><span class="w"> </span><span class="n">req</span><span class="p">,</span><span class="w"> </span><span class="n">HttpServletResponse</span><span class="w"> </span><span class="n">resp</span><span class="p">,</span>
+<span class="w">                                </span><span class="n">Object</span><span class="w"> </span><span class="n">handler</span><span class="p">,</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="n">ex</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">long</span><span class="w"> </span><span class="n">ms</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="na">currentTimeMillis</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="p">(</span><span class="kt">long</span><span class="p">)</span><span class="w"> </span><span class="n">req</span><span class="p">.</span><span class="na">getAttribute</span><span class="p">(</span><span class="s">"start"</span><span class="p">);</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">req</span><span class="p">.</span><span class="na">getRequestURI</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">" -&gt; "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">ms</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">" ms"</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="codehilite"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.context.annotation.Configuration</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.servlet.config.annotation.*</span><span class="p">;</span>
+
+<span class="nd">@Configuration</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">WebConfig</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">WebMvcConfigurer</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">addInterceptors</span><span class="p">(</span><span class="n">InterceptorRegistry</span><span class="w"> </span><span class="n">registry</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">registry</span><span class="p">.</span><span class="na">addInterceptor</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">TimingInterceptor</span><span class="p">())</span>
+<span class="w">                </span><span class="p">.</span><span class="na">addPathPatterns</span><span class="p">(</span><span class="s">"/api/**"</span><span class="p">)</span>
+<span class="w">                </span><span class="p">.</span><span class="na">excludePathPatterns</span><span class="p">(</span><span class="s">"/api/health"</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<h3>Filters vs Interceptors</h3>
+<div class="codehilite"><div class="highlight"><pre><span></span><span class="c1">// | Aspect            | Filter                          | HandlerInterceptor           |</span>
+<span class="c1">// |-------------------|---------------------------------|------------------------------|</span>
+<span class="c1">// | Layer             | servlet container (all requests)| Spring MVC dispatcher only   |</span>
+<span class="c1">// | Can see handler?  | no                              | yes — which method will run  |</span>
+<span class="c1">// | Runs around       | the whole request               | controller handler execution |</span>
+<span class="c1">// | Typical use       | auth, CORS, encoding, logging   | timing, audit, permission checks |</span>
+<span class="c1">// | Access to path patterns | url-patterns only         | includePathPatterns/exclude  |</span>
+</pre></div>
+</div></article>
+  </section>
+  <nav class="prev-next"><a class="pn previous" href="spring-security.html"><span class="pn-label">Previous</span><span class="pn-title">Spring Security Flow</span></a><a class="pn next" href="core-java-deep-dive.html"><span class="pn-label">Next</span><span class="pn-title">Core Java Deep-Dive</span></a></nav>
+</main>
+<script src="../assets/app.js"></script>
+</body>
+</html>

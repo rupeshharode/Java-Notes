@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bean Lifecycle &amp; Where AOP Fits · Night Java</title>
+<meta name="description" content="The full lifecycle diagram plus the point where proxies and aspects enter.">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body class="topic-body">
+<aside class="sidebar">
+  <a class="brand" href="../index.html"><span class="brand-mark">J</span> Night Java</a>
+  <input class="side-filter" type="search" placeholder="Filter topics…" aria-label="Filter topics">
+  <div class="side-phase-wrap"><label class="side-phase-label" for="side-phase">Jump to phase</label>
+  <select id="side-phase" class="side-phase"><option value="1">Phase 1 · Programming Basics</option>
+<option value="2">Phase 2 · OOP</option>
+<option value="3">Phase 3 · Core Java Advanced</option>
+<option value="4">Phase 4 · Advanced Java</option>
+<option value="5">Phase 5 · DSA</option>
+<option value="6">Phase 6 · Database</option>
+<option value="7">Phase 7 · Backend Development</option>
+<option value="8">Phase 8 · Frontend</option>
+<option value="9">Phase 9 · DevOps + Deployment</option>
+<option value="10">Phase 10 · LLD</option>
+<option value="11">Phase 11 · HLD</option>
+<option value="12">Phase 12 · Interview Topics</option></select></div>
+  <nav class="side-nav" aria-label="Topics in roadmap order"><a class="side-link" href="../topics/java-fundamentals.html" data-slug="java-fundamentals"><span class="check" data-check="java-fundamentals" aria-hidden="true"></span>Java Fundamentals Q&amp;A</a>
+<a class="side-link" href="../topics/oops-encapsulation.html" data-slug="oops-encapsulation"><span class="check" data-check="oops-encapsulation" aria-hidden="true"></span>OOPs &amp; Encapsulation</a>
+<a class="side-link" href="../topics/inheritance.html" data-slug="inheritance"><span class="check" data-check="inheritance" aria-hidden="true"></span>Inheritance</a>
+<a class="side-link" href="../topics/has-a-is-a.html" data-slug="has-a-is-a"><span class="check" data-check="has-a-is-a" aria-hidden="true"></span>Has-a vs Is-a Relationships</a>
+<a class="side-link" href="../topics/polymorphism.html" data-slug="polymorphism"><span class="check" data-check="polymorphism" aria-hidden="true"></span>Polymorphism</a>
+<a class="side-link" href="../topics/abstraction.html" data-slug="abstraction"><span class="check" data-check="abstraction" aria-hidden="true"></span>Abstraction</a>
+<a class="side-link" href="../topics/interface.html" data-slug="interface"><span class="check" data-check="interface" aria-hidden="true"></span>Interfaces</a>
+<a class="side-link" href="../topics/anonymous-inner-class.html" data-slug="anonymous-inner-class"><span class="check" data-check="anonymous-inner-class" aria-hidden="true"></span>Anonymous Inner Class</a>
+<a class="side-link" href="../topics/collections-framework.html" data-slug="collections-framework"><span class="check" data-check="collections-framework" aria-hidden="true"></span>Collections Framework</a>
+<a class="side-link" href="../topics/exception-handling.html" data-slug="exception-handling"><span class="check" data-check="exception-handling" aria-hidden="true"></span>Exception Handling</a>
+<a class="side-link" href="../topics/file-handling.html" data-slug="file-handling"><span class="check" data-check="file-handling" aria-hidden="true"></span>File Handling</a>
+<a class="side-link" href="../topics/generics.html" data-slug="generics"><span class="check" data-check="generics" aria-hidden="true"></span>Generics</a>
+<a class="side-link" href="../topics/stream-api.html" data-slug="stream-api"><span class="check" data-check="stream-api" aria-hidden="true"></span>Stream API</a>
+<a class="side-link" href="../topics/multithreading.html" data-slug="multithreading"><span class="check" data-check="multithreading" aria-hidden="true"></span>Multithreading</a>
+<a class="side-link" href="../topics/executorservice.html" data-slug="executorservice"><span class="check" data-check="executorservice" aria-hidden="true"></span>ExecutorService</a>
+<a class="side-link" href="../topics/completablefuture.html" data-slug="completablefuture"><span class="check" data-check="completablefuture" aria-hidden="true"></span>CompletableFuture</a>
+<a class="side-link" href="../topics/atomic-classes.html" data-slug="atomic-classes"><span class="check" data-check="atomic-classes" aria-hidden="true"></span>Atomic Classes</a>
+<a class="side-link" href="../topics/concurrent-collections.html" data-slug="concurrent-collections"><span class="check" data-check="concurrent-collections" aria-hidden="true"></span>Concurrent Collections</a>
+<a class="side-link" href="../topics/jdbc.html" data-slug="jdbc"><span class="check" data-check="jdbc" aria-hidden="true"></span>JDBC</a>
+<a class="side-link" href="../topics/servlet.html" data-slug="servlet"><span class="check" data-check="servlet" aria-hidden="true"></span>Servlets</a>
+<a class="side-link" href="../topics/jsp.html" data-slug="jsp"><span class="check" data-check="jsp" aria-hidden="true"></span>JSP</a>
+<a class="side-link" href="../topics/hibernate.html" data-slug="hibernate"><span class="check" data-check="hibernate" aria-hidden="true"></span>Hibernate</a>
+<a class="side-link" href="../topics/spring-mvc.html" data-slug="spring-mvc"><span class="check" data-check="spring-mvc" aria-hidden="true"></span>Spring MVC</a>
+<a class="side-link" href="../topics/session-management.html" data-slug="session-management"><span class="check" data-check="session-management" aria-hidden="true"></span>Session Management</a>
+<a class="side-link" href="../topics/maven.html" data-slug="maven"><span class="check" data-check="maven" aria-hidden="true"></span>Maven</a>
+<a class="side-link" href="../topics/servlet-vs-spring-core.html" data-slug="servlet-vs-spring-core"><span class="check" data-check="servlet-vs-spring-core" aria-hidden="true"></span>Servlet vs Spring Core</a>
+<a class="side-link" href="../topics/ioc-and-di.html" data-slug="ioc-and-di"><span class="check" data-check="ioc-and-di" aria-hidden="true"></span>IoC &amp; Dependency Injection</a>
+<a class="side-link" href="../topics/autowiring.html" data-slug="autowiring"><span class="check" data-check="autowiring" aria-hidden="true"></span>Autowiring</a>
+<a class="side-link" href="../topics/bean-configuration.html" data-slug="bean-configuration"><span class="check" data-check="bean-configuration" aria-hidden="true"></span>Bean Configuration &amp; Annotations</a>
+<a class="side-link" href="../topics/bean-lifecycle.html" data-slug="bean-lifecycle"><span class="check" data-check="bean-lifecycle" aria-hidden="true"></span>Bean Lifecycle</a>
+<a class="side-link" href="../topics/bean-lifecycle-aop.html" aria-current="page" data-slug="bean-lifecycle-aop"><span class="check" data-check="bean-lifecycle-aop" aria-hidden="true"></span>Bean Lifecycle &amp; Where AOP Fits</a>
+<a class="side-link" href="../topics/spring-aop.html" data-slug="spring-aop"><span class="check" data-check="spring-aop" aria-hidden="true"></span>Spring AOP</a>
+<a class="side-link" href="../topics/spring-transactions.html" data-slug="spring-transactions"><span class="check" data-check="spring-transactions" aria-hidden="true"></span>Spring Transactions</a>
+<a class="side-link" href="../topics/spring-data.html" data-slug="spring-data"><span class="check" data-check="spring-data" aria-hidden="true"></span>Spring Data (JPA)</a>
+<a class="side-link" href="../topics/spring-profiles.html" data-slug="spring-profiles"><span class="check" data-check="spring-profiles" aria-hidden="true"></span>Spring Profiles &amp; Config</a>
+<a class="side-link" href="../topics/spring-security.html" data-slug="spring-security"><span class="check" data-check="spring-security" aria-hidden="true"></span>Spring Security Flow</a>
+<a class="side-link" href="../topics/filters-and-interceptors.html" data-slug="filters-and-interceptors"><span class="check" data-check="filters-and-interceptors" aria-hidden="true"></span>Filters &amp; Interceptors</a>
+<a class="side-link" href="../topics/core-java-deep-dive.html" data-slug="core-java-deep-dive"><span class="check" data-check="core-java-deep-dive" aria-hidden="true"></span>Core Java Deep-Dive</a></nav>
+  <p class="side-progress"><span data-progress-text></span></p>
+</aside>
+<main class="content">
+  <header class="topic-head">
+    <p class="crumb"><a href="../index.html">Roadmap</a> / Phase 7 · Backend Development</p>
+    <h1>Bean Lifecycle &amp; Where AOP Fits</h1>
+    <p class="summary">The full lifecycle diagram plus the point where proxies and aspects enter.</p>
+    <div class="head-row">
+      <div class="tags"><span class="tag">spring</span><span class="tag">aop</span><span class="tag">lifecycle</span><span class="tag">proxies</span></div>
+      <button class="read-btn" data-read-btn data-slug="bean-lifecycle-aop"><span class="read-icon">○</span> Mark as read</button>
+    </div>
+  </header>
+  <div class="tabs" role="tablist">
+    <button class="tab active" role="tab" data-tab="notes" aria-selected="true">Notes</button>
+    <button class="tab" role="tab" data-tab="examples" aria-selected="false">Code examples</button>
+  </div>
+  <section class="panel active" data-panel="notes" role="tabpanel">
+    <article class="prose"><p>Q.1. BeanPostProcessor , BeanFactoryPostProcessor ,postProcessBeforeInitilizingBean() ,PostProcessAfterInitilizingBean()</p>
+<p><code>BeanPostProcessor</code> is a Spring interface used to customize or process Spring-managed beans before and after their initialization. It provides two important methods: <code>postProcessBeforeInitialization()</code> and <code>postProcessAfterInitialization()</code>.</p>
+<p><code>postProcessBeforeInitialization()</code> is called after dependency injection and before the bean's initialization callbacks, such as <code>@PostConstruct</code> and <code>afterPropertiesSet()</code>.</p>
+<p><code>postProcessAfterInitialization()</code> is called after the bean's initialization callbacks. A post-processor can return the original bean or another object, such as a proxy.</p>
+<p>BeanPostProcessors are used for various Spring features, including annotation processing, dependency injection, and proxy creation. They are also important for Spring AOP.</p>
+<p>In Spring AOP, when a bean matches an aspect or advice, Spring can create a proxy around the original bean during the bean post-processing phase. The application interacts with the proxy, and the proxy invokes the appropriate advice before or after calling the target bean.</p>
+<p>For example, when a method has logging or transactional advice, the call can flow through the AOP proxy, execute the advice, and then invoke the original target method.</p>
+<p>Therefore, AOP fits into the Spring Bean lifecycle through Spring's post-processing infrastructure, where eligible beans can be wrapped with proxies before they are made available to the application.</p>
+<p>A <code>BeanPostProcessor</code> works with bean instances, whereas a <code>BeanFactoryPostProcessor</code> works with BeanDefinitions before bean instances are created.</p>
+<p>@@Details---&gt;</p>
+<ol start="113">
+<li>
+<p>What is BeanPostProcessor?
+BeanPostProcessor is a Spring interface that allows us to customize or modify Spring beans before and after their initialization.
+It provides two important methods:
+public interface BeanPostProcessor {</p>
+<p>Object postProcessBeforeInitialization(
+    Object bean, String beanName);</p>
+<p>Object postProcessAfterInitialization(
+    Object bean, String beanName);
+}</p>
+</li>
+</ol>
+<p>The methods can return:
+- the same bean, or
+- a modified/wrapped bean, such as a proxy.
+Simple idea
+Suppose Spring creates:
+UserService userService = new UserService();</p>
+<p>The bean goes through BeanPostProcessors:
+UserService created
+       ↓
+Dependency Injection
+       ↓
+postProcessBeforeInitialization()
+       ↓
+@PostConstruct
+       ↓
+afterPropertiesSet()
+       ↓
+postProcessAfterInitialization()
+       ↓
+Bean ready</p>
+<p>A BeanPostProcessor can inspect or modify the bean during this process.
+114. What is BeanPostProcessor used for?
+It is used when Spring needs to perform additional processing on beans automatically.
+Common purposes include:
+- Processing annotations
+- Performing dependency injection
+- Creating proxies
+- Applying AOP
+- Supporting transactions
+- Supporting security-related proxies
+- Custom bean processing
+For example, Spring has internal post-processors that process annotations such as:
+@Autowired
+@PostConstruct</p>
+<p>And Spring AOP can use post-processing to create a proxy around a bean.
+Important interview point
+A BeanPostProcessor works on Spring-managed beans.
+If you create an object manually:
+UserService service = new UserService();</p>
+<p>Spring's BeanPostProcessors do not automatically process that object.
+115. postProcessBeforeInitialization()
+This method is called before the bean's initialization callbacks.
+For example:
+@Component
+public class UserService {</p>
+<div class="codehilite"><div class="highlight"><pre><span></span>@PostConstruct
+public void init() {
+    System.out.println("Initialization");
+}
+</pre></div>
+</div>
+<p>}</p>
+<p>Conceptually:
+Bean created
+     ↓
+Dependency Injection
+     ↓
+postProcessBeforeInitialization()
+     ↓
+@PostConstruct
+     ↓
+BeanPostProcessor processing
+     ↓
+Bean ready</p>
+<p>Example
+You can create your own BeanPostProcessor:
+@Component
+public class MyBeanProcessor implements BeanPostProcessor {</p>
+<div class="codehilite"><div class="highlight"><pre><span></span>@Override
+public Object postProcessBeforeInitialization(
+        Object bean, String beanName) {
+
+    System.out.println("Before: " + beanName);
+    return bean;
+}
+</pre></div>
+</div>
+<p>}</p>
+<p>Spring calls this method for eligible beans before their initialization callbacks.
+Why is it useful?
+You can use it to:
+- inspect beans,
+- modify beans,
+- perform custom processing,
+- validate bean configuration,
+- prepare a bean before initialization.
+116. postProcessAfterInitialization()
+This method is called after the bean's initialization callbacks have completed.
+For example:
+Bean instantiated
+       ↓
+Dependency Injection
+       ↓
+Aware callbacks
+       ↓
+postProcessBeforeInitialization()
+       ↓
+@PostConstruct
+       ↓
+afterPropertiesSet()
+       ↓
+postProcessAfterInitialization()
+       ↓
+Bean ready</p>
+<p>This method is particularly important because a BeanPostProcessor can return a proxy instead of the original bean.
+For example:
+Object postProcessAfterInitialization(
+        Object bean, String beanName) {</p>
+<div class="codehilite"><div class="highlight"><pre><span></span>return new Proxy(bean);
+</pre></div>
+</div>
+<p>}</p>
+<p>Then the object that the application receives may actually be:
+Original Bean
+     ↓
+Proxy
+     ↓
+Application</p>
+<p>This concept is extremely important for understanding Spring AOP.
+117. Where does AOP fit into the Bean Lifecycle?
+This is one of the most important concepts.
+Suppose we have:
+@Service
+public class PaymentService {</p>
+<div class="codehilite"><div class="highlight"><pre><span></span>public void makePayment() {
+    System.out.println("Payment");
+}
+</pre></div>
+</div>
+<p>}</p>
+<p>And we want to add logging:
+@Aspect
+@Component
+public class LoggingAspect {</p>
+<div class="codehilite"><div class="highlight"><pre><span></span>@Before("execution(* com.example.service.*.*(..))")
+public void log() {
+    System.out.println("Method called");
+}
+</pre></div>
+</div>
+<p>}</p>
+<p>We don't manually modify PaymentService.
+Instead, Spring can create a proxy around the bean.
+Conceptually:
+PaymentService object
+        ↓
+BeanPostProcessor
+        ↓
+AOP determines advice applies
+        ↓
+Proxy created
+        ↓
+Proxy returned to application</p>
+<p>So instead of the application directly calling:
+PaymentService</p>
+<p>it may call:
+PaymentService Proxy
+       ↓
+     Advice
+       ↓
+Original PaymentService</p>
+<p>Example execution
+When you call:
+paymentService.makePayment();</p>
+<p>The actual flow can be:
+Application
+    ↓
+AOP Proxy
+    ↓
+@Before advice
+    ↓
+Original PaymentService.makePayment()
+    ↓
+@After / @AfterReturning etc.</p>
+<p>This is how Spring AOP can add cross-cutting functionality such as:
+- Logging
+- Transactions
+- Security
+- Caching
+without putting that code directly into your business logic.
+Why is postProcessAfterInitialization() important for AOP?
+Spring's AOP infrastructure can use BeanPostProcessors to determine whether a bean needs to be wrapped with an AOP proxy.
+Conceptually:
+                 Spring Container
+                       ↓
+              Create Bean
+                       ↓
+             Inject Dependencies
+                       ↓
+           BeanPostProcessor
+                       ↓
+        Does this bean need AOP?
+              ↙              ↘
+            No               Yes
+             ↓                ↓
+         Original Bean      Create Proxy
+                               ↓
+                          Return Proxy</p>
+<p>Therefore, the object eventually obtained from the container may be a proxy rather than the original object.
+This is why Spring AOP works without you explicitly creating proxy objects.
+Very important distinction
+Don't say:
+"postProcessAfterInitialization() always creates a proxy."</p>
+<p>That is incorrect.
+A BeanPostProcessor can return a proxy, but not every BeanPostProcessor creates a proxy.
+AOP-related post-processing can create proxies when a bean matches an aspect/advice.
+Complete lifecycle with BeanPostProcessor
+For interview purposes, you can remember this more detailed sequence:
+1. IoC Container starts
+          ↓
+2. Configuration metadata is read
+          ↓
+3. BeanDefinitions are created/registered
+          ↓
+4. Bean is instantiated
+          ↓
+5. Dependencies are injected
+          ↓
+6. Aware callbacks
+          ↓
+7. postProcessBeforeInitialization()
+          ↓
+8. @PostConstruct
+          ↓
+9. InitializingBean.afterPropertiesSet()
+          ↓
+10. Custom initMethod
+          ↓
+11. postProcessAfterInitialization()
+          ↓
+12. AOP proxy may be created
+          ↓
+13. Bean is ready to use
+          ↓
+14. Container shuts down
+          ↓
+15. @PreDestroy
+          ↓
+16. DisposableBean.destroy()
+          ↓
+17. Custom destroyMethod
+          ↓
+18. Bean destroyed</p>
+<p>One nuance: the exact internal ordering can involve multiple BeanPostProcessors and other container callbacks, so treat this as the interview-level lifecycle flow, not as a literal exhaustive implementation sequence.
+BeanPostProcessor vs @PostConstruct
+This is a common interview question.
+BeanPostProcessor   @PostConstruct
+Interface   Annotation
+Can process many beans  Applied to a particular method
+Has before/after initialization hooks   Initialization callback
+Can modify/wrap/replace a bean  Usually performs initialization logic
+Can participate in proxy creation   Does not itself create AOP proxies</p>
+<p>For example:
+@PostConstruct
+public void init() {
+    // initialization logic
+}</p>
+<p>versus:
+@Component
+public class MyProcessor implements BeanPostProcessor {</p>
+<div class="codehilite"><div class="highlight"><pre><span></span>@Override
+public Object postProcessAfterInitialization(
+        Object bean, String beanName) {
+
+    // process bean
+    return bean;
+}
+</pre></div>
+</div>
+<p>}</p>
+<p>BeanPostProcessor vs BeanFactoryPostProcessor
+This is another very important interview distinction.
+BeanPostProcessor
+Works on bean instances.
+BeanDefinition
+      ↓
+Bean instance
+      ↓
+BeanPostProcessor</p>
+<p>BeanFactoryPostProcessor
+Works on BeanDefinitions/metadata before beans are instantiated.
+BeanDefinition
+      ↓
+BeanFactoryPostProcessor
+      ↓
+Modified BeanDefinition
+      ↓
+Bean instance created</p>
+<p>So remember:
+BeanFactoryPostProcessor → works with BeanDefinitions.</p>
+<p>BeanPostProcessor → works with bean instances.</p></article>
+  </section>
+  <section class="panel" data-panel="examples" role="tabpanel" hidden>
+    <article class="prose"><h3>Where AOP enters the bean lifecycle</h3>
+<div class="codehilite"><div class="highlight"><pre><span></span><span class="c1">// Normal bean:  instantiate -&gt; inject -&gt; @PostConstruct -&gt; ready</span>
+<span class="c1">// Proxied bean: instantiate -&gt; inject -&gt; @PostConstruct -&gt;</span>
+<span class="c1">//               BeanPostProcessor#postProcessAfterInitialization</span>
+<span class="c1">//               wraps the target in a JDK dynamic proxy or CGLIB subclass -&gt;</span>
+<span class="c1">//               the PROXY is what other beans actually inject</span>
+
+<span class="nd">@Service</span>
+<span class="kd">class</span> <span class="nc">OrderService</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Transactional</span><span class="w">                     </span><span class="c1">// &lt;- this triggers proxy creation</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">place</span><span class="p">(</span><span class="n">Order</span><span class="w"> </span><span class="n">order</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">repo</span><span class="p">.</span><span class="na">save</span><span class="p">(</span><span class="n">order</span><span class="p">);</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// The proxy intercepts every call: opens a transaction,</span>
+<span class="c1">// calls the real method, commits/rolls back.</span>
+</pre></div>
+</div>
+<h3>Seeing it in code</h3>
+<div class="codehilite"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.context.*</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.stereotype.*</span><span class="p">;</span>
+
+<span class="nd">@Component</span>
+<span class="kd">class</span> <span class="nc">BeanInspector</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">ApplicationContextAware</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setApplicationContext</span><span class="p">(</span><span class="n">ApplicationContext</span><span class="w"> </span><span class="n">ctx</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">OrderService</span><span class="w"> </span><span class="n">svc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ctx</span><span class="p">.</span><span class="na">getBean</span><span class="p">(</span><span class="n">OrderService</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">svc</span><span class="p">.</span><span class="na">getClass</span><span class="p">());</span>
+<span class="w">        </span><span class="c1">// class com.jack.OrderService$$EnhancerBySpringCGLIB$$...</span>
+<span class="w">        </span><span class="c1">// NOT OrderService — the injected object is the AOP proxy</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<h3>Advice on proxied beans — and the self-invocation trap</h3>
+<div class="codehilite"><div class="highlight"><pre><span></span><span class="nd">@Aspect</span>
+<span class="nd">@Component</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">AuditingAspect</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Around</span><span class="p">(</span><span class="s">"execution(* com.jack.service..*(..))"</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Object</span><span class="w"> </span><span class="nf">audit</span><span class="p">(</span><span class="n">ProceedingJoinPoint</span><span class="w"> </span><span class="n">pjp</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Throwable</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">long</span><span class="w"> </span><span class="n">start</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="na">nanoTime</span><span class="p">();</span>
+<span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">pjp</span><span class="p">.</span><span class="na">proceed</span><span class="p">();</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">finally</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">pjp</span><span class="p">.</span><span class="na">getSignature</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">" took "</span>
+<span class="w">                    </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">System</span><span class="p">.</span><span class="na">nanoTime</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">start</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">1_000_000</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">" ms"</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nd">@Service</span>
+<span class="kd">class</span> <span class="nc">OrderService</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">place</span><span class="p">(</span><span class="n">Order</span><span class="w"> </span><span class="n">o</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">validate</span><span class="p">(</span><span class="n">o</span><span class="p">);</span><span class="w">        </span><span class="c1">// internal call BYPASSES the proxy:</span>
+<span class="w">        </span><span class="c1">// validate(o)      // no @Transactional / audit advice applies!</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Transactional</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">validate</span><span class="p">(</span><span class="n">Order</span><span class="w"> </span><span class="n">o</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<h3>Why @Transactional on internal calls "doesn't work"</h3>
+<div class="codehilite"><div class="highlight"><pre><span></span><span class="c1">// Rule of thumb:</span>
+<span class="c1">// - Spring AOP is PROXY-BASED: only calls arriving from OUTSIDE the bean</span>
+<span class="c1">//   pass through the proxy and get advice.</span>
+<span class="c1">// - this.method() is a plain Java call — the proxy is never involved.</span>
+<span class="c1">// - Fix: split into two beans, or use AspectJ weaving for true inlining.</span>
+</pre></div>
+</div></article>
+  </section>
+  <nav class="prev-next"><a class="pn previous" href="bean-lifecycle.html"><span class="pn-label">Previous</span><span class="pn-title">Bean Lifecycle</span></a><a class="pn next" href="spring-aop.html"><span class="pn-label">Next</span><span class="pn-title">Spring AOP</span></a></nav>
+</main>
+<script src="../assets/app.js"></script>
+</body>
+</html>

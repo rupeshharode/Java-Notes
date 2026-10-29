@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maven ·  Java</title>
+<meta name="description" content="Project object model, lifecycle phases, repositories and dependencies.">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body class="topic-body">
+<aside class="sidebar">
+  <a class="brand" href="../index.html"><span class="brand-mark">J</span> Night Java</a>
+  <input class="side-filter" type="search" placeholder="Filter topics…" aria-label="Filter topics">
+  <div class="side-phase-wrap"><label class="side-phase-label" for="side-phase">Jump to phase</label>
+  <select id="side-phase" class="side-phase"><option value="1">Phase 1 · Programming Basics</option>
+<option value="2">Phase 2 · OOP</option>
+<option value="3">Phase 3 · Core Java Advanced</option>
+<option value="4">Phase 4 · Advanced Java</option>
+<option value="5">Phase 5 · DSA</option>
+<option value="6">Phase 6 · Database</option>
+<option value="7">Phase 7 · Backend Development</option>
+<option value="8">Phase 8 · Frontend</option>
+<option value="9">Phase 9 · DevOps + Deployment</option>
+<option value="10">Phase 10 · LLD</option>
+<option value="11">Phase 11 · HLD</option>
+<option value="12">Phase 12 · Interview Topics</option></select></div>
+  <nav class="side-nav" aria-label="Topics in roadmap order"><a class="side-link" href="../topics/java-fundamentals.html" data-slug="java-fundamentals"><span class="check" data-check="java-fundamentals" aria-hidden="true"></span>Java Fundamentals Q&amp;A</a>
+<a class="side-link" href="../topics/oops-encapsulation.html" data-slug="oops-encapsulation"><span class="check" data-check="oops-encapsulation" aria-hidden="true"></span>OOPs &amp; Encapsulation</a>
+<a class="side-link" href="../topics/inheritance.html" data-slug="inheritance"><span class="check" data-check="inheritance" aria-hidden="true"></span>Inheritance</a>
+<a class="side-link" href="../topics/has-a-is-a.html" data-slug="has-a-is-a"><span class="check" data-check="has-a-is-a" aria-hidden="true"></span>Has-a vs Is-a Relationships</a>
+<a class="side-link" href="../topics/polymorphism.html" data-slug="polymorphism"><span class="check" data-check="polymorphism" aria-hidden="true"></span>Polymorphism</a>
+<a class="side-link" href="../topics/abstraction.html" data-slug="abstraction"><span class="check" data-check="abstraction" aria-hidden="true"></span>Abstraction</a>
+<a class="side-link" href="../topics/interface.html" data-slug="interface"><span class="check" data-check="interface" aria-hidden="true"></span>Interfaces</a>
+<a class="side-link" href="../topics/anonymous-inner-class.html" data-slug="anonymous-inner-class"><span class="check" data-check="anonymous-inner-class" aria-hidden="true"></span>Anonymous Inner Class</a>
+<a class="side-link" href="../topics/collections-framework.html" data-slug="collections-framework"><span class="check" data-check="collections-framework" aria-hidden="true"></span>Collections Framework</a>
+<a class="side-link" href="../topics/exception-handling.html" data-slug="exception-handling"><span class="check" data-check="exception-handling" aria-hidden="true"></span>Exception Handling</a>
+<a class="side-link" href="../topics/file-handling.html" data-slug="file-handling"><span class="check" data-check="file-handling" aria-hidden="true"></span>File Handling</a>
+<a class="side-link" href="../topics/generics.html" data-slug="generics"><span class="check" data-check="generics" aria-hidden="true"></span>Generics</a>
+<a class="side-link" href="../topics/stream-api.html" data-slug="stream-api"><span class="check" data-check="stream-api" aria-hidden="true"></span>Stream API</a>
+<a class="side-link" href="../topics/multithreading.html" data-slug="multithreading"><span class="check" data-check="multithreading" aria-hidden="true"></span>Multithreading</a>
+<a class="side-link" href="../topics/executorservice.html" data-slug="executorservice"><span class="check" data-check="executorservice" aria-hidden="true"></span>ExecutorService</a>
+<a class="side-link" href="../topics/completablefuture.html" data-slug="completablefuture"><span class="check" data-check="completablefuture" aria-hidden="true"></span>CompletableFuture</a>
+<a class="side-link" href="../topics/atomic-classes.html" data-slug="atomic-classes"><span class="check" data-check="atomic-classes" aria-hidden="true"></span>Atomic Classes</a>
+<a class="side-link" href="../topics/concurrent-collections.html" data-slug="concurrent-collections"><span class="check" data-check="concurrent-collections" aria-hidden="true"></span>Concurrent Collections</a>
+<a class="side-link" href="../topics/jdbc.html" data-slug="jdbc"><span class="check" data-check="jdbc" aria-hidden="true"></span>JDBC</a>
+<a class="side-link" href="../topics/servlet.html" data-slug="servlet"><span class="check" data-check="servlet" aria-hidden="true"></span>Servlets</a>
+<a class="side-link" href="../topics/jsp.html" data-slug="jsp"><span class="check" data-check="jsp" aria-hidden="true"></span>JSP</a>
+<a class="side-link" href="../topics/hibernate.html" data-slug="hibernate"><span class="check" data-check="hibernate" aria-hidden="true"></span>Hibernate</a>
+<a class="side-link" href="../topics/spring-mvc.html" data-slug="spring-mvc"><span class="check" data-check="spring-mvc" aria-hidden="true"></span>Spring MVC</a>
+<a class="side-link" href="../topics/session-management.html" data-slug="session-management"><span class="check" data-check="session-management" aria-hidden="true"></span>Session Management</a>
+<a class="side-link" href="../topics/maven.html" aria-current="page" data-slug="maven"><span class="check" data-check="maven" aria-hidden="true"></span>Maven</a>
+<a class="side-link" href="../topics/servlet-vs-spring-core.html" data-slug="servlet-vs-spring-core"><span class="check" data-check="servlet-vs-spring-core" aria-hidden="true"></span>Servlet vs Spring Core</a>
+<a class="side-link" href="../topics/ioc-and-di.html" data-slug="ioc-and-di"><span class="check" data-check="ioc-and-di" aria-hidden="true"></span>IoC &amp; Dependency Injection</a>
+<a class="side-link" href="../topics/autowiring.html" data-slug="autowiring"><span class="check" data-check="autowiring" aria-hidden="true"></span>Autowiring</a>
+<a class="side-link" href="../topics/bean-configuration.html" data-slug="bean-configuration"><span class="check" data-check="bean-configuration" aria-hidden="true"></span>Bean Configuration &amp; Annotations</a>
+<a class="side-link" href="../topics/bean-lifecycle.html" data-slug="bean-lifecycle"><span class="check" data-check="bean-lifecycle" aria-hidden="true"></span>Bean Lifecycle</a>
+<a class="side-link" href="../topics/bean-lifecycle-aop.html" data-slug="bean-lifecycle-aop"><span class="check" data-check="bean-lifecycle-aop" aria-hidden="true"></span>Bean Lifecycle &amp; Where AOP Fits</a>
+<a class="side-link" href="../topics/spring-aop.html" data-slug="spring-aop"><span class="check" data-check="spring-aop" aria-hidden="true"></span>Spring AOP</a>
+<a class="side-link" href="../topics/spring-transactions.html" data-slug="spring-transactions"><span class="check" data-check="spring-transactions" aria-hidden="true"></span>Spring Transactions</a>
+<a class="side-link" href="../topics/spring-data.html" data-slug="spring-data"><span class="check" data-check="spring-data" aria-hidden="true"></span>Spring Data (JPA)</a>
+<a class="side-link" href="../topics/spring-profiles.html" data-slug="spring-profiles"><span class="check" data-check="spring-profiles" aria-hidden="true"></span>Spring Profiles &amp; Config</a>
+<a class="side-link" href="../topics/spring-security.html" data-slug="spring-security"><span class="check" data-check="spring-security" aria-hidden="true"></span>Spring Security Flow</a>
+<a class="side-link" href="../topics/filters-and-interceptors.html" data-slug="filters-and-interceptors"><span class="check" data-check="filters-and-interceptors" aria-hidden="true"></span>Filters &amp; Interceptors</a>
+<a class="side-link" href="../topics/core-java-deep-dive.html" data-slug="core-java-deep-dive"><span class="check" data-check="core-java-deep-dive" aria-hidden="true"></span>Core Java Deep-Dive</a></nav>
+  <p class="side-progress"><span data-progress-text></span></p>
+</aside>
+<main class="content">
+  <header class="topic-head">
+    <p class="crumb"><a href="../index.html">Roadmap</a> / Phase 7 · Backend Development</p>
+    <h1>Maven</h1>
+    <p class="summary">Project object model, lifecycle phases, repositories and dependencies.</p>
+    <div class="head-row">
+      <div class="tags"><span class="tag">build</span><span class="tag">maven</span><span class="tag">pom</span></div>
+      <button class="read-btn" data-read-btn data-slug="maven"><span class="read-icon">○</span> Mark as read</button>
+    </div>
+  </header>
+  <div class="tabs" role="tablist">
+    <button class="tab active" role="tab" data-tab="notes" aria-selected="true">Notes</button>
+    <button class="tab" role="tab" data-tab="examples" aria-selected="false">Code examples</button>
+  </div>
+  <section class="panel active" data-panel="notes" role="tabpanel">
+    <article class="prose"><p>Question 1
+What is Maven, and why do we use Maven in a Java project?</p>
+<p>Maven is a <strong>build automation and dependency management tool</strong> commonly used for Java projects.</p>
+<p>It helps us manage the project build lifecycle, including compiling, testing, packaging, verification, installation, and deployment-related tasks.</p>
+<p>Maven provides a <code>pom.xml</code> file, which is used to define project information, dependencies, plugins, and build configuration.</p>
+<p>For example, instead of manually downloading an external JAR file and adding it to our project, we declare the dependency in <code>pom.xml</code>. Maven automatically downloads the required dependency and its required transitive dependencies.</p>
+<p>Maven stores downloaded dependencies in the local Maven repository, usually <code>.m2/repository</code>, so they can be reused by other projects.</p>
+<p>Maven can also package our application into formats such as a <strong>JAR or WAR file</strong>.</p>
+<p>Therefore, Maven makes dependency management and the build process easier and more consistent.</p>
+<p>Question 2 🔥
+What is pom.xml in Maven, and what information do we define inside it?</p>
+<p><code>pom.xml</code> stands for <strong>Project Object Model</strong>. It is the main configuration file of a Maven project.</p>
+<p>It contains information about the project, such as its dependencies, plugins, version, packaging, properties, and build configuration.</p>
+<p>The important elements include:</p>
+<ul>
+<li><strong><code>groupId</code></strong> — identifies the organization or group that owns the project. It is commonly based on a domain name.</li>
+<li><strong><code>artifactId</code></strong> — identifies the project or artifact.</li>
+<li><strong><code>version</code></strong> — specifies the version of the project.</li>
+<li><strong><code>packaging</code></strong> — specifies the type of artifact to be created, such as JAR or WAR.</li>
+<li><strong><code>dependencies</code></strong> — defines external libraries required by the project.</li>
+<li><strong><code>properties</code></strong> — defines reusable project properties, such as the Java version.</li>
+<li><strong><code>build</code></strong> — contains build-related configuration.</li>
+<li><strong><code>plugins</code></strong> — provides goals for tasks such as compilation, testing, and packaging.
+                 ex-the Maven Compiler Plugin compiles Java source code.</li>
+</ul>
+<p>The combination of <code>groupId</code>, <code>artifactId</code>, and <code>version</code> is used to identify a specific Maven artifact.</p>
+<p>Therefore, <code>pom.xml</code> acts as the central configuration file for a Maven project.</p>
+<p>Q.3
+Maven install</p>
+<p>When we add a dependency to <code>pom.xml</code> and run <code>mvn install</code>, Maven first reads the <code>pom.xml</code> and resolves the required dependencies.</p>
+<p>Maven checks the local repository, usually the <code>.m2/repository</code> directory, for the required dependency. If the dependency is not available locally, Maven downloads it from a configured remote repository and stores it in the local repository.</p>
+<p>After resolving the dependencies, Maven executes the build lifecycle phases up to the <code>install</code> phase.</p>
+<p>The main phases include:</p>
+<ol>
+<li><strong>validate</strong> — validates the project structure and configuration.</li>
+<li><strong>compile</strong> — compiles the source code.</li>
+<li><strong>test</strong> — runs unit tests.</li>
+<li><strong>package</strong> — packages the application, for example into a JAR or WAR.</li>
+<li><strong>verify</strong> — performs checks to verify that the package is valid.</li>
+<li><strong>install</strong> — installs the generated artifact into the local Maven repository.</li>
+</ol>
+<p>Because Maven follows the lifecycle order, when we run <code>mvn install</code>, the earlier lifecycle phases are also executed.</p>
+<p>Q.4 Maven components
+- <strong>compile</strong> — compiles the main Java source code into <code>.class</code> files and places them in the <code>target/classes</code> directory.</p>
+<ul>
+<li>
+<p><strong>test</strong> — compiles and runs the project's test cases, generally located under <code>src/test</code>.</p>
+</li>
+<li>
+<p><strong>package</strong> — packages the compiled application into an artifact such as a JAR or WAR file.</p>
+</li>
+<li>
+<p><strong>install</strong> — installs the generated artifact into the local Maven repository, usually <code>.m2/repository</code>, so it can be used by other local Maven projects.</p>
+</li>
+<li>
+<p><strong>deploy</strong> — publishes the generated artifact to a remote Maven repository so that other developers or projects can access it.</p>
+</li>
+</ul>
+<p>Q5. Maven lifecyle </p>
+<p>clean lifecycle -&gt; clean
+default life cycle -&gt; validate , compile , test , package , verify , install , deploy
+site lifecycle -&gt; site</p></article>
+  </section>
+  <section class="panel" data-panel="examples" role="tabpanel" hidden>
+    <article class="prose"><h3>The pom.xml essentials</h3>
+<div class="codehilite"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<span class="nt">&lt;project</span><span class="w"> </span><span class="na">xmlns=</span><span class="s">"http://maven.apache.org/POM/4.0.0"</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;modelVersion&gt;</span>4.0.0<span class="nt">&lt;/modelVersion&gt;</span>
+
+<span class="w">    </span><span class="nt">&lt;groupId&gt;</span>com.jack<span class="nt">&lt;/groupId&gt;</span><span class="w">       </span><span class="cm">&lt;!-- organization namespace --&gt;</span>
+<span class="w">    </span><span class="nt">&lt;artifactId&gt;</span>order-service<span class="nt">&lt;/artifactId&gt;</span><span class="w">  </span><span class="cm">&lt;!-- project name --&gt;</span>
+<span class="w">    </span><span class="nt">&lt;version&gt;</span>1.0.0<span class="nt">&lt;/version&gt;</span>
+<span class="w">    </span><span class="nt">&lt;packaging&gt;</span>jar<span class="nt">&lt;/packaging&gt;</span>
+
+<span class="w">    </span><span class="nt">&lt;properties&gt;</span>
+<span class="w">        </span><span class="nt">&lt;maven.compiler.source&gt;</span>21<span class="nt">&lt;/maven.compiler.source&gt;</span>
+<span class="w">        </span><span class="nt">&lt;maven.compiler.target&gt;</span>21<span class="nt">&lt;/maven.compiler.target&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/properties&gt;</span>
+
+<span class="w">    </span><span class="nt">&lt;dependencies&gt;</span>
+<span class="w">        </span><span class="nt">&lt;dependency&gt;</span>
+<span class="w">            </span><span class="nt">&lt;groupId&gt;</span>org.springframework.boot<span class="nt">&lt;/groupId&gt;</span>
+<span class="w">            </span><span class="nt">&lt;artifactId&gt;</span>spring-boot-starter-web<span class="nt">&lt;/artifactId&gt;</span>
+<span class="w">            </span><span class="nt">&lt;version&gt;</span>3.3.0<span class="nt">&lt;/version&gt;</span>
+<span class="w">            </span><span class="nt">&lt;scope&gt;</span>compile<span class="nt">&lt;/scope&gt;</span><span class="w">    </span><span class="cm">&lt;!-- compile | provided | runtime | test --&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/dependency&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/dependencies&gt;</span>
+<span class="nt">&lt;/project&gt;</span>
+</pre></div>
+</div>
+<h3>The default lifecycle phases (in order)</h3>
+<div class="codehilite"><div class="highlight"><pre><span></span>mvn<span class="w"> </span>validate<span class="w">     </span><span class="c1"># project structure is correct</span>
+mvn<span class="w"> </span>compile<span class="w">      </span><span class="c1"># src/main/java -&gt; target/classes</span>
+mvn<span class="w"> </span><span class="nb">test</span><span class="w">         </span><span class="c1"># run unit tests</span>
+mvn<span class="w"> </span>package<span class="w">      </span><span class="c1"># build the jar/war into target/</span>
+mvn<span class="w"> </span>verify<span class="w">       </span><span class="c1"># integration checks</span>
+mvn<span class="w"> </span>install<span class="w">      </span><span class="c1"># put the jar into the local repo (~/.m2)</span>
+mvn<span class="w"> </span>deploy<span class="w">       </span><span class="c1"># publish to a remote repository</span>
+<span class="c1"># Phases run everything before them: mvn package also compiles + tests</span>
+</pre></div>
+</div>
+<h3>Useful everyday commands</h3>
+<div class="codehilite"><div class="highlight"><pre><span></span>mvn<span class="w"> </span>clean<span class="w">                    </span><span class="c1"># delete target/</span>
+mvn<span class="w"> </span>clean<span class="w"> </span>install<span class="w"> </span>-DskipTests
+mvn<span class="w"> </span>dependency:tree<span class="w">          </span><span class="c1"># see the full dependency graph</span>
+mvn<span class="w"> </span><span class="nb">test</span><span class="w"> </span>-Dtest<span class="o">=</span>OrderServiceTest<span class="w">   </span><span class="c1"># one test class</span>
+mvn<span class="w"> </span>spring-boot:run<span class="w">          </span><span class="c1"># run a Spring Boot app</span>
+</pre></div>
+</div>
+<h3>Scopes and dependency management</h3>
+<div class="codehilite"><div class="highlight"><pre><span></span><span class="nt">&lt;dependencies&gt;</span>
+<span class="w">    </span><span class="cm">&lt;!-- test scope: only on the test classpath --&gt;</span>
+<span class="w">    </span><span class="nt">&lt;dependency&gt;</span>
+<span class="w">        </span><span class="nt">&lt;groupId&gt;</span>junit<span class="nt">&lt;/groupId&gt;&lt;artifactId&gt;</span>junit<span class="nt">&lt;/artifactId&gt;</span>
+<span class="w">        </span><span class="nt">&lt;version&gt;</span>4.13.2<span class="nt">&lt;/version&gt;&lt;scope&gt;</span>test<span class="nt">&lt;/scope&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/dependency&gt;</span>
+
+<span class="w">    </span><span class="cm">&lt;!-- parent POM pins versions once; children inherit --&gt;</span>
+<span class="nt">&lt;/dependencies&gt;</span>
+
+<span class="nt">&lt;dependencyManagement&gt;</span>
+<span class="w">    </span><span class="nt">&lt;dependencies&gt;</span>
+<span class="w">        </span><span class="nt">&lt;dependency&gt;</span>
+<span class="w">            </span><span class="nt">&lt;groupId&gt;</span>com.mysql<span class="nt">&lt;/groupId&gt;&lt;artifactId&gt;</span>mysql-connector-j<span class="nt">&lt;/artifactId&gt;</span>
+<span class="w">            </span><span class="nt">&lt;version&gt;</span>8.4.0<span class="nt">&lt;/version&gt;</span><span class="w">   </span><span class="cm">&lt;!-- version declared here only --&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/dependency&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/dependencies&gt;</span>
+<span class="nt">&lt;/dependencyManagement&gt;</span>
+</pre></div>
+</div>
+<h3>Maven vs Gradle</h3>
+<div class="codehilite"><div class="highlight"><pre><span></span><span class="c1">// Maven: XML, convention over configuration, huge ecosystem — the default</span>
+<span class="c1">//         for Spring projects and most interviews.</span>
+<span class="c1">// Gradle: Groovy/Kotlin DSL, faster, more flexible builds.</span>
+<span class="c1">// Both resolve transitive dependencies and repositories the same way.</span>
+</pre></div>
+</div></article>
+  </section>
+  <nav class="prev-next"><a class="pn previous" href="session-management.html"><span class="pn-label">Previous</span><span class="pn-title">Session Management</span></a><a class="pn next" href="servlet-vs-spring-core.html"><span class="pn-label">Next</span><span class="pn-title">Servlet vs Spring Core</span></a></nav>
+</main>
+<script src="../assets/app.js"></script>
+</body>
+</html>

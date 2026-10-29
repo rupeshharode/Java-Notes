@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spring Data (JPA) · Night Java</title>
+<meta name="description" content="Repositories, derived queries, JPQL, pagination and relationships.">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body class="topic-body">
+<aside class="sidebar">
+  <a class="brand" href="../index.html"><span class="brand-mark">J</span> Night Java</a>
+  <input class="side-filter" type="search" placeholder="Filter topics…" aria-label="Filter topics">
+  <div class="side-phase-wrap"><label class="side-phase-label" for="side-phase">Jump to phase</label>
+  <select id="side-phase" class="side-phase"><option value="1">Phase 1 · Programming Basics</option>
+<option value="2">Phase 2 · OOP</option>
+<option value="3">Phase 3 · Core Java Advanced</option>
+<option value="4">Phase 4 · Advanced Java</option>
+<option value="5">Phase 5 · DSA</option>
+<option value="6">Phase 6 · Database</option>
+<option value="7">Phase 7 · Backend Development</option>
+<option value="8">Phase 8 · Frontend</option>
+<option value="9">Phase 9 · DevOps + Deployment</option>
+<option value="10">Phase 10 · LLD</option>
+<option value="11">Phase 11 · HLD</option>
+<option value="12">Phase 12 · Interview Topics</option></select></div>
+  <nav class="side-nav" aria-label="Topics in roadmap order"><a class="side-link" href="../topics/java-fundamentals.html" data-slug="java-fundamentals"><span class="check" data-check="java-fundamentals" aria-hidden="true"></span>Java Fundamentals Q&amp;A</a>
+<a class="side-link" href="../topics/oops-encapsulation.html" data-slug="oops-encapsulation"><span class="check" data-check="oops-encapsulation" aria-hidden="true"></span>OOPs &amp; Encapsulation</a>
+<a class="side-link" href="../topics/inheritance.html" data-slug="inheritance"><span class="check" data-check="inheritance" aria-hidden="true"></span>Inheritance</a>
+<a class="side-link" href="../topics/has-a-is-a.html" data-slug="has-a-is-a"><span class="check" data-check="has-a-is-a" aria-hidden="true"></span>Has-a vs Is-a Relationships</a>
+<a class="side-link" href="../topics/polymorphism.html" data-slug="polymorphism"><span class="check" data-check="polymorphism" aria-hidden="true"></span>Polymorphism</a>
+<a class="side-link" href="../topics/abstraction.html" data-slug="abstraction"><span class="check" data-check="abstraction" aria-hidden="true"></span>Abstraction</a>
+<a class="side-link" href="../topics/interface.html" data-slug="interface"><span class="check" data-check="interface" aria-hidden="true"></span>Interfaces</a>
+<a class="side-link" href="../topics/anonymous-inner-class.html" data-slug="anonymous-inner-class"><span class="check" data-check="anonymous-inner-class" aria-hidden="true"></span>Anonymous Inner Class</a>
+<a class="side-link" href="../topics/collections-framework.html" data-slug="collections-framework"><span class="check" data-check="collections-framework" aria-hidden="true"></span>Collections Framework</a>
+<a class="side-link" href="../topics/exception-handling.html" data-slug="exception-handling"><span class="check" data-check="exception-handling" aria-hidden="true"></span>Exception Handling</a>
+<a class="side-link" href="../topics/file-handling.html" data-slug="file-handling"><span class="check" data-check="file-handling" aria-hidden="true"></span>File Handling</a>
+<a class="side-link" href="../topics/generics.html" data-slug="generics"><span class="check" data-check="generics" aria-hidden="true"></span>Generics</a>
+<a class="side-link" href="../topics/stream-api.html" data-slug="stream-api"><span class="check" data-check="stream-api" aria-hidden="true"></span>Stream API</a>
+<a class="side-link" href="../topics/multithreading.html" data-slug="multithreading"><span class="check" data-check="multithreading" aria-hidden="true"></span>Multithreading</a>
+<a class="side-link" href="../topics/executorservice.html" data-slug="executorservice"><span class="check" data-check="executorservice" aria-hidden="true"></span>ExecutorService</a>
+<a class="side-link" href="../topics/completablefuture.html" data-slug="completablefuture"><span class="check" data-check="completablefuture" aria-hidden="true"></span>CompletableFuture</a>
+<a class="side-link" href="../topics/atomic-classes.html" data-slug="atomic-classes"><span class="check" data-check="atomic-classes" aria-hidden="true"></span>Atomic Classes</a>
+<a class="side-link" href="../topics/concurrent-collections.html" data-slug="concurrent-collections"><span class="check" data-check="concurrent-collections" aria-hidden="true"></span>Concurrent Collections</a>
+<a class="side-link" href="../topics/jdbc.html" data-slug="jdbc"><span class="check" data-check="jdbc" aria-hidden="true"></span>JDBC</a>
+<a class="side-link" href="../topics/servlet.html" data-slug="servlet"><span class="check" data-check="servlet" aria-hidden="true"></span>Servlets</a>
+<a class="side-link" href="../topics/jsp.html" data-slug="jsp"><span class="check" data-check="jsp" aria-hidden="true"></span>JSP</a>
+<a class="side-link" href="../topics/hibernate.html" data-slug="hibernate"><span class="check" data-check="hibernate" aria-hidden="true"></span>Hibernate</a>
+<a class="side-link" href="../topics/spring-mvc.html" data-slug="spring-mvc"><span class="check" data-check="spring-mvc" aria-hidden="true"></span>Spring MVC</a>
+<a class="side-link" href="../topics/session-management.html" data-slug="session-management"><span class="check" data-check="session-management" aria-hidden="true"></span>Session Management</a>
+<a class="side-link" href="../topics/maven.html" data-slug="maven"><span class="check" data-check="maven" aria-hidden="true"></span>Maven</a>
+<a class="side-link" href="../topics/servlet-vs-spring-core.html" data-slug="servlet-vs-spring-core"><span class="check" data-check="servlet-vs-spring-core" aria-hidden="true"></span>Servlet vs Spring Core</a>
+<a class="side-link" href="../topics/ioc-and-di.html" data-slug="ioc-and-di"><span class="check" data-check="ioc-and-di" aria-hidden="true"></span>IoC &amp; Dependency Injection</a>
+<a class="side-link" href="../topics/autowiring.html" data-slug="autowiring"><span class="check" data-check="autowiring" aria-hidden="true"></span>Autowiring</a>
+<a class="side-link" href="../topics/bean-configuration.html" data-slug="bean-configuration"><span class="check" data-check="bean-configuration" aria-hidden="true"></span>Bean Configuration &amp; Annotations</a>
+<a class="side-link" href="../topics/bean-lifecycle.html" data-slug="bean-lifecycle"><span class="check" data-check="bean-lifecycle" aria-hidden="true"></span>Bean Lifecycle</a>
+<a class="side-link" href="../topics/bean-lifecycle-aop.html" data-slug="bean-lifecycle-aop"><span class="check" data-check="bean-lifecycle-aop" aria-hidden="true"></span>Bean Lifecycle &amp; Where AOP Fits</a>
+<a class="side-link" href="../topics/spring-aop.html" data-slug="spring-aop"><span class="check" data-check="spring-aop" aria-hidden="true"></span>Spring AOP</a>
+<a class="side-link" href="../topics/spring-transactions.html" data-slug="spring-transactions"><span class="check" data-check="spring-transactions" aria-hidden="true"></span>Spring Transactions</a>
+<a class="side-link" href="../topics/spring-data.html" aria-current="page" data-slug="spring-data"><span class="check" data-check="spring-data" aria-hidden="true"></span>Spring Data (JPA)</a>
+<a class="side-link" href="../topics/spring-profiles.html" data-slug="spring-profiles"><span class="check" data-check="spring-profiles" aria-hidden="true"></span>Spring Profiles &amp; Config</a>
+<a class="side-link" href="../topics/spring-security.html" data-slug="spring-security"><span class="check" data-check="spring-security" aria-hidden="true"></span>Spring Security Flow</a>
+<a class="side-link" href="../topics/filters-and-interceptors.html" data-slug="filters-and-interceptors"><span class="check" data-check="filters-and-interceptors" aria-hidden="true"></span>Filters &amp; Interceptors</a>
+<a class="side-link" href="../topics/core-java-deep-dive.html" data-slug="core-java-deep-dive"><span class="check" data-check="core-java-deep-dive" aria-hidden="true"></span>Core Java Deep-Dive</a></nav>
+  <p class="side-progress"><span data-progress-text></span></p>
+</aside>
+<main class="content">
+  <header class="topic-head">
+    <p class="crumb"><a href="../index.html">Roadmap</a> / Phase 7 · Backend Development</p>
+    <h1>Spring Data (JPA)</h1>
+    <p class="summary">Repositories, derived queries, JPQL, pagination and relationships.</p>
+    <div class="head-row">
+      <div class="tags"><span class="tag">spring</span><span class="tag">jpa</span><span class="tag">repositories</span></div>
+      <button class="read-btn" data-read-btn data-slug="spring-data"><span class="read-icon">○</span> Mark as read</button>
+    </div>
+  </header>
+  <div class="tabs" role="tablist">
+    <button class="tab active" role="tab" data-tab="notes" aria-selected="true">Notes</button>
+    <button class="tab" role="tab" data-tab="examples" aria-selected="false">Code examples</button>
+  </div>
+  <section class="panel active" data-panel="notes" role="tabpanel">
+    <article class="prose"><p>Spring Data is an umbrella project in the Spring ecosystem that provides a consistent and simplified way to work with different data storage technologies. It reduces boilerplate code by providing repository interfaces and predefined methods for common database operations.</p>
+<p>For example:
+- <strong>Spring Data JPA</strong> is used with relational databases such as MySQL and PostgreSQL.
+- <strong>Spring Data MongoDB</strong> is used with MongoDB, a NoSQL database.
+- <strong>Spring Data Redis</strong> is used with Redis, an in-memory data store.</p>
+<p>Spring Data provides different repository interfaces, such as <code>CrudRepository</code>, <code>ListCrudRepository</code>, <code>PagingAndSortingRepository</code>, and <code>JpaRepository</code>, depending on the required operations.</p>
+<p>By extending the appropriate repository interface, we can use predefined methods such as <code>save()</code>, <code>findById()</code>, <code>findAll()</code>, and <code>deleteById()</code> without writing their implementations ourselves. Spring Data generates the required repository implementation at runtime.</p>
+<p>Therefore, Spring Data simplifies database access, reduces boilerplate code, and improves developer productivity.</p>
+<p>** why we use repository instead of hibernate implementation entitymanager </p>
+<p>We use Spring Data JPA repositories because they reduce boilerplate code and simplify database operations.</p>
+<p>For example, suppose we have multiple entities, such as <code>Student</code>, <code>Department</code>, and <code>Employee</code>. If we use <code>EntityManager</code> directly, we may need to write repetitive code for operations such as saving, finding, updating, and deleting entities.</p>
+<p>We also need to understand entity management, persistence contexts, and transaction handling.</p>
+<p>With Spring Data JPA, we can create repository interfaces by extending <code>JpaRepository</code>. Spring automatically provides the implementation for common database operations at runtime.</p>
+<p>For example, we can call <code>studentRepository.save(student)</code> or <code>studentRepository.findById(id)</code> directly from our service layer.</p>
+<p>This reduces repetitive code and makes our application easier to maintain. However, <code>EntityManager</code> is still useful when we need custom queries or more control over persistence operations.</p>
+<h3>******</h3>
+<p><code>CrudRepository</code> is used to perform CRUD operations on a database, while <code>PagingAndSortingRepository</code> is used to retrieve data with pagination and sorting. <code>JpaRepository</code> provides a wide range of methods by combining CRUD, list-based CRUD, and paging and sorting functionality. It also provides additional JPA-specific methods. </p>
+<h3>*********</h3>
+<p>What is the difference between findById() and getReferenceById() in Spring Data JPA?</p>
+<p>The main difference between <code>findById()</code> and <code>getReferenceById()</code> is how they retrieve an entity.</p>
+<p><code>findById()</code> returns an <code>Optional</code> containing the entity if it exists, or an empty <code>Optional</code> if it does not exist. It generally retrieves the entity from the database if it is not already available in the persistence context.</p>
+<p>On the other hand, <code>getReferenceById()</code> may return a proxy without immediately fetching the entity's data from the database. The data is typically fetched when we access the entity's properties.</p>
+<p>If the referenced entity does not exist, accessing its data may result in an <code>EntityNotFoundException</code>. Proxy behavior and when the database is queried depend on the JPA provider and persistence context.</p>
+<h3>**</h3>
+<p>What is the difference between save() and saveAndFlush() in Spring Data JPA? </p>
+<p>The main difference between <code>save()</code> and <code>saveAndFlush()</code> is when changes are synchronized with the database.</p>
+<p><code>save()</code> saves or updates an entity in the persistence context, but it does not guarantee an immediate flush to the database. The changes may be synchronized later, such as when the transaction commits or a flush is triggered.</p>
+<p>On the other hand, <code>saveAndFlush()</code> saves the entity and immediately triggers a flush of the persistence context. This synchronizes pending changes with the database without necessarily committing the transaction.</p>
+<p>Therefore, we use <code>save()</code> for normal persistence operations and <code>saveAndFlush()</code> when we need pending changes to be synchronized with the database immediately.</p>
+<h3>********</h3>
+<p>What is the difference between CrudRepository and ListCrudRepository?</p>
+<p>The main difference between <code>CrudRepository</code> and <code>ListCrudRepository</code> is the return type of certain methods.</p>
+<p><code>CrudRepository</code> provides basic CRUD operations, and methods such as <code>findAll()</code> return an <code>Iterable</code>.</p>
+<p><code>ListCrudRepository</code> provides similar CRUD operations, but methods such as <code>findAll()</code> return a <code>List</code> instead of an <code>Iterable</code>.</p>
+<p>A <code>List</code> is useful when we need list-specific operations, such as accessing elements by index. Both interfaces provide methods for common database operations.</p>
+<h3>*****</h3>
+<p>What are derived query methods in Spring Data JPA? Explain with an example.</p>
+<p>Derived query methods in Spring Data JPA are methods whose database queries are automatically generated by Spring Data based on the method name.</p>
+<p>Instead of writing SQL or JPQL queries manually, we define methods in the repository interface using predefined keywords such as <code>findBy</code>, <code>And</code>, <code>Or</code>, <code>GreaterThan</code>, and <code>OrderBy</code>.</p>
+<p>Spring Data analyzes the method name at runtime and generates the appropriate query to retrieve or manipulate data.</p>
+<p>Derived query methods reduce boilerplate code and make database operations easier to implement and maintain.</p>
+<h3>*******</h3>
+<p>What is the difference between a derived query method and the @Query annotation in Spring Data JPA?</p>
+<p>The main difference between a derived query method and the <code>@Query</code> annotation is how the query is defined.</p>
+<p>A derived query method allows Spring Data JPA to generate a query automatically based on the method name. For example, <code>findByDepartment(String department)</code> retrieves students belonging to a particular department.</p>
+<p>On the other hand, the <code>@Query</code> annotation allows us to explicitly write a JPQL or native SQL query. It is useful when the query is complex or cannot be expressed conveniently through a method name.</p>
+<p>Therefore, derived query methods are suitable for simple queries, whereas <code>@Query</code> provides greater flexibility for complex database operations.</p>
+<h3>*****</h3>
+<p>What is the difference between JPQL and native SQL in Spring Data JPA?</p>
+<p>The main difference between JPQL and native SQL is that JPQL is an object-oriented query language, whereas native SQL uses the database's SQL syntax.</p>
+<p>JPQL operates on entity classes and their properties instead of directly accessing database tables and columns. It is generally database-independent because the JPA provider translates JPQL into SQL.</p>
+<p>On the other hand, native SQL allows us to write database-specific SQL queries directly using table and column names. It is useful when we need database-specific features or complex queries that are difficult to express in JPQL.</p>
+<p>Therefore, we use JPQL for entity-oriented, portable queries and native SQL when we need more direct control over database-specific SQL.</p>
+<h3>****</h3>
+<p>What is the difference between findById() and findAll() in Spring Data JPA?</p>
+<p><code>findById()</code> is used to retrieve a specific entity using its primary key. It returns an <code>Optional</code> containing the entity if it exists, or an empty <code>Optional</code> if it does not exist.</p>
+<p>On the other hand, <code>findAll()</code> retrieves all entities of the specified type and returns an <code>Iterable</code> or a <code>List</code>, depending on the repository interface being used.</p>
+<p>Therefore, we use <code>findById()</code> when we need a particular record and <code>findAll()</code> when we need all records.</p>
+<h3>******</h3>
+<p>What is the difference between save() and saveAll() in Spring Data JPA?</p>
+<p>In Spring Data JPA, <code>save()</code> is used to save or update a single entity, whereas <code>saveAll()</code> is used to save or update multiple entities in one method call.</p>
+<p>Both methods return the saved entities. <code>save()</code> returns a single entity, while <code>saveAll()</code> returns an iterable of the saved entities.</p>
+<p>However, calling <code>saveAll()</code> does not necessarily mean that all entities are inserted using a single SQL statement. The actual database operations depend on the JPA provider and batching configuration.</p>
+<h3>*********</h3>
+<p>What is the difference between findById() and existsById() in Spring Data JPA?</p>
+<p>In Spring Data JPA, <code>findById()</code> is used to retrieve an entity based on its primary key. It returns an <code>Optional</code> containing the entity if it exists, or an empty <code>Optional</code> if it does not exist.</p>
+<p>On the other hand, <code>existsById()</code> is used to check whether an entity with a specific primary key exists in the database. It returns a boolean value: <code>true</code> if the entity exists and <code>false</code> otherwise.</p>
+<p>Therefore, we use <code>findById()</code> when we need the entity's data and <code>existsById()</code> when we only need to check its existence.</p>
+<h3>********</h3></article>
+  </section>
+  <section class="panel" data-panel="examples" role="tabpanel" hidden>
+    <article class="prose"><h3>Entities and relationships</h3>
+<div class="codehilite"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.persistence.*</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.*</span><span class="p">;</span>
+
+<span class="nd">@Entity</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Author</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Id</span><span class="w"> </span><span class="nd">@GeneratedValue</span><span class="p">(</span><span class="n">strategy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GenerationType</span><span class="p">.</span><span class="na">IDENTITY</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Long</span><span class="w"> </span><span class="n">id</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nd">@OneToMany</span><span class="p">(</span><span class="n">mappedBy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"author"</span><span class="p">,</span><span class="w"> </span><span class="n">cascade</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CascadeType</span><span class="p">.</span><span class="na">ALL</span><span class="p">,</span><span class="w"> </span><span class="n">orphanRemoval</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Book</span><span class="o">&gt;</span><span class="w"> </span><span class="n">books</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">addBook</span><span class="p">(</span><span class="n">Book</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">books</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">b</span><span class="p">);</span>
+<span class="w">        </span><span class="n">b</span><span class="p">.</span><span class="na">setAuthor</span><span class="p">(</span><span class="k">this</span><span class="p">);</span><span class="w">      </span><span class="c1">// keep both sides in sync</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nd">@Entity</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Book</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Id</span><span class="w"> </span><span class="nd">@GeneratedValue</span><span class="p">(</span><span class="n">strategy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GenerationType</span><span class="p">.</span><span class="na">IDENTITY</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Long</span><span class="w"> </span><span class="n">id</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">title</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nd">@ManyToOne</span><span class="p">(</span><span class="n">fetch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">FetchType</span><span class="p">.</span><span class="na">LAZY</span><span class="p">)</span>
+<span class="w">    </span><span class="nd">@JoinColumn</span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"author_id"</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Author</span><span class="w"> </span><span class="n">author</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<h3>Repository: derived queries for free</h3>
+<div class="codehilite"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.data.jpa.repository.*</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.data.domain.*</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.*</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">BookRepository</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">JpaRepository</span><span class="o">&lt;</span><span class="n">Book</span><span class="p">,</span><span class="w"> </span><span class="n">Long</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="c1">// SQL generated from the method name</span>
+<span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Book</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">findByTitleContainingIgnoreCase</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">keyword</span><span class="p">);</span>
+<span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Book</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">findByAuthorName</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">);</span>
+<span class="w">    </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">Book</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">findByTitleAndAuthorName</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">title</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">author</span><span class="p">);</span>
+<span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">existsByTitle</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">title</span><span class="p">);</span>
+<span class="w">    </span><span class="kt">long</span><span class="w"> </span><span class="nf">countByAuthorName</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Sorting + pagination built in</span>
+<span class="w">    </span><span class="n">Page</span><span class="o">&lt;</span><span class="n">Book</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">findByAuthorName</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">Pageable</span><span class="w"> </span><span class="n">pageable</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Custom JPQL</span>
+<span class="w">    </span><span class="nd">@Query</span><span class="p">(</span><span class="s">"SELECT b FROM Book b WHERE b.title LIKE %:q%"</span><span class="p">)</span>
+<span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Book</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">search</span><span class="p">(</span><span class="nd">@Param</span><span class="p">(</span><span class="s">"q"</span><span class="p">)</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">q</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<h3>CRUD + pagination in a service</h3>
+<div class="codehilite"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.data.domain.*</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.stereotype.Service</span><span class="p">;</span>
+
+<span class="nd">@Service</span>
+<span class="kd">class</span> <span class="nc">BookService</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">BookRepository</span><span class="w"> </span><span class="n">books</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">BookService</span><span class="p">(</span><span class="n">BookRepository</span><span class="w"> </span><span class="n">books</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">books</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">books</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">Book</span><span class="w"> </span><span class="nf">save</span><span class="p">(</span><span class="n">Book</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">books</span><span class="p">.</span><span class="na">save</span><span class="p">(</span><span class="n">b</span><span class="p">);</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">Book</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">one</span><span class="p">(</span><span class="n">Long</span><span class="w"> </span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">books</span><span class="p">.</span><span class="na">findById</span><span class="p">(</span><span class="n">id</span><span class="p">);</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">delete</span><span class="p">(</span><span class="n">Long</span><span class="w"> </span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">books</span><span class="p">.</span><span class="na">deleteById</span><span class="p">(</span><span class="n">id</span><span class="p">);</span><span class="w"> </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">Page</span><span class="o">&lt;</span><span class="n">Book</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">page</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">pageNo</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">size</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">books</span><span class="p">.</span><span class="na">findAll</span><span class="p">(</span>
+<span class="w">                </span><span class="n">PageRequest</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">pageNo</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="p">,</span><span class="w"> </span><span class="n">Sort</span><span class="p">.</span><span class="na">by</span><span class="p">(</span><span class="s">"title"</span><span class="p">).</span><span class="na">ascending</span><span class="p">()));</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<h3>N+1 problem and how to fix it</h3>
+<div class="codehilite"><div class="highlight"><pre><span></span><span class="c1">// BAD: author.getBooks() inside a loop fires one query per author (N+1)</span>
+
+<span class="c1">// Fix 1: fetch join in JPQL</span>
+<span class="nd">@Query</span><span class="p">(</span><span class="s">"SELECT DISTINCT a FROM Author a JOIN FETCH a.books"</span><span class="p">)</span>
+<span class="n">List</span><span class="o">&lt;</span><span class="n">Author</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">allWithBooks</span><span class="p">();</span>
+
+<span class="c1">// Fix 2: @EntityGraph on the repository method</span>
+<span class="nd">@EntityGraph</span><span class="p">(</span><span class="n">attributePaths</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"books"</span><span class="p">)</span>
+<span class="n">List</span><span class="o">&lt;</span><span class="n">Author</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">findBy</span><span class="p">(</span><span class="nd">@Param</span><span class="p">(</span><span class="s">"name"</span><span class="p">)</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">);</span>
+
+<span class="c1">// Fix 3: @BatchSize on the relationship to batch the lazy loads</span>
+</pre></div>
+</div></article>
+  </section>
+  <nav class="prev-next"><a class="pn previous" href="spring-transactions.html"><span class="pn-label">Previous</span><span class="pn-title">Spring Transactions</span></a><a class="pn next" href="spring-profiles.html"><span class="pn-label">Next</span><span class="pn-title">Spring Profiles &amp; Config</span></a></nav>
+</main>
+<script src="../assets/app.js"></script>
+</body>
+</html>
