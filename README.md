@@ -1,6 +1,6 @@
-# Night Java
+#  Java
 
-A dependency-free Java revision roadmap built with plain HTML, CSS, and JavaScript.
+Java revision roadmap built with plain HTML, CSS, and JavaScript.
 It contains 38 topic pages with interview notes and code examples, arranged across
 12 learning phases.
 
@@ -12,23 +12,6 @@ It contains 38 topic pages with interview notes and code examples, arranged acro
 - Per-topic "mark as read" progress saved in `localStorage`
 - Responsive dark theme
 - No build step, package manager, framework, or CDN dependency
-
-## Run locally
-
-Open [`index.html`](./index.html) directly in a browser, or serve the project
-directory over HTTP:
-
-```bash
-python3 -m http.server 8000
-```
-
-Then visit <http://localhost:8000>.
-
-On Windows, the same server can be started with:
-
-```powershell
-py -m http.server 8000
-```
 
 ## Deploy to GitHub Pages
 
